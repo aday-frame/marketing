@@ -1,0 +1,12 @@
+{
+  "name": "frameops-marketing",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "icons": "node scripts/generate-icons.js",
+    "prebuild": "node scripts/generate-icons.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}

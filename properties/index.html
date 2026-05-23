@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Frame Properties. Every residence ready before anyone arrives.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="description" content="Operations intelligence for private estates and residences. Household knowledge encoded, vendors documented, seasonal readiness automated." />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Theme -->
+<meta name="theme-color" content="#0A0E1A" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Frame" />
+
+<!-- OpenGraph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Frame" />
+<meta property="og:title" content="Frame Properties — Every residence ready before anyone arrives." />
+<meta property="og:description" content="Operations intelligence for private estates and residences. Household knowledge encoded, vendors documented, seasonal readiness automated." />
+<meta property="og:image" content="https://frameops.io/assets/og-image.jpg" />
+<meta property="og:url" content="https://frameops.io/properties" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Frame Properties — Every residence ready before anyone arrives." />
+<meta name="twitter:description" content="Operations intelligence for private estates and residences. Household knowledge encoded, vendors documented, seasonal readiness automated." />
+<meta name="twitter:image" content="https://frameops.io/assets/og-image.jpg" />
+
+<!-- Canonical -->
+<link rel="canonical" href="https://frameops.io/properties" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Figtree:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+ --paper: #F1EDE4;
+ --paper-2:#EAE4D5;
+ --ink: #0A0E1A;
+ --ink-2: #060810;
+ --orange: #FF6A00;
+ --good: #4CAF6E;
+ --warn: #E8A352;
+ --red: #C8553D;
+ --muted: rgba(10,14,26,0.50);
+ --faint: rgba(10,14,26,0.32);
+ --ghost: rgba(255,255,255,0.42);
+ --ghost-2:rgba(255,255,255,0.48);
+ --rule: rgba(10,14,26,0.10);
+ --rule-d: rgba(255,255,255,0.08);
+ --serif: 'Cormorant Garamond', Georgia, serif;
+ --sans: 'Figtree', system-ui, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+a { color: inherit; text-decoration: none; }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .9s cubic-bezier(.16,.84,.3,1), transform .9s cubic-bezier(.16,.84,.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+.d1 { transition-delay: .08s; } .d2 { transition-delay: .18s; } .d3 { transition-delay: .30s; } .d4 { transition-delay: .42s; }
+
+/* nav */
+nav {
+ position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 16px 20px;
+ background: rgba(241,237,228,0.86);
+ -webkit-backdrop-filter: saturate(140%) blur(14px); backdrop-filter: saturate(140%) blur(14px);
+ border-bottom: 1px solid var(--rule);
+ transition: background .3s, border-color .3s, color .3s;
+}
+nav.on-dark { background: rgba(10,14,26,0.78); border-bottom-color: var(--rule-d); color: var(--paper); }
+a.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { display: flex; flex-direction: column; gap: 3px; width: 18px; }
+.brand-mark .lb { height: 2px; border-radius: 2px; background: currentColor; }
+.brand-mark .lb:nth-child(1) { width: 100%; opacity: .22; }
+.brand-mark .lb:nth-child(2) { width: 68%; opacity: .55; }
+.brand-mark .lb:nth-child(3) { width: 42%; background: var(--orange); opacity: 1; }
+.brand-word { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+.brand-slash { font-family: var(--serif); font-size: 22px; font-weight: 300; opacity: .35; margin: 0 4px; }
+.brand-page { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+.nav-links { display: none; }
+.nav-link { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; opacity: .55; cursor: pointer; transition: opacity .2s; }
+.nav-link:hover { opacity: 1; }
+.nav-link.current { opacity: 1; color: var(--orange); }
+.nav-cta { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; cursor: pointer; padding: 10px 14px; border: 1px solid currentColor; border-radius: 999px; }
+.nav-right { display: inline-flex; align-items: center; gap: 14px; }
+.nav-signin {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+  color: inherit; opacity: .75; cursor: pointer; padding: 8px 4px;
+  transition: opacity .2s;
+}
+.nav-signin:hover { opacity: 1; color: var(--orange); }
+.nav-signin svg { display: block; }
+.nav-signin span { display: none; }
+@media (min-width: 768px) {
+  .nav-signin span { display: inline; }
+}
+
+.menu-btn { display: inline-flex; flex-direction: column; gap: 4px; padding: 8px; cursor: pointer; }
+.menu-btn .ml { width: 18px; height: 1.5px; background: currentColor; }
+
+/* section scaffold */
+section { position: relative; padding: 96px 20px; }
+.on-paper { background: var(--paper); color: var(--ink); }
+.on-ink { background: var(--ink); color: var(--paper); }
+.on-deep { background: var(--ink-2); color: var(--paper); }
+
+.sec-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.sec-num { font-size: 10px; letter-spacing: .2em; font-weight: 700; color: var(--orange); }
+.sec-eyebrow .rule { flex: 1; height: 1px; background: currentColor; opacity: .14; max-width: 64px; }
+.sec-tag { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; opacity: .6; }
+
+h2.section-h {
+ font-family: var(--serif); font-weight: 400;
+ font-size: clamp(36px, 10vw, 56px);
+ line-height: 1.02; letter-spacing: -0.022em;
+}
+h2.section-h em { font-style: italic; display: block; font-weight: 300; opacity: .55; }
+.on-ink h2.section-h em { opacity: .42; }
+
+.section-lede { font-size: 15px; font-weight: 300; line-height: 1.65; max-width: 520px; }
+.on-paper .section-lede { color: var(--muted); }
+.on-ink .section-lede { color: var(--ghost); }
+.acc-rule { width: 32px; height: 1.5px; background: var(--orange); margin: 18px 0 24px; border: none; }
+
+/* ═════════════ HERO · Cinematic Full-Bleed ═════════════ */
+.hero {
+ min-height: 100svh;
+ padding: 0;
+ position: relative;
+ background: #1A1610;
+ overflow: hidden;
+ color: var(--paper);
+}
+.hero-photo-bg { position: absolute; inset: 0; z-index: 1; }
+.hero-photo-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 60%; display: block; }
+.hero-photo-bg::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(10,8,5,0.55) 0%, rgba(10,8,5,0.05) 25%, rgba(10,8,5,0.05) 55%, rgba(10,8,5,0.65) 100%),
+    linear-gradient(90deg, rgba(10,8,5,0.55) 0%, rgba(10,8,5,0.10) 50%, rgba(10,8,5,0.45) 100%);
+}
+.hero-text { position: relative; z-index: 5; padding: 120px 20px 56px; display: flex; flex-direction: column; gap: 28px; color: var(--paper); }
+.hero-text .hero-tag .tx { color: var(--paper); opacity: .85; }
+.hero-text h1 { color: var(--paper); }
+.hero-text h1 em { opacity: .72; }
+.hero-text .hero-sub { color: rgba(255,255,255,0.62); }
+.hero-text .hero-sub b { color: var(--paper); }
+.hero-text .hero-cta-note { color: rgba(255,255,255,0.45); }
+.frame-caption {
+  position: absolute; left: 20px; bottom: 24px; z-index: 5;
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--paper);
+  font-weight: 600; line-height: 1.8; text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+.frame-caption .tag { color: var(--orange); }
+.frame-caption .name { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 20px; letter-spacing: 0; text-transform: none; margin-top: 4px; display: block; color: var(--paper); }
+.reg-mark { position: absolute; width: 14px; height: 14px; z-index: 4; }
+.reg-mark::before, .reg-mark::after { content: ""; position: absolute; background: var(--paper); opacity: .42; }
+.reg-mark::before { left: 0; top: 50%; width: 100%; height: 1px; }
+.reg-mark::after { top: 0; left: 50%; width: 1px; height: 100%; }
+.reg-mark.tl { left: 16px; top: 76px; }
+.reg-mark.tr { right: 16px; top: 76px; }
+.hero-tag { display: flex; align-items: center; gap: 14px; }
+.hero-tag .ln { width: 24px; height: 1.5px; background: var(--orange); }
+.hero-tag .tx { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1 {
+ font-family: var(--serif); font-weight: 400;
+ font-size: clamp(36px, 11vw, 56px);
+ line-height: 1.0; letter-spacing: -0.028em;
+ text-wrap: balance;
+}
+h1 em { font-style: italic; font-weight: 300; display: block; opacity: .55; }
+.hero-sub { font-size: 14px; line-height: 1.65; color: var(--muted); max-width: 460px; font-weight: 300; }
+.hero-sub b { color: var(--ink); font-weight: 500; }
+
+.hero-cta { display: flex; flex-direction: column; gap: 12px; }
+.btn-primary {
+  background: var(--ink); color: var(--paper);
+  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  padding: 14px 22px; border: none; border-radius: 999px;
+  box-shadow: none; -webkit-appearance: none; appearance: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+  cursor: pointer; transition: background .2s;
+  width: max-content;
+}
+.btn-primary:hover { background: var(--orange); }
+.hero-cta-note { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); font-weight: 500; }
+
+/* ═════════════ §02 ARRIVAL READINESS ═════════════ */
+.brief-h { font-family: var(--serif); font-size: clamp(36px, 11vw, 56px); font-weight: 300; line-height: 1.02; letter-spacing: -0.022em; }
+.brief-h em { font-style: italic; color: var(--orange); display: block; }
+.brief-meta { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); margin-top: 22px; font-weight: 600; }
+
+.arrival-list { margin-top: 56px; }
+.arrival-row {
+ display: grid; grid-template-columns: 30px 1fr auto auto;
+ gap: 14px; align-items: baseline;
+ padding: 24px 0;
+ border-top: 1px solid var(--rule-d);
+}
+.arrival-row:last-child { border-bottom: 1px solid var(--rule-d); }
+.arrival-row .ix { font-size: 11px; letter-spacing: .14em; color: var(--ghost-2); font-weight: 600; }
+.arrival-row .what { font-family: var(--serif); font-size: 24px; font-weight: 400; line-height: 1.1; }
+.arrival-row .what em { font-style: italic; font-size: 13px; opacity: .5; display: block; margin-top: 4px; font-weight: 300; }
+.arrival-row .who { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; min-width: 110px; text-align: right; }
+.arrival-row .status { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; min-width: 80px; text-align: right; }
+.arrival-row .status.ok { color: var(--good); }
+.arrival-row .status.prog { color: var(--orange); }
+.arrival-row .status.due { color: var(--warn); }
+
+/* ═════════════ §04 MANUALS. TRANSITION ═════════════ */
+.transition { margin-top: 56px; display: grid; gap: 0; }
+.tx-stage {
+ padding: 32px 0;
+ border-top: 1px solid var(--rule-d);
+ display: grid; gap: 16px;
+}
+.tx-stage:last-child { border-bottom: 1px solid var(--rule-d); }
+.tx-num { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--orange); font-weight: 700; }
+.tx-h { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -0.01em; line-height: 1.15; color: var(--paper); }
+.tx-h em { font-style: italic; opacity: .55; font-size: 14px; display: block; margin-top: 4px; font-weight: 300; }
+.tx-art {
+ background: rgba(255,255,255,0.025);
+ padding: 22px;
+ font-family: var(--serif); font-style: italic; font-size: 15px;
+ color: var(--ghost); line-height: 1.55; max-width: 520px;
+}
+.tx-art b { font-style: normal; font-family: var(--sans); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); display: block; margin-bottom: 8px; font-weight: 700; }
+.tx-art .meta { font-style: normal; font-family: var(--sans); font-size: 10px; letter-spacing: .12em; color: var(--ghost-2); margin-top: 12px; display: block; }
+
+/* ═════════════ §05 VENDORS + STAFF ═════════════ */
+.roster { margin-top: 56px; display: grid; gap: 0; }
+.roster-row {
+ display: grid; grid-template-columns: 1fr;
+ gap: 8px;
+ padding: 24px 0;
+ border-top: 1px solid var(--rule);
+}
+.roster-row:last-child { border-bottom: 1px solid var(--rule); }
+.roster-top { display: flex; align-items: baseline; gap: 16px; justify-content: space-between; }
+.roster-name { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.1; }
+.roster-name em { font-style: italic; font-size: 12px; opacity: .5; }
+.roster-role { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); font-weight: 700; }
+.roster-meta { font-size: 12px; letter-spacing: .08em; color: var(--muted); font-weight: 400; }
+.roster-meta b { color: var(--ink); font-weight: 500; }
+.roster-touch { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+
+/* ═════════════ §06 SEASONAL. ARC ═════════════ */
+.seasonal { margin-top: 56px; position: relative; padding: 30px 0; }
+.season-arc { position: relative; height: 200px; }
+.season-arc svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.season-arc .mark { position: absolute; transform: translate(-50%, -50%); text-align: center; }
+.season-arc .mark .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--paper); margin: 0 auto 10px; }
+.season-arc .mark.signal .dot { background: var(--orange); }
+.season-arc .mark .mo { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 700; }
+.season-arc .mark .ev { font-family: var(--serif); font-size: 14px; font-style: italic; color: var(--paper); margin-top: 4px; line-height: 1.25; max-width: 110px; }
+
+.seasonal-list { margin-top: 24px; display: grid; gap: 0; }
+.season-row {
+ padding: 16px 0;
+ border-top: 1px solid var(--rule);
+ display: grid; grid-template-columns: 80px 1fr;
+ gap: 16px; align-items: baseline;
+}
+.season-row:last-child { border-bottom: 1px solid var(--rule); }
+.season-row .mo { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); font-weight: 700; }
+.season-row .ev { font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--ink); }
+.season-row .ev small { font-style: normal; font-family: var(--sans); display: block; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin-top: 4px; font-weight: 500; }
+
+/* ═════════════ §07 RISK ═════════════ */
+.command { margin-top: 56px; display: grid; gap: 0; border-top: 1px solid var(--rule-d); }
+.cmd-card { padding: 32px 0 28px; border-bottom: 1px solid var(--rule-d); }
+.cmd-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--orange); margin-bottom: 16px; }
+.cmd-v { font-family: var(--serif); font-size: clamp(54px, 18vw, 84px); font-weight: 300; line-height: .95; letter-spacing: -0.03em; }
+.cmd-v .sub { font-family: var(--sans); font-weight: 400; font-size: .35em; letter-spacing: 0; }
+.cmd-v .red { color: var(--red); }
+.cmd-v .acc { color: var(--orange); }
+.cmd-v.ital { font-style: italic; }
+.cmd-l { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ghost-2); margin-top: 14px; font-weight: 500; }
+.cmd-n { font-size: 13px; color: var(--ghost); margin-top: 10px; line-height: 1.55; font-weight: 300; max-width: 380px; }
+
+/* §08 CTA */
+.demo { padding: 120px 20px; }
+.demo-h { font-family: var(--serif); font-size: clamp(40px, 12vw, 64px); font-weight: 300; line-height: 1.0; letter-spacing: -0.028em; color: var(--paper); }
+.demo-h em { font-style: italic; color: var(--ghost-2); display: block; }
+.demo-sub { font-size: 14px; line-height: 1.7; color: var(--ghost); margin-top: 20px; max-width: 440px; font-weight: 300; }
+.demo-cta { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+.demo-cta .btn-primary { background: var(--orange); color: var(--paper); }
+.demo-cta .btn-primary:hover { background: var(--paper); color: var(--ink); }
+.demo-note { margin-top: 36px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 500; }
+.demo-fields { display: grid; gap: 14px; margin-top: 24px; }
+.demo-field { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; padding-bottom: 12px; border-bottom: 1px solid var(--rule-d); display: flex; justify-content: space-between; gap: 12px; }
+.demo-field b { color: var(--paper); font-weight: 600; }
+
+footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px; }
+.foot-grid { display: grid; gap: 36px; }
+.foot-brand .brand-word { color: var(--paper); }
+.foot-tagline { font-family: var(--serif); font-size: 17px; font-style: italic; color: rgba(255,255,255,0.62); margin-top: 14px; max-width: 280px; line-height: 1.4; }
+.foot-cols { display: grid; gap: 24px; grid-template-columns: 1fr 1fr; }
+.foot-col h6 { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); margin-bottom: 12px; font-weight: 600; }
+.foot-col a { display: block; font-size: 12px; color: var(--ghost); padding: 4px 0; font-weight: 400; }
+.foot-bot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--rule-d); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; }
+
+/* mobile menu */
+.mobile-menu {
+ position: fixed; inset: 0; z-index: 90;
+ background: var(--ink); color: var(--paper); padding: 96px 24px 32px;
+ display: flex; flex-direction: column; justify-content: space-between;
+ transform: translateY(-100%); transition: transform .55s cubic-bezier(.16,.84,.3,1);
+}
+.mobile-menu.open { transform: none; }
+.mm-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.mm-list li { border-bottom: 1px solid var(--rule-d); }
+.mm-list a { display: flex; align-items: baseline; justify-content: space-between; padding: 20px 0; font-family: var(--serif); font-size: 32px; font-weight: 400; }
+.mm-list a em { font-style: italic; opacity: .35; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-family: var(--sans); font-weight: 500; }
+.mm-foot { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; display: flex; justify-content: space-between; }
+
+/* ═════════════ TABLET 768+ ═════════════ */
+@media (min-width: 768px) {
+ nav { padding: 22px 40px; }
+ .menu-btn { display: none; }
+ .nav-links { display: flex; gap: 28px; }
+ .hero { padding: 96px 40px 56px; }
+ h1 { font-size: clamp(56px, 7.5vw, 84px); }
+ section { padding: 120px 40px; }
+ h2.section-h { font-size: clamp(48px, 6vw, 64px); }
+ .transition { grid-template-columns: 1fr 1fr 1fr; }
+ .tx-stage { padding: 32px; border-right: 1px solid var(--rule-d); border-top: 1px solid var(--rule-d); }
+ .tx-stage:last-child { border-right: none; }
+ .roster-row { grid-template-columns: 200px 1fr 160px; align-items: baseline; }
+ .roster-top { display: contents; }
+ .seasonal-list { display: none; }
+ .season-arc { height: 240px; display: block; }
+ .command { grid-template-columns: 1fr 1fr; }
+ .cmd-card { padding: 40px 32px; border-right: 1px solid var(--rule-d); }
+ .cmd-card:nth-child(even) { border-right: none; }
+ .demo { padding: 140px 40px; }
+ .demo-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+ .demo-cta { flex-direction: row; }
+ footer { padding: 72px 40px 36px; }
+ .foot-grid { grid-template-columns: 1.2fr 2fr; gap: 80px; }
+ .foot-cols { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ═════════════ DESKTOP 1280+ ═════════════ */
+@media (min-width: 1280px) {
+ nav { padding: 24px 64px; }
+ .hero { padding: 0; display: block; min-height: 100svh; }
+ .hero-text { padding: 200px 64px 64px; max-width: 720px; }
+ .hero-text h1 { font-size: clamp(72px, 6vw, 96px); }
+ .frame-caption { left: 64px; bottom: 56px; }
+ .frame-caption .name { font-size: 22px; }
+ .reg-mark { width: 18px; height: 18px; }
+ .reg-mark.tl { left: 64px; top: 88px; }
+ .reg-mark.tr { right: 64px; top: 88px; }
+ h1 { font-size: clamp(64px, 5vw, 84px); }
+ section { padding: 160px 64px; }
+ h2.section-h { font-size: clamp(64px, 4.6vw, 80px); }
+ .command { grid-template-columns: repeat(4, 1fr); }
+ .cmd-card:nth-child(even) { border-right: 1px solid var(--rule-d); }
+ .cmd-card:last-child { border-right: none; }
+ .demo { padding: 180px 64px; }
+ footer { padding: 96px 64px 40px; }
+}
+
+/* season arc. Mobile = stacked list */
+@media (max-width: 767px) {
+ .season-arc { display: none; }
+}
+
+/* 320 SAFETY */
+@media (max-width: 359px) {
+ h1 { font-size: 32px; }
+ .hero { padding: 76px 16px 24px; }
+ section, .demo, footer { padding-left: 16px; padding-right: 16px; }
+ .brief-h, .arrival-row .what { font-size: 20px; }
+ .arrival-row { grid-template-columns: 22px 1fr; row-gap: 8px; }
+ .arrival-row .who, .arrival-row .status { grid-column: 2; text-align: left; min-width: 0; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav" class="on-dark">
+ <a class="brand" href="/">
+  <div class="brand-mark"><div class="lb"></div><div class="lb"></div><div class="lb"></div></div>
+  <div class="brand-word">Frame</div>
+  <span class="brand-slash">/</span>
+  <div class="brand-page">Properties</div>
+ </a>
+ <div class="nav-links">
+  <a class="nav-link" href="/#portfolio">Portfolio</a>
+  <a class="nav-link" href="/vessels">Vessels</a>
+  <a class="nav-link current" href="#">Properties</a>
+  <a class="nav-link" href="#demo">Contact</a>
+ </div>
+ <div class="nav-right">
+  <a class="nav-signin" href="https://project-6e6k2.vercel.app/" aria-label="Sign in" title="Sign in">
+   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+    <circle cx="12" cy="7" r="4"/>
+   </svg>
+   <span>Sign in</span>
+  </a>
+  <div class="nav-cta" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Request Demo →</div>
+  <div class="menu-btn" id="menuBtn"><span class="ml"></span><span class="ml"></span></div>
+ </div>
+</nav>
+
+<aside class="mobile-menu" id="mobileMenu">
+ <ul class="mm-list">
+  <li><a href="/#portfolio">Portfolio <em>02</em></a></li>
+  <li><a href="/vessels">Vessels <em>→</em></a></li>
+  <li><a href="#"><span style="color:var(--orange);">Properties</span> <em>Current</em></a></li>
+  <li><a href="#demo">Contact <em>→</em></a></li>
+ </ul>
+ <div class="mm-foot"><span>Frame · Properties</span><span>frameops.io</span></div>
+</aside>
+
+<!-- ══════════ 01 · HERO ══════════ -->
+<section class="hero" id="hero">
+ <div class="hero-photo-bg" aria-hidden="true">
+  <img src="/assets/aspen-house.webp" alt="" loading="eager" fetchpriority="high" decoding="async" />
+ </div>
+ <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+ <div class="hero-text">
+  <div class="hero-tag reveal"><span class="ln"></span><span class="tx">Frame Properties</span></div>
+  <h1 class="reveal d1">Every residence ready<em>before anyone<br/>arrives.</em></h1>
+  <p class="hero-sub reveal d2">Operations intelligence for private estates and residences. <b>Household knowledge encoded, vendors documented, seasonal readiness automated</b>. So the new estate manager doesn't start from zero.</p>
+  <div class="hero-cta reveal d3">
+   <button class="btn-primary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})"><span>Request Demo</span><span>→</span></button>
+   <span class="hero-cta-note">Private onboarding · By invitation</span>
+  </div>
+ </div>
+ <div class="frame-caption">
+  <span class="tag">Aspen Lodge</span>
+  <span class="name">Snowmass · Colorado</span>
+  On Frame since 2023
+ </div>
+</section>
+
+<!-- ══════════ 02 · ARRIVAL READINESS ══════════ -->
+<section class="on-ink" id="arrival">
+ <div class="sec-eyebrow reveal">
+  <span class="sec-num">02</span>
+  <span class="rule" style="background: var(--paper); opacity: .14;"></span>
+  <span class="sec-tag" style="color: var(--ghost-2);">Arrival Readiness</span>
+ </div>
+
+ <div class="brief-h reveal d1">Owner arriving<em>Friday at 14:00.</em></div>
+ <div class="brief-meta reveal d2"><b style="color:var(--paper);">Aspen Lodge</b> · Snowmass, CO · Brief compiled by Frame · 04:00 UTC</div>
+
+ <div class="arrival-list reveal d3">
+  <div class="arrival-row">
+   <span class="ix">01</span>
+   <div class="what">House <em>HVAC zoned · interior temp pre-set · lights primed</em></div>
+   <span class="who">House Mgr · Walsh</span>
+   <span class="status ok">Ready</span>
+  </div>
+  <div class="arrival-row">
+   <span class="ix">02</span>
+   <div class="what">Chef <em>Provisions delivered · menu pre-cleared · dietary on file</em></div>
+   <span class="who">Chef Pérez</span>
+   <span class="status ok">Ready</span>
+  </div>
+  <div class="arrival-row">
+   <span class="ix">03</span>
+   <div class="what">Vehicles <em>2 SUVs detailed · charged · driver briefed</em></div>
+   <span class="who">Estate Driver</span>
+   <span class="status ok">Ready</span>
+  </div>
+  <div class="arrival-row">
+   <span class="ix">04</span>
+   <div class="what">Pool <em>WO-2841 · filtration · vendor en route 13:45</em></div>
+   <span class="who">AirTech Inc.</span>
+   <span class="status prog">In progress</span>
+  </div>
+  <div class="arrival-row">
+   <span class="ix">05</span>
+   <div class="what">Guest wing <em>Deep clean 09:30–12:30 · linens fresh · ready 13:00</em></div>
+   <span class="who">Housekeeping</span>
+   <span class="status prog">In progress</span>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════ 04 · MANUALS + SOPs ══════════ -->
+<section class="on-ink" id="manuals">
+ <div class="sec-eyebrow reveal">
+  <span class="sec-num">04</span>
+  <span class="rule" style="background: var(--paper); opacity: .14;"></span>
+  <span class="sec-tag" style="color: var(--ghost-2);">Manuals · SOPs</span>
+ </div>
+ <h2 class="section-h reveal d1" style="color: var(--paper);">Household knowledge,<em>encoded.</em></h2>
+ <hr class="acc-rule reveal d2" />
+ <p class="section-lede reveal d2">Manuals on shelves, fixes in someone's head, the quirks of the gate. Turned into searchable, enforceable operating intelligence the next house manager can run on day one.</p>
+
+ <div class="transition reveal d3">
+  <div class="tx-stage">
+   <div class="tx-num">01 · Paper</div>
+   <div class="tx-h">A binder, a Post-it,<em>a name only one person knows.</em></div>
+   <div class="tx-art">
+    "The HVAC zone 3 thermostat lies by 2 degrees in winter. Bypass the boiler if Zone 4 reads &gt; 76. Only Manny knows the override sequence. Don't lose this page."
+    <span class="meta">Source · estate binder · undated · author unknown</span>
+   </div>
+  </div>
+  <div class="tx-stage">
+   <div class="tx-num">02 · Indexed</div>
+   <div class="tx-h">Frame parses,<em>indexes, cross-references.</em></div>
+   <div class="tx-art">
+    <b>HVAC · Zone 3 · Calibration</b>
+    Document fragment ingested · linked to Asset HVAC-A2 · cross-referenced to fault code FC-208 (zone calibration drift) and SOP-15 (winter override).
+    <span class="meta">Indexed · 22 Mar 2026 · provenance preserved</span>
+   </div>
+  </div>
+  <div class="tx-stage">
+   <div class="tx-num">03 · Guided</div>
+   <div class="tx-h">Action,<em>the same way every time.</em></div>
+   <div class="tx-art">
+    <b>WO-2912 · Auto-generated</b>
+    Zone 3 calibration drift detected · SOP-15 invoked · estate engineer assigned · vendor (AirTech) on standby. The override sequence is now in the work order, signed and audited.
+    <span class="meta">Closed · 4 days later · 100% provenance · audit-complete</span>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════ 05 · VENDORS + STAFF ══════════ -->
+<section class="on-paper" id="roster">
+ <div class="sec-eyebrow reveal">
+  <span class="sec-num">05</span>
+  <span class="rule"></span>
+  <span class="sec-tag">Vendors · Staff</span>
+ </div>
+ <h2 class="section-h reveal d1">Know who<em>handles what.</em></h2>
+ <hr class="acc-rule reveal d2" />
+ <p class="section-lede reveal d2">Every name, role, lane, and last-touch documented. When the estate manager changes, the relationships don't disappear with them.</p>
+
+ <div class="roster reveal d3">
+  <div class="roster-row">
+   <div class="roster-top">
+    <div class="roster-name">Elena Walsh <em>· House Manager</em></div>
+    <div class="roster-role">Staff · Primary</div>
+   </div>
+   <div class="roster-meta">Aspen Lodge · 5 yrs · <b>32 vendors</b> in lane</div>
+   <div class="roster-touch">Touched 22 May</div>
+  </div>
+  <div class="roster-row">
+   <div class="roster-top">
+    <div class="roster-name">Chef Pérez <em>· Resident chef</em></div>
+    <div class="roster-role">Staff · F&amp;B</div>
+   </div>
+   <div class="roster-meta">Aspen &amp; Coconut Grove · dietary file on record</div>
+   <div class="roster-touch">Touched 09:12</div>
+  </div>
+  <div class="roster-row">
+   <div class="roster-top">
+    <div class="roster-name">AirTech Inc. <em>· HVAC + filtration</em></div>
+    <div class="roster-role">Vendor · Approved</div>
+   </div>
+   <div class="roster-meta">SLA <b>4.9</b> · 38 WOs closed · contract on file</div>
+   <div class="roster-touch">Touched 22 May</div>
+  </div>
+  <div class="roster-row">
+   <div class="roster-top">
+    <div class="roster-name">NorthWatch <em>· Security</em></div>
+    <div class="roster-role">Vendor · Approved</div>
+   </div>
+   <div class="roster-meta">2 perimeters · 4 cameras · 24/7 contract</div>
+   <div class="roster-touch">Touched 21 May</div>
+  </div>
+  <div class="roster-row">
+   <div class="roster-top">
+    <div class="roster-name">PowerCo <em>· Generator + utility</em></div>
+    <div class="roster-role">Vendor · Approved</div>
+   </div>
+   <div class="roster-meta">Annual service · last 14 Mar 2026 · resupply auto-call</div>
+   <div class="roster-touch">Touched 14 Mar</div>
+  </div>
+  <div class="roster-row">
+   <div class="roster-top">
+    <div class="roster-name">AquaSafe <em>· Leak response</em></div>
+    <div class="roster-role">Vendor · Emergency</div>
+   </div>
+   <div class="roster-meta">30-min SLA · 24/7 · 2 incidents past 12mo</div>
+   <div class="roster-touch">Touched 08 Apr</div>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════ 06 · SEASONAL ══════════ -->
+<section class="on-ink" id="seasonal">
+ <div class="sec-eyebrow reveal">
+  <span class="sec-num">06</span>
+  <span class="rule" style="background: var(--paper); opacity: .14;"></span>
+  <span class="sec-tag" style="color: var(--ghost-2);">Seasonal Operations</span>
+ </div>
+ <h2 class="section-h reveal d1" style="color: var(--paper);">Openings. Closures.<em>Storms. Events.</em></h2>
+ <hr class="acc-rule reveal d2" />
+ <p class="section-lede reveal d2">Estates run on the calendar. Frame remembers what was done last May, what to check in November, and what to pre-stage before a Miami hurricane window opens.</p>
+
+ <div class="seasonal reveal d3">
+  <div class="season-arc">
+   <svg viewBox="0 0 1200 240" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M 40 200 C 220 60, 420 60, 600 140 S 980 220, 1160 100"
+     fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+   </svg>
+   <div class="mark" style="left: 4%; top: 84%;"><div class="dot"></div><div class="mo">Jan</div><div class="ev">Snow ops · Aspen winter mode</div></div>
+   <div class="mark signal" style="left: 22%; top: 30%;"><div class="dot"></div><div class="mo">Apr</div><div class="ev">Spring opening · Aspen</div></div>
+   <div class="mark" style="left: 40%; top: 32%;"><div class="dot"></div><div class="mo">May</div><div class="ev">Owner arrivals begin</div></div>
+   <div class="mark" style="left: 58%; top: 60%;"><div class="dot"></div><div class="mo">Aug</div><div class="ev">Charter window peak</div></div>
+   <div class="mark signal" style="left: 76%; top: 80%;"><div class="dot"></div><div class="mo">Sep</div><div class="ev">Hurricane prep · Miami</div></div>
+   <div class="mark" style="left: 96%; top: 44%;"><div class="dot"></div><div class="mo">Dec</div><div class="ev">Winter closure</div></div>
+  </div>
+
+  <div class="seasonal-list">
+   <div class="season-row"><span class="mo">Jan</span><span class="ev">Snow operations<small>Aspen winter mode · roof load monitoring</small></span></div>
+   <div class="season-row"><span class="mo">Apr</span><span class="ev">Spring opening · Aspen<small>HVAC commission · pool open · staff brief</small></span></div>
+   <div class="season-row"><span class="mo">May</span><span class="ev">Owner arrivals begin<small>Readiness briefs · Friday rhythm</small></span></div>
+   <div class="season-row"><span class="mo">Aug</span><span class="ev">Charter window peak<small>Lady M · Mediterranean rotation</small></span></div>
+   <div class="season-row"><span class="mo">Sep</span><span class="ev">Hurricane prep · Miami<small>Storm SOP · vendor pre-stage · evac plan</small></span></div>
+   <div class="season-row"><span class="mo">Dec</span><span class="ev">Winter closure<small>Property winterization · staff rotation</small></span></div>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════ 07 · RISK ══════════ -->
+<section class="on-paper" id="risk">
+ <div class="sec-eyebrow reveal">
+  <span class="sec-num">07</span>
+  <span class="rule"></span>
+  <span class="sec-tag">Risk · Properties</span>
+ </div>
+ <h2 class="section-h reveal d1">What's quietly<em>getting worse.</em></h2>
+ <hr class="acc-rule reveal d2" />
+ <p class="section-lede reveal d2">Repeated failures, deferred maintenance, unresolved issues. Frame surfaces the slow drift before it becomes a Friday-night incident.</p>
+
+ <div class="command reveal d3" style="border-top-color: var(--rule);">
+  <div class="cmd-card" style="border-bottom-color: var(--rule);">
+   <div class="cmd-label">Repeated Faults</div>
+   <div class="cmd-v" style="color: var(--ink);">3</div>
+   <div class="cmd-l" style="color: var(--muted);">HVAC zone 3 · pool pump · gate motor</div>
+   <div class="cmd-n" style="color: var(--muted);">Each has failed 3+ times this season. Frame recommends manufacturer review or replacement.</div>
+  </div>
+  <div class="cmd-card" style="border-bottom-color: var(--rule);">
+   <div class="cmd-label">Deferred Maintenance</div>
+   <div class="cmd-v" style="color: var(--ink);">$148<span class="sub">K</span></div>
+   <div class="cmd-l" style="color: var(--muted);">Across 3 residences · 18 months</div>
+   <div class="cmd-n" style="color: var(--muted);">Items deferred beyond manufacturer cycle. Surface annually for owner review.</div>
+  </div>
+  <div class="cmd-card" style="border-bottom-color: var(--rule);">
+   <div class="cmd-label">Unresolved &gt; 30d</div>
+   <div class="cmd-v ital" style="color: var(--ink);">2</div>
+   <div class="cmd-l" style="color: var(--muted);">Miami guest bath · Aspen exterior trim</div>
+   <div class="cmd-n" style="color: var(--muted);">Open work orders beyond standard cycle. Both have vendor commitments. Frame escalates next.</div>
+  </div>
+  <div class="cmd-card" style="border-bottom-color: var(--rule);">
+   <div class="cmd-label">Audit Trail</div>
+   <div class="cmd-v" style="color: var(--ink);">100<span class="sub">%</span></div>
+   <div class="cmd-l" style="color: var(--muted);">Every action · every property · 7 yrs</div>
+   <div class="cmd-n" style="color: var(--muted);">Insurance, estate planning, succession. Every event recorded with provenance.</div>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════ 08 · CTA ══════════ -->
+<section class="demo on-deep" id="demo">
+ <div class="demo-inner">
+  <div>
+   <div class="sec-eyebrow reveal">
+    <span class="sec-num">08</span>
+    <span class="rule" style="background: var(--paper); opacity: .14;"></span>
+    <span class="sec-tag" style="color: var(--ghost-2);">Private Onboarding</span>
+   </div>
+   <div class="demo-h reveal d1">Run Properties<em>on Frame.</em></div>
+   <p class="demo-sub reveal d2">By invitation only. Frame onboards each residence personally. Four to six weeks, white-glove. Tell us about the portfolio.</p>
+   <div class="demo-cta reveal d3">
+    <button class="btn-primary"><span>Request Demo</span><span>→</span></button>
+   </div>
+   <div class="demo-note reveal d4">Replies within one business day · By appointment only</div>
+  </div>
+  <div class="reveal d3">
+   <div class="demo-fields">
+    <div class="demo-field"><span>Residences</span><b>1 – 8 estates</b></div>
+    <div class="demo-field"><span>Coverage</span><b>Year-round + seasonal</b></div>
+    <div class="demo-field"><span>Roster</span><b>Staff + vendors documented</b></div>
+    <div class="demo-field"><span>Emergency</span><b>SOPs · auto-dispatch · 24/7</b></div>
+    <div class="demo-field"><span>Onboarding</span><b>4–6 weeks white-glove</b></div>
+    <div class="demo-field"><span>Reference</span><b>Available on request</b></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<footer>
+ <div class="foot-grid">
+  <div class="foot-brand">
+   <div class="brand"><div class="brand-mark"><div class="lb"></div><div class="lb"></div><div class="lb"></div></div><div class="brand-word">Frame</div></div>
+   <div class="foot-tagline">The operating system for private operations.</div>
+  </div>
+  <div class="foot-cols">
+   <div class="foot-col"><h6>Platform</h6><a href="/#portfolio">Portfolio</a><a href="/#capabilities">Capabilities</a><a href="/#about">About</a></div>
+   <div class="foot-col"><h6>Asset Classes</h6><a href="/vessels">Vessels</a><a style="color: var(--orange);">Properties</a><a>Aircraft <em style="opacity:.4;">Q3 2026</em></a></div>
+   <div class="foot-col"><h6>Company</h6><a>About</a><a>Contact</a><a>Press</a></div>
+   <div class="foot-col"><h6>Trust</h6><a>Security</a><a>SOC 2</a><a>Privacy</a></div>
+  </div>
+ </div>
+ <div class="foot-bot">
+  <span>© 2026 Frame Operations</span>
+  <span>frameops.io</span>
+ </div>
+</footer>
+
+<script>
+ const io = new IntersectionObserver((entries) => {
+  for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+ }, { threshold: 0.08 });
+ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+ const nav = document.getElementById('nav');
+ const darkSecs = document.querySelectorAll('.hero, .on-ink, .on-deep');
+ function syncNav() {
+  const y = window.scrollY + 70;
+  let dark = false;
+  darkSecs.forEach(s => { const top = s.offsetTop, bot = top + s.offsetHeight; if (y > top && y < bot) dark = true; });
+  nav.classList.toggle('on-dark', dark);
+ }
+ window.addEventListener('scroll', syncNav, { passive: true });
+ syncNav();
+
+ const menuBtn = document.getElementById('menuBtn');
+ const mm = document.getElementById('mobileMenu');
+ menuBtn.addEventListener('click', () => mm.classList.toggle('open'));
+ mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+</script>
+</body>
+</html>
