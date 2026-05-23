@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "icons": "node scripts/generate-icons.js",
-    "prebuild": "node scripts/generate-icons.js"
+    "og": "node scripts/generate-og-images.js",
+    "assets": "node scripts/generate-icons.js && node scripts/generate-og-images.js",
+    "prebuild": "node scripts/generate-icons.js && node scripts/generate-og-images.js"
   },
   "devDependencies": {
     "sharp": "^0.33.5"
