@@ -734,6 +734,17 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  const mm = document.getElementById('mobileMenu');
  menuBtn.addEventListener('click', () => mm.classList.toggle('open'));
  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+ const mmPageLink = mm.querySelector('a.current');
+ const mmContactLink = mm.querySelector('a[href="#demo"]');
+ if (mmContactLink && mmPageLink) {
+  const demoObs = new IntersectionObserver((entries) => {
+   const inView = entries[0].isIntersecting;
+   mmPageLink.style.color = inView ? '' : 'var(--orange)';
+   mmContactLink.style.color = inView ? 'var(--orange)' : '';
+  }, { threshold: 0.15 });
+  const demoEl = document.getElementById('demo');
+  if (demoEl) demoObs.observe(demoEl);
+ }
 </script>
 </body>
 </html>
