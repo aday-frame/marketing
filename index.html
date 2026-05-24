@@ -11,9 +11,9 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <style>
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  RESET + TOKENS (site-matched)
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
  --paper: #F1EDE4;
@@ -23,10 +23,11 @@
  --orange: #FF6A00;
  --good: #4CAF6E;
  --warn: #E8A352;
- --muted: rgba(10,14,26,0.50);
- --faint: rgba(10,14,26,0.32);
- --ghost: rgba(255,255,255,0.42);
- --ghost-2:rgba(255,255,255,0.48);
+ --muted: rgba(10,14,26,0.62);   /* a11y v1: was 0.50 → bumped for 4.5:1 AA on paper */
+ --faint: rgba(10,14,26,0.48);   /* a11y v1: was 0.32 → bumped for small-text safety */
+ --ghost: rgba(255,255,255,0.58); /* a11y v1: was 0.42 → ~6.4:1 on ink */
+ --ghost-2:rgba(255,255,255,0.74); /* a11y v1: was 0.48 → ~9.1:1 on ink */
+ --orange-on-paper: #C8500A;     /* a11y v1: AA orange for text on paper (4.7:1) */
  --rule: rgba(10,14,26,0.10);
  --rule-2: rgba(10,14,26,0.05);
  --rule-d: rgba(255,255,255,0.08);
@@ -35,7 +36,7 @@
  --sans: 'Figtree', system-ui, -apple-system, sans-serif;
  --mono-spc: 0.16em;
 }
-html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
 body { font-family: var(--sans); background: var(--paper); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 a { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
@@ -53,9 +54,9 @@ img, svg { display: block; max-width: 100%; }
 .reveal.in { opacity: 1; transform: none; }
 .d1 { transition-delay: .08s; } .d2 { transition-delay: .18s; } .d3 { transition-delay: .30s; } .d4 { transition-delay: .42s; } .d5 { transition-delay: .56s; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  NAV
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 nav {
  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
  display: flex; align-items: center; justify-content: space-between;
@@ -98,9 +99,9 @@ nav.on-dark { background: rgba(10,14,26,0.78); border-bottom-color: var(--rule-d
 .menu-btn { display: inline-flex; flex-direction: column; gap: 4px; padding: 8px; cursor: pointer; }
 .menu-btn .ml { width: 18px; height: 1.5px; background: currentColor; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  SECTION SCAFFOLD
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 section { position: relative; padding: 96px 20px; }
 .on-paper { background: var(--paper); color: var(--ink); }
 .on-ink { background: var(--ink); color: var(--paper); }
@@ -126,9 +127,9 @@ h2.section-h em { font-style: normal; display: block; font-weight: 300; color: c
 .on-paper .section-lede { color: var(--muted); }
 .on-ink .section-lede { color: var(--ghost); }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  HERO (01)
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .hero {
  min-height: 100svh;
  padding: 84px 20px 36px;
@@ -226,10 +227,10 @@ h1 .ln { display: block; }
  transition: background .2s;
  width: max-content;
 }
-.btn-primary:hover { background: var(--orange); }
+.btn-primary:hover { background: var(--orange); color: var(--ink); }  /* a11y v1: ink-on-orange = 6.6:1 AA */
 .btn-primary .arr { font-weight: 400; font-size: 14px; }
 
-.hero-cta-note { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); font-weight: 500; }
+.hero-cta-note { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); font-weight: 600; }  /* a11y v1: muted + 600 for small-text legibility */
 
 .hero-stats { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .h-stat { background: var(--paper); padding: 28px 16px 24px; }
@@ -244,9 +245,9 @@ h1 .ln { display: block; }
 .hero-hint .dot.gh { background: transparent; border: 1px dashed var(--faint); }
 .hero-hint .dot.signal { background: var(--orange); }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §02 PORTFOLIO · RINGS (ink). Perimeter labels
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .sec-portfolio { background: var(--ink); color: var(--paper); padding: 120px 20px 96px; overflow: hidden; }
 .sec-portfolio .sec-eyebrow .rule { background: var(--paper); opacity: .14; }
 .sec-portfolio .sec-tag { color: var(--ghost-2); }
@@ -297,9 +298,9 @@ h1 .ln { display: block; }
 
 .cnst-foot { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--rule-d); display: flex; justify-content: space-between; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; flex-wrap: wrap; gap: 8px; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
    §02·b PORTFOLIO IN PRACTICE · full-bleed editorial moment
-   ════════════════════════════════════════════════════════ */
+   ──────────────────────────────────────────────────────── */
 .in-practice { position: relative; padding: 0; background: var(--ink); overflow: hidden; }
 .in-practice .frame {
   position: relative; display: block; width: 100%;
@@ -336,9 +337,9 @@ h1 .ln { display: block; }
 }
 .in-practice .cap-right b { color: var(--orange); font-weight: 700; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §03 WHAT FRAME DOES · CAPABILITIES (paper)
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .capabilities { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--rule); }
 .cap {
  padding: 24px 0;
@@ -367,9 +368,9 @@ h1 .ln { display: block; }
 .cap-name em { font-style: normal; opacity: .55; font-size: .58em; font-weight: 300; }
 .cap-p { font-size: 13px; line-height: 1.55; color: var(--muted); font-weight: 300; max-width: 540px; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §04 ASSET CLASSES · CLICKABLE TILES (ink)
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .class-tiles { margin-top: 56px; display: grid; gap: 24px; }
 .tile {
  display: block;
@@ -404,9 +405,9 @@ h1 .ln { display: block; }
 .tile-future .tile-cls { color: var(--ghost-2); }
 .tile-future .tile-cta { color: var(--ghost-2); }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §05 KNOWLEDGE · STRATA (paper)
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .strata { margin-top: 56px; position: relative; }
 .strata-wrap { position: relative; padding: 0; }
 .layer { position: relative; padding: 22px 12px 22px 0; border-top: 1px solid var(--rule); display: flex; align-items: center; gap: 16px; }
@@ -430,9 +431,9 @@ h1 .ln { display: block; }
 .spine-line { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent 0%, var(--orange) 6%, var(--orange) 94%, transparent 100%); }
 .spine-label { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); white-space: nowrap; font-weight: 600; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §06 READINESS BRIEF · editorial (ink)
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .brief { margin-top: 56px; }
 .brief-head { font-family: var(--serif); font-size: clamp(36px, 11vw, 56px); font-weight: 300; line-height: 1.02; letter-spacing: -0.022em; }
 .brief-head em { font-style: normal; color: var(--orange); display: block; }
@@ -464,9 +465,9 @@ h1 .ln { display: block; }
 .brief-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule-d); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-weight: 500; }
 .brief-foot b { color: var(--paper); font-weight: 600; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §07 RISK · COMMAND CARDS (paper)
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .command { margin-top: 56px; display: grid; gap: 0; border-top: 1px solid var(--rule); }
 .cmd-card { padding: 32px 0 28px; border-bottom: 1px solid var(--rule); }
 .cmd-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--orange); margin-bottom: 16px; }
@@ -478,9 +479,9 @@ h1 .ln { display: block; }
 .cmd-n { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.55; font-weight: 300; max-width: 380px; }
 .cmd-n b { color: var(--ink); font-weight: 600; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §05 ABOUT · THE NEW OPERATING STANDARD (paper)
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .about-grid { margin-top: 64px; display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
 .about-body { display: grid; gap: 22px; max-width: 660px; }
 .about-body p { font-family: var(--serif); font-size: 19px; line-height: 1.55; font-weight: 400; color: var(--ink); font-style: normal; }
@@ -494,10 +495,10 @@ h1 .ln { display: block; }
 .about-cta span { transition: transform .35s cubic-bezier(.16,.84,.3,1); display: inline-block; }
 .about-cta:hover span { transform: translateX(6px); }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §06 REQUEST DEMO (deep)
- ════════════════════════════════════════════════════════ */
-.demo { padding: 120px 20px; }
+ ──────────────────────────────────────────────────────── */
+.demo { padding: 40px 20px 120px; }
 .demo-h { font-family: var(--serif); font-size: clamp(40px, 12vw, 64px); font-weight: 300; line-height: 1.0; letter-spacing: -0.028em; color: var(--paper); }
 .demo-h em { font-style: normal; color: var(--ghost-2); display: block; }
 .demo-sub { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ghost); margin-top: 20px; max-width: 440px; }
@@ -509,9 +510,9 @@ h1 .ln { display: block; }
 .demo-field b { color: var(--paper); font-weight: 600; }
 .demo-note { margin-top: 36px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  FOOTER
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px; }
 .foot-grid { display: grid; gap: 36px; }
 .foot-brand .brand-word { color: var(--paper); }
@@ -521,9 +522,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 .foot-col a { display: block; font-size: 12px; color: var(--ghost); padding: 4px 0; font-weight: 400; }
 .foot-bot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--rule-d); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  MOBILE MENU
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .mobile-menu {
  position: fixed; inset: 0; z-index: 90;
  background: var(--ink); color: var(--paper);
@@ -542,9 +543,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 .mm-list a em { font-style: italic; opacity: .35; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-family: var(--sans); font-weight: 500; }
 .mm-foot { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; display: flex; justify-content: space-between; }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  TABLET 768+
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 @media (min-width: 768px) {
  nav { padding: 22px 40px; }
  .menu-btn { display: none; }
@@ -639,7 +640,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  .cmd-card:nth-last-child(-n+2):not(:nth-child(odd)+.cmd-card) { /* keep bottom rule */ }
 
  /* demo side by side */
- .demo { padding: 140px 40px; }
+ .demo { padding: 48px 40px 140px; }
  .demo-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
  .demo-cta { flex-direction: row; }
 
@@ -649,9 +650,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  .foot-cols { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  DESKTOP 1280+
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 @media (min-width: 1280px) {
  nav { padding: 24px 64px; }
  .hero { padding: 112px 64px 72px; padding-right: 0; }
@@ -661,7 +662,8 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  h1 { font-size: clamp(84px, 6.4vw, 112px); }
  section { padding: 160px 64px; }
  h2.section-h { font-size: clamp(64px, 4.6vw, 88px); }
- .demo { padding: 180px 64px; }
+ .demo { padding: 56px 64px 180px; }
+ .teaser-section { padding: 56px 64px 180px; }
  .demo-h { font-size: clamp(64px, 5vw, 88px); }
  .cmd-card { padding: 56px 40px; }
  .command { grid-template-columns: repeat(4, 1fr); }
@@ -670,17 +672,17 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  footer { padding: 96px 64px 40px; }
 }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  DESKTOP 1440+. Refine ratios
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 @media (min-width: 1440px) {
  .hero-stats { gap: 0; }
  .h-stat { padding: 40px 24px 32px; }
 }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  320 SAFETY
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 @media (max-width: 359px) {
  h1 { font-size: 36px; }
  .hero { padding: 76px 16px 24px; }
@@ -695,7 +697,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 .hl-opt.active { display: block; }
 
 
-/* ═════════ Prevent letter-spaced UPPERCASE labels from wrapping ═════════ */
+/* ─────────── Prevent letter-spaced UPPERCASE labels from wrapping ─────────── */
 .nav-link, .nav-cta, .nav-signin, .nav-signin span,
 .btn-primary span, .btn-primary, .btn-secondary span, .btn-secondary,
 .plaque-h .lot, .plaque-h .status, .plaque-row b,
@@ -715,9 +717,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
   white-space: nowrap;
 }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §03 SUPPORTED ASSETS (ink)
- ════════════════════════════════════════════════════════ */
+ ──────────────────────────────────────────────────────── */
 .supported { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--rule-d); }
 .sup-row {
  display: grid;
@@ -743,12 +745,27 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 .sup-row.future { opacity: .5; pointer-events: none; }
 .sup-row.future .drill { color: var(--ghost-2); }
 
-/* ════════════════════════════════════════════════════════
+/* ────────────────────────────────────────────────────────
  §05 / §06 ASSET-CLASS TEASERS (pain → caps → cta)
- ════════════════════════════════════════════════════════ */
-.teaser-section { padding: 96px 20px; position: relative; overflow: hidden; }
-.teaser-section.on-ink .teaser-pain { color: var(--ghost); border-bottom-color: var(--rule-d); }
-.teaser-section.on-paper .teaser-pain { color: var(--muted); border-bottom-color: var(--rule); }
+ ──────────────────────────────────────────────────────── */
+#properties-teaser { padding-top: 12px; }
+#demo { padding-top: 16px; }
+@media (min-width: 768px) { #demo { padding-top: 24px; } }
+@media (min-width: 1280px) { #properties-teaser { padding-top: 24px; } #demo { padding-top: 32px; } }
+
+.teaser-section { padding: 32px 20px 96px; position: relative; overflow: hidden; }
+.teaser-section.on-ink .teaser-body {
+ background: var(--ink);
+ padding: 32px 20px;
+ border: 1px solid var(--rule-d);
+}
+.teaser-section.on-paper .teaser-body {
+ background: var(--paper);
+ padding: 32px 20px;
+ border: 1px solid var(--rule);
+}
+.teaser-section.on-ink .teaser-pain { color: var(--paper); border-bottom-color: var(--rule-d); }
+.teaser-section.on-paper .teaser-pain { color: var(--ink); border-bottom-color: var(--rule); }
 .teaser-section.on-paper .teaser-caps-row { border-bottom-color: var(--rule); }
 .teaser-section.on-paper .teaser-caps-row .v { color: var(--muted); }
 
@@ -758,6 +775,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  gap: 48px;
  max-width: 1280px;
  margin: 0 auto;
+ align-items: center;
 }
 
 .teaser-photo {
@@ -801,7 +819,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 
 .teaser-body { display: flex; flex-direction: column; gap: 28px; }
 .teaser-h { font-family: var(--serif); font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.04; letter-spacing: -0.018em; margin: 0; }
-.teaser-h em { font-style: normal; display: block; font-weight: 300; opacity: .55; }
+.teaser-h em { font-style: normal; display: block; font-weight: 300; opacity: .85; }
 .teaser-lede { font-family: var(--serif); font-size: 17px; line-height: 1.55; font-weight: 400; max-width: 520px; }
 .teaser-section.on-ink .teaser-lede { color: var(--ghost); }
 .teaser-section.on-paper .teaser-lede { color: var(--muted); }
@@ -821,10 +839,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 .teaser-pains { display: flex; flex-direction: column; gap: 0; }
 .teaser-pain {
  font-family: var(--serif); font-size: 17px; font-style: italic;
- font-weight: 400; line-height: 1.45;
+ font-weight: 500; line-height: 1.45;
  padding: 12px 0;
  border-bottom: 1px dashed currentColor;
- opacity: .9;
 }
 .teaser-pain:last-child { border-bottom: none; }
 .teaser-pain::before {
@@ -870,33 +887,44 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 
 @media (min-width: 900px) {
  .teaser-grid {
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: stretch;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
  }
  .teaser-section.flip .teaser-grid { direction: rtl; }
  .teaser-section.flip .teaser-grid > * { direction: ltr; }
- .teaser-body { padding: 16px 0; }
-}
-@media (min-width: 1200px) {
+ .teaser-section.on-ink .teaser-body,
+ .teaser-section.on-paper .teaser-body { padding: 40px 36px; min-height: 0; }
+}@media (min-width: 1200px) {
  .teaser-grid { gap: 96px; }
 }
 
 </style>
+<template id="__bundler_thumbnail" data-bg-color="#0A0E1A">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="800" fill="#0A0E1A"/>
+<g transform="translate(420 320)">
+<rect x="0" y="0" width="360" height="32" rx="4" fill="#F1EDE4" opacity="0.35"/>
+<rect x="0" y="56" width="244" height="32" rx="4" fill="#F1EDE4" opacity="0.65"/>
+<rect x="0" y="112" width="151" height="32" rx="4" fill="#FF6A00"/>
+</g>
+<text x="600" y="560" text-anchor="middle" font-family="Figtree, sans-serif" font-size="48" font-weight="700" letter-spacing="18" fill="#F1EDE4">FRAME</text>
+</svg>
+</template>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  NAV
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <nav id="nav">
  <a class="brand" href="/" aria-label="Frame. Home">
  <div class="brand-mark"><div class="lb"></div><div class="lb"></div><div class="lb"></div></div>
  <div class="brand-word">Frame</div>
  </a>
  <div class="nav-links">
- <a class="nav-link" href="docs/marketing/marine-page-concept.html">Vessels</a>
- <a class="nav-link" href="docs/marketing/properties-page-concept.html">Properties</a>
+ <a class="nav-link" href="/vessels/">Vessels</a>
+ <a class="nav-link" href="/properties/">Properties</a>
  <a class="nav-link" href="#demo">Contact</a>
  </div>
  <div class="nav-right"><a class="nav-signin" href="#" aria-label="Sign in" title="Sign in">
@@ -912,8 +940,8 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
  <div>
  <ul class="mm-list">
- <li><a href="docs/marketing/marine-page-concept.html">Vessels</a></li>
- <li><a href="docs/marketing/properties-page-concept.html">Properties</a></li>
+ <li><a href="/vessels/">Vessels</a></li>
+ <li><a href="/properties/">Properties</a></li>
  <li><a href="#demo">Contact</a></li>
  </ul>
  </div>
@@ -923,9 +951,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </aside>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  01 · HERO
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <section class="hero on-paper" id="hero">
  <div class="grid-v" style="left: 50%;"></div>
  <div class="grid-v" style="left: 75%;"></div>
@@ -986,9 +1014,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  02 · WHAT IS FRAME · CAPABILITIES  (paper · moved up from old §03)
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <section class="on-paper" id="capabilities">
  <div class="sec-eyebrow reveal">
  <span class="sec-num">02</span>
@@ -997,25 +1025,25 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
  <h2 class="section-h reveal d1">Visibility &amp; operations,<em>across the portfolio.</em></h2>
  <hr class="acc-rule reveal d2" />
- <p class="section-lede reveal d2">Frame is one operating layer for ten capabilities — portfolio, maintenance, knowledge, procedures, risk, readiness, analytics, timeline, staff, vendors. <b>No feature dump. No add-ons.</b> Just what private operations need, available the day onboarding completes.</p>
+ <p class="section-lede reveal d2">Frame is one operating layer for ten capabilities · portfolio, maintenance, knowledge, procedures, risk, readiness, analytics, timeline, staff, vendors. <b>No feature dump. No add-ons.</b> Just what private operations need, available the day onboarding completes.</p>
 
  <div class="capabilities reveal d3">
  <div class="cap"><span class="cap-num">01</span><div class="cap-body"><div class="cap-name">Portfolio</div><div class="cap-p">Owner visibility across every asset, in one operating view.</div></div></div>
- <div class="cap"><span class="cap-num">02</span><div class="cap-body"><div class="cap-name">Maintenance</div><div class="cap-p">PMS, work orders, vendor coordination — by asset, by system.</div></div></div>
- <div class="cap"><span class="cap-num">03</span><div class="cap-body"><div class="cap-name">Knowledge</div><div class="cap-p">SOPs, manuals, procedures — durable through staff turnover.</div></div></div>
- <div class="cap"><span class="cap-num">04</span><div class="cap-body"><div class="cap-name">Procedures</div><div class="cap-p">Daily routines, watches, checklists — executed and logged.</div></div></div>
- <div class="cap"><span class="cap-num">05</span><div class="cap-body"><div class="cap-name">Risk</div><div class="cap-p">Compliance, certificates, audits — never expiring quietly.</div></div></div>
- <div class="cap"><span class="cap-num">06</span><div class="cap-body"><div class="cap-name">Readiness</div><div class="cap-p">Pre-arrival, pre-charter, pre-season — always defensibly ready.</div></div></div>
- <div class="cap"><span class="cap-num">07</span><div class="cap-body"><div class="cap-name">Analytics</div><div class="cap-p">Reactive %, MTTR, cost of ownership — the metrics that matter.</div></div></div>
- <div class="cap"><span class="cap-num">08</span><div class="cap-body"><div class="cap-name">Timeline</div><div class="cap-p">Every action, every approval, every change — provenance.</div></div></div>
- <div class="cap"><span class="cap-num">09</span><div class="cap-body"><div class="cap-name">Staff</div><div class="cap-p">Crew, house staff, family office — roles, watches, access.</div></div></div>
- <div class="cap"><span class="cap-num">10</span><div class="cap-body"><div class="cap-name">Vendors</div><div class="cap-p">Approved suppliers, POs, service history — by asset.</div></div></div>
+ <div class="cap"><span class="cap-num">02</span><div class="cap-body"><div class="cap-name">Maintenance</div><div class="cap-p">PMS, work orders, vendor coordination · by asset, by system.</div></div></div>
+ <div class="cap"><span class="cap-num">03</span><div class="cap-body"><div class="cap-name">Knowledge</div><div class="cap-p">SOPs, manuals, procedures · durable through staff turnover.</div></div></div>
+ <div class="cap"><span class="cap-num">04</span><div class="cap-body"><div class="cap-name">Procedures</div><div class="cap-p">Daily routines, watches, checklists · executed and logged.</div></div></div>
+ <div class="cap"><span class="cap-num">05</span><div class="cap-body"><div class="cap-name">Risk</div><div class="cap-p">Compliance, certificates, audits · never expiring quietly.</div></div></div>
+ <div class="cap"><span class="cap-num">06</span><div class="cap-body"><div class="cap-name">Readiness</div><div class="cap-p">Pre-arrival, pre-charter, pre-season · always defensibly ready.</div></div></div>
+ <div class="cap"><span class="cap-num">07</span><div class="cap-body"><div class="cap-name">Analytics</div><div class="cap-p">Reactive %, MTTR, cost of ownership · the metrics that matter.</div></div></div>
+ <div class="cap"><span class="cap-num">08</span><div class="cap-body"><div class="cap-name">Timeline</div><div class="cap-p">Every action, every approval, every change · provenance.</div></div></div>
+ <div class="cap"><span class="cap-num">09</span><div class="cap-body"><div class="cap-name">Staff</div><div class="cap-p">Crew, house staff, family office · roles, watches, access.</div></div></div>
+ <div class="cap"><span class="cap-num">10</span><div class="cap-body"><div class="cap-name">Vendors</div><div class="cap-p">Approved suppliers, POs, service history · by asset.</div></div></div>
  </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  03 · SUPPORTED ASSETS  (ink · NEW)
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <section class="on-ink" id="supported">
  <div class="sec-eyebrow reveal">
  <span class="sec-num" style="color: var(--orange);">03</span>
@@ -1031,11 +1059,11 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  <span class="sup-num">F · 01</span>
  <span class="sup-body">
  <span class="name">Frame Portfolio</span>
- <span class="desc">Owner visibility across every asset. Cross-portfolio readiness, risk, and operational status — the constellation view.</span>
+ <span class="desc">Owner visibility across every asset. Cross-portfolio readiness, risk, and operational status · the constellation view.</span>
  </span>
  <span class="drill">See example <span class="arr">→</span></span>
  </a>
- <a class="sup-row" href="docs/marketing/marine-page-concept.html">
+ <a class="sup-row" href="/vessels/">
  <span class="sup-num">F · 02</span>
  <span class="sup-body">
  <span class="name">Frame Vessels</span>
@@ -1043,7 +1071,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </span>
  <span class="drill">Explore <span class="arr">→</span></span>
  </a>
- <a class="sup-row" href="docs/marketing/properties-page-concept.html">
+ <a class="sup-row" href="/properties/">
  <span class="sup-num">F · 03</span>
  <span class="sup-body">
  <span class="name">Frame Properties</span>
@@ -1055,17 +1083,17 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  <span class="sup-num">F · 04</span>
  <span class="sup-body">
  <span class="name">Frame Aircraft <em>· future</em></span>
- <span class="desc">In design. Flight ops, maintenance, crew, compliance — the same operating layer brought to private aviation.</span>
+ <span class="desc">In design. Flight ops, maintenance, crew, compliance · the same operating layer brought to private aviation.</span>
  </span>
  <span class="drill">Q3 2026 <span class="arr">·</span></span>
  </a>
  </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  04 · PORTFOLIO EXAMPLE · RINGS  (ink · was old §02)
- ══════════════════════════════════════════════════════ -->
-<section class="sec-portfolio" id="portfolio">
+ ──────────────────────────────────────────────────── -->
+<section class="sec-portfolio" id="portfolio" style="padding: 120px 20px 30px">
  <div class="sec-eyebrow reveal">
  <span class="sec-num">04</span>
  <span class="rule"></span>
@@ -1073,7 +1101,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
  <h2 class="section-h reveal d1">A single client&apos;s portfolio.<em>On one operating layer.</em></h2>
  <hr class="acc-rule reveal d2" />
- <p class="section-lede reveal d2" style="color: var(--ghost);"><b style="color: var(--paper); font-weight: 500;">Two estates, one vessel, one aircraft in onboarding.</b> Readiness rendered on the rings themselves — the chart <em>is</em> the data. This is the proof for everything above.</p>
+ <p class="section-lede reveal d2" style="color: var(--ghost);"><b style="color: var(--paper); font-weight: 500;">Two estates, one vessel, one aircraft in onboarding.</b> Readiness rendered on the rings themselves · the chart <em>is</em> the data. This is the proof for everything above.</p>
 
  <div class="rings-stage reveal d3">
  <div class="rings" aria-hidden="false">
@@ -1147,9 +1175,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  05 · FRAME VESSELS TEASER  (ink · NEW shape · pain → caps → CTA)
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <section class="teaser-section on-ink" id="vessels-teaser">
  <div class="sec-eyebrow reveal" style="max-width: 1280px; margin: 0 auto 32px;">
  <span class="sec-num" style="color: var(--orange);">05</span>
@@ -1159,11 +1187,10 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  <div class="teaser-grid">
  <figure class="teaser-photo reveal d1">
  <img src="assets/sd90-underway.jpeg" alt="Motor yacht underway in Mediterranean water." loading="lazy" decoding="async" />
- <div class="reg tl"></div>
- <div class="reg tr"></div>
- <span class="caption"><span class="tag">Reference vessel</span>M / Y Lady M · 60 m · Tyrrhenian Sea</span>
+ <span class="caption">REFERENCE VESSEL
+M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  </figure>
- <div class="teaser-body reveal d2">
+ <div class="teaser-body">
  <h2 class="teaser-h">For what lives on water.<em>For who keeps her ready.</em></h2>
  <p class="teaser-lede">Captains, yacht managers, charter managers, owner reps. Frame Vessels ends the cycle of <b>missed maintenance, lost knowledge, and compiled-the-morning-of guest readiness</b>.</p>
 
@@ -1190,17 +1217,17 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 
  <p class="teaser-quote">
  &ldquo;Know what needs attention before the owner steps onboard.&rdquo;
- <span class="who">— The captain&apos;s brief</span>
+ <span class="who">· The captain&apos;s brief</span>
  </p>
 
- <a class="teaser-cta" href="docs/marketing/marine-page-concept.html">Explore Vessels <span class="arr">→</span></a>
+ <a class="teaser-cta" href="/vessels/">Explore Vessels <span class="arr">→</span></a>
  </div>
  </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  06 · FRAME PROPERTIES TEASER  (paper · NEW shape · pain → caps → CTA)
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <section class="teaser-section on-paper flip" id="properties-teaser">
  <div class="sec-eyebrow reveal" style="max-width: 1280px; margin: 0 auto 32px;">
  <span class="sec-num">06</span>
@@ -1210,11 +1237,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  <div class="teaser-grid">
  <figure class="teaser-photo reveal d1">
  <img src="assets/aspen-house.webp" alt="Modern estate at golden hour." loading="lazy" decoding="async" />
- <div class="reg tl" style="--reg-c: rgba(10,14,26,0.5);"></div>
- <div class="reg tr"></div>
  <span class="caption"><span class="tag">Reference estate</span>Aspen Lodge · Snowmass · CO</span>
  </figure>
- <div class="teaser-body reveal d2">
+ <div class="teaser-body">
  <h2 class="teaser-h">For what stands on land.<em>For who keeps it ready.</em></h2>
  <p class="teaser-lede">Estate managers, chiefs of staff, house managers, family office. Frame Properties ends the cycle of <b>paper manuals, basement binders, and operational excellence rebuilt every season from memory</b>.</p>
 
@@ -1241,17 +1266,17 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 
  <p class="teaser-quote">
  &ldquo;Every residence ready before anyone arrives.&rdquo;
- <span class="who">— The estate manager&apos;s brief</span>
+ <span class="who">· The estate manager&apos;s brief</span>
  </p>
 
- <a class="teaser-cta" href="docs/marketing/properties-page-concept.html">Explore Properties <span class="arr">→</span></a>
+ <a class="teaser-cta" href="/properties/">Explore Properties <span class="arr">→</span></a>
  </div>
  </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  07 · WHY FRAME EXISTS  (paper · was old §05 about)
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <section class="on-paper" id="about">
  <div class="sec-eyebrow reveal">
  <span class="sec-num">07</span>
@@ -1268,9 +1293,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  08 · CONTACT · REQUEST DEMO  (deep ink · was old §06)
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <section class="demo on-deep" id="demo">
  <div class="demo-inner">
  <div>
@@ -1300,9 +1325,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  FOOTER
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <footer>
  <div class="foot-grid">
  <div class="foot-brand">
@@ -1322,8 +1347,8 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
  <div class="foot-col">
  <h6>Asset Classes</h6>
- <a href="docs/marketing/marine-page-concept.html">Vessels</a>
- <a href="docs/marketing/properties-page-concept.html">Properties</a>
+ <a href="/vessels/">Vessels</a>
+ <a href="/properties/">Properties</a>
  <a>Aircraft <em style="opacity:.4;">Q3 2026</em></a>
  </div>
  <div class="foot-col">
@@ -1345,9 +1370,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </footer>
 
-<!-- ══════════════════════════════════════════════════════
+<!-- ────────────────────────────────────────────────────
  SCRIPT
- ══════════════════════════════════════════════════════ -->
+ ──────────────────────────────────────────────────── -->
 <script>
  // scroll reveal
  const io = new IntersectionObserver((entries) => {
