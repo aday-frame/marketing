@@ -387,8 +387,6 @@ h1 .ln { display: block; }
  §05 / §06 ASSET-CLASS TEASERS
  ════════════════════════════════════════════════════════ */
 .teaser-section { padding: 96px 20px; position: relative; overflow: hidden; }
-.teaser-section.on-ink .teaser-body { background: var(--ink); }
-.teaser-section.on-paper .teaser-body { background: var(--paper); }
 .teaser-section.on-ink .teaser-pain { color: var(--ghost-2); border-bottom-color: var(--rule-d); }
 .teaser-section.on-paper .teaser-pain { color: rgba(10,14,26,0.70); border-bottom-color: var(--rule); }
 .teaser-section.on-paper .teaser-caps-row { border-bottom-color: var(--rule); }
@@ -441,7 +439,7 @@ h1 .ln { display: block; }
  margin-bottom: 4px;
 }
 
-.teaser-body { display: flex; flex-direction: column; gap: 28px; }
+.teaser-body { display: flex; flex-direction: column; gap: 28px; order: -1; }
 .teaser-h { font-family: var(--serif); font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.04; letter-spacing: -0.018em; margin: 0; }
 .teaser-h em { font-style: normal; display: block; font-weight: 300; opacity: .55; }
 .teaser-lede { font-family: var(--serif); font-size: 17px; line-height: 1.55; font-weight: 400; max-width: 520px; }
@@ -658,7 +656,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  .teaser-grid { grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
  .teaser-section.flip .teaser-grid { direction: rtl; }
  .teaser-section.flip .teaser-grid > * { direction: ltr; }
- .teaser-body { padding: 16px 0; }
+ .teaser-body { padding: 16px 0; order: 0; }
  /* fade photo edge toward text column for contrast */
  .teaser-section:not(.flip) .teaser-photo::after {
   background:
