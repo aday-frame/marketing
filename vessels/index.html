@@ -842,7 +842,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
    const inView = entries[0].isIntersecting;
    if (mmPageLink) mmPageLink.style.color = inView ? '' : 'var(--orange)';
    if (mmContactLink) mmContactLink.style.color = inView ? 'var(--orange)' : '';
-   if (desktopPageLink) desktopPageLink.style.opacity = inView ? '.55' : '';
+   if (desktopPageLink) desktopPageLink.classList.toggle('current', !inView);
    if (desktopContactLink) { desktopContactLink.style.color = inView ? 'var(--orange)' : ''; desktopContactLink.style.opacity = inView ? '1' : ''; }
   }, { threshold: 0.15 });
   demoObs.observe(demoEl);
