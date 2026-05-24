@@ -2,40 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Frame: Operating System for Private Operations</title>
-<meta name="description" content="Frame is the first platform built for the complexity of private asset operations. Estates, vessels, aircraft. On one operating layer." />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
-<!-- OpenGraph -->
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Frame" />
-<meta property="og:title" content="Frame: Built for private operations." />
-<meta property="og:description" content="The operating system for private asset operations. Vessels, estates, aircraft on one layer." />
-<meta property="og:image" content="https://frameops.io/assets/og-image.jpg" />
-<meta property="og:url" content="https://frameops.io" />
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Frame: Built for private operations." />
-<meta name="twitter:description" content="The operating system for private asset operations. Vessels, estates, aircraft on one layer." />
-<meta name="twitter:image" content="https://frameops.io/assets/og-image.jpg" />
-
-<!-- Canonical -->
-<link rel="canonical" href="https://frameops.io" />
-
-<!-- Favicons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
-<link rel="manifest" href="/assets/site.webmanifest" />
-<meta name="theme-color" content="#F1EDE4" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<meta name="apple-mobile-web-app-title" content="Frame" />
-
+<title>Frame. Operating System for Private Operations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Figtree:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <style>
 /* ════════════════════════════════════════════════════════
  RESET + TOKENS (site-matched)
@@ -57,8 +31,6 @@
  --rule-2: rgba(10,14,26,0.05);
  --rule-d: rgba(255,255,255,0.08);
  --rule-d2:rgba(255,255,255,0.04);
- --red: #D9574A;
- --red-2: #D87765;
  --serif: 'Cormorant Garamond', Georgia, serif;
  --sans: 'Figtree', system-ui, -apple-system, sans-serif;
  --mono-spc: 0.16em;
@@ -174,6 +146,7 @@ h2.section-h em { font-style: normal; display: block; font-weight: 300; color: c
   background: #051018;
   display: none;
 }
+/* paper gradient on hero photo removed per direction */
 .hero-image img {
   width: 100%; height: 100%;
   object-fit: cover;
@@ -206,6 +179,7 @@ h2.section-h em { font-style: normal; display: block; font-weight: 300; color: c
   object-position: 50% 50%;
   display: block;
 }
+/* mobile gradient on hero photo removed per direction */
 .hero-bg .grid-v { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule); }
 .hero-wm {
  position: absolute; right: -0.04em; bottom: -10vh;
@@ -264,14 +238,14 @@ h1 .ln { display: block; }
 .h-stat-v .sub { font-family: var(--sans); font-weight: 300; font-size: .5em; }
 .h-stat-l { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 8px; font-weight: 500; }
 
-/* tiny constellation hint */
+/* tiny constellation hint behind hero */
 .hero-hint { position: absolute; right: 6vw; top: 18vh; pointer-events: none; opacity: .65; }
 .hero-hint .dot { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--ink); }
 .hero-hint .dot.gh { background: transparent; border: 1px dashed var(--faint); }
 .hero-hint .dot.signal { background: var(--orange); }
 
 /* ════════════════════════════════════════════════════════
- §02 PORTFOLIO · RINGS (ink)
+ §02 PORTFOLIO · RINGS (ink). Perimeter labels
  ════════════════════════════════════════════════════════ */
 .sec-portfolio { background: var(--ink); color: var(--paper); padding: 120px 20px 96px; overflow: hidden; }
 .sec-portfolio .sec-eyebrow .rule { background: var(--paper); opacity: .14; }
@@ -298,7 +272,7 @@ h1 .ln { display: block; }
 .r-bearing.b { left: 50%; bottom: -22px; transform: translateX(-50%); }
 .r-bearing.l { left: -28px; top: 50%; transform: translateY(-50%); }
 
-/* MOBILE. Labels listed BELOW the rings */
+/* MOBILE. Labels listed BELOW the rings (sibling of .rings inside section) */
 .rings-labels {
  margin-top: 40px;
  display: grid;
@@ -322,6 +296,45 @@ h1 .ln { display: block; }
 .r-asset.future .pc, .r-asset.future .nm { color: var(--ghost-2); }
 
 .cnst-foot { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--rule-d); display: flex; justify-content: space-between; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; flex-wrap: wrap; gap: 8px; }
+
+/* ════════════════════════════════════════════════════════
+   §02·b PORTFOLIO IN PRACTICE · full-bleed editorial moment
+   ════════════════════════════════════════════════════════ */
+.in-practice { position: relative; padding: 0; background: var(--ink); overflow: hidden; }
+.in-practice .frame {
+  position: relative; display: block; width: 100%;
+  aspect-ratio: 16 / 9; overflow: hidden; background: #051018;
+}
+.in-practice .frame img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 55%;
+}
+.in-practice .frame::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(10,14,26,0.32) 0%, rgba(10,14,26,0) 22%, rgba(10,14,26,0) 70%, rgba(10,14,26,0.55) 100%);
+}
+.in-practice .caption {
+  position: absolute; left: 6%; right: 6%; bottom: 6%;
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 16px; flex-wrap: wrap; color: var(--paper);
+}
+.in-practice .cap-left { display: flex; flex-direction: column; gap: 6px; }
+.in-practice .cap-tag {
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  font-weight: 700; color: var(--orange);
+}
+.in-practice .cap-asset {
+  font-family: var(--serif);
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 400; letter-spacing: -0.015em; line-height: 1.1;
+}
+.in-practice .cap-asset em { font-style: normal; opacity: .55; font-weight: 300; font-size: .65em; margin-left: 8px; }
+.in-practice .cap-right {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.62); font-weight: 600; text-align: right;
+  line-height: 1.7;
+}
+.in-practice .cap-right b { color: var(--orange); font-weight: 700; }
 
 /* ════════════════════════════════════════════════════════
  §03 WHAT FRAME DOES · CAPABILITIES (paper)
@@ -355,160 +368,118 @@ h1 .ln { display: block; }
 .cap-p { font-size: 13px; line-height: 1.55; color: var(--muted); font-weight: 300; max-width: 540px; }
 
 /* ════════════════════════════════════════════════════════
- §03 SUPPORTED ASSETS (ink)
+ §04 ASSET CLASSES · CLICKABLE TILES (ink)
  ════════════════════════════════════════════════════════ */
-.supported { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--rule-d); }
-.sup-row {
- display: grid;
- grid-template-columns: 110px 1fr auto;
- gap: 28px;
- padding: 28px 0;
- border-bottom: 1px solid var(--rule-d);
- align-items: center;
- text-decoration: none; color: inherit;
-}
-.sup-num { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: 11px; color: var(--ghost-2); letter-spacing: .04em; }
-.sup-body .name { font-family: var(--serif); font-size: clamp(28px, 4vw, 40px); font-weight: 400; line-height: 1.05; letter-spacing: -0.012em; display: block; }
-.sup-body .name em { font-style: italic; opacity: .42; font-weight: 300; }
-.sup-body .desc { font-size: 13px; line-height: 1.6; color: var(--ghost); font-weight: 300; margin-top: 6px; max-width: 520px; display: block; }
-.sup-row .drill {
- font-size: 11px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700;
- color: var(--paper); display: inline-flex; align-items: center; gap: 10px;
- padding: 8px 0; white-space: nowrap;
- transition: color .25s, gap .25s;
-}
-.sup-row .drill .arr { transition: transform .35s cubic-bezier(.16,.84,.3,1); }
-.sup-row:hover .drill { color: var(--orange); }
-.sup-row:hover .drill .arr { transform: translateX(6px); }
-.sup-row.future { opacity: .5; pointer-events: none; }
-.sup-row.future .drill { color: var(--ghost-2); }
-
-/* ════════════════════════════════════════════════════════
- §05 / §06 ASSET-CLASS TEASERS
- ════════════════════════════════════════════════════════ */
-.teaser-section { padding: 96px 20px; position: relative; overflow: hidden; }
-.teaser-section.on-ink .teaser-pain { color: var(--ghost); border-bottom-color: var(--rule-d); }
-.teaser-section.on-paper .teaser-pain { color: var(--muted); border-bottom-color: var(--rule); }
-.teaser-section.on-paper .teaser-caps-row { border-bottom-color: var(--rule); }
-.teaser-section.on-paper .teaser-caps-row .v { color: var(--muted); }
-
-.teaser-grid {
- display: grid;
- grid-template-columns: 1fr;
- gap: 48px;
- max-width: 1280px;
- margin: 0 auto;
-}
-
-.teaser-photo {
+.class-tiles { margin-top: 56px; display: grid; gap: 24px; }
+.tile {
+ display: block;
  position: relative;
- aspect-ratio: 4 / 3;
  overflow: hidden;
- background: #0A1018;
+ padding: 40px 28px 32px;
+ background: var(--ink-2);
+ border: 1px solid var(--rule-d);
+ text-decoration: none;
+ color: inherit;
+ transition: background .35s ease, transform .35s ease, border-color .35s ease;
 }
-.teaser-photo img {
- width: 100%; height: 100%; object-fit: cover; display: block;
- transition: transform 8s ease-out;
-}
-.teaser-section:hover .teaser-photo img { transform: scale(1.03); }
-.teaser-photo::after {
- content: ""; position: absolute; inset: 0;
- background: linear-gradient(180deg, rgba(5,10,20,0.15) 0%, rgba(5,10,20,0) 30%, rgba(5,10,20,0) 60%, rgba(5,10,20,0.7) 100%);
- pointer-events: none;
-}
-.teaser-photo .reg {
- position: absolute; width: 14px; height: 14px; z-index: 2;
-}
-.teaser-photo .reg::before, .teaser-photo .reg::after {
- content: ""; position: absolute; background: var(--reg-c, rgba(241,237,228,0.5));
-}
-.teaser-photo .reg::before { left: 0; top: 50%; width: 100%; height: 1px; }
-.teaser-photo .reg::after { top: 0; left: 50%; width: 1px; height: 100%; }
-.teaser-photo .reg.tl { left: 14px; top: 14px; }
-.teaser-photo .reg.tr { right: 14px; top: 14px; }
-.teaser-photo .caption {
- position: absolute; left: 18px; bottom: 16px; z-index: 2;
- font-family: ui-monospace, 'JetBrains Mono', monospace;
- font-size: 11px; color: var(--paper); letter-spacing: .04em;
- text-shadow: 0 1px 6px rgba(0,0,0,0.5);
-}
-.teaser-photo .caption .tag {
- display: block;
- font-family: var(--sans); font-size: 9px; letter-spacing: .26em;
- text-transform: uppercase; color: var(--orange); font-weight: 700;
- margin-bottom: 4px;
-}
+.tile:hover { background: #0E1322; border-color: rgba(255,106,0,0.22); }
+.tile:hover .tile-cta { color: var(--orange); }
+.tile:hover .tile-cta .arr { transform: translateX(8px); }
+.tile-eyebrow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.tile-cls { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--orange); }
+.tile-stat { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; color: var(--ghost-2); }
+.tile h3 { font-family: var(--serif); font-size: clamp(28px, 8vw, 36px); font-weight: 400; line-height: 1.05; letter-spacing: -0.018em; color: var(--paper); }
+.tile h3 em { font-style: normal; display: block; font-weight: 300; opacity: .42; }
+.tile-sub { font-size: 13px; line-height: 1.65; color: var(--ghost); font-weight: 300; margin-top: 16px; max-width: 420px; }
+.tile-modules { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--rule-d); display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+.tile-module { font-size: 11px; letter-spacing: .04em; color: var(--ghost); font-weight: 400; display: flex; align-items: baseline; gap: 8px; }
+.tile-module::before { content: "·"; color: var(--orange); font-weight: 700; }
+.tile-foot { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule-d); display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+.tile-cta { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: var(--paper); display: inline-flex; align-items: center; gap: 12px; transition: color .25s; }
+.tile-cta .arr { display: inline-block; transition: transform .35s cubic-bezier(.16,.84,.3,1); }
+.tile-meta { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; text-align: right; }
+.tile-meta b { color: var(--paper); font-weight: 600; }
 
-.teaser-body { display: flex; flex-direction: column; gap: 28px; }
-.teaser-h { font-family: var(--serif); font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.04; letter-spacing: -0.018em; margin: 0; }
-.teaser-h em { font-style: normal; display: block; font-weight: 300; opacity: .55; }
-.teaser-lede { font-family: var(--serif); font-size: 17px; line-height: 1.55; font-weight: 400; max-width: 520px; }
-.teaser-section.on-ink .teaser-lede { color: var(--ghost); }
-.teaser-section.on-paper .teaser-lede { color: var(--muted); }
-.teaser-lede b { font-weight: 500; }
-.teaser-section.on-ink .teaser-lede b { color: var(--paper); }
-.teaser-section.on-paper .teaser-lede b { color: var(--ink); }
-
-.teaser-block-h {
- font-family: var(--sans); font-size: 10px; letter-spacing: .18em;
- text-transform: uppercase; font-weight: 700;
- padding-bottom: 10px; margin-bottom: 4px;
- border-bottom: 1px solid currentColor;
- display: inline-block;
-}
-.teaser-block-h.pains { color: var(--red); }
-.teaser-block-h.caps { color: var(--orange); }
-.teaser-pains { display: flex; flex-direction: column; gap: 0; }
-.teaser-pain {
- font-family: var(--serif); font-size: 17px; font-style: italic;
- font-weight: 400; line-height: 1.45;
- padding: 12px 0;
- border-bottom: 1px dashed currentColor;
- opacity: .9;
-}
-.teaser-pain:last-child { border-bottom: none; }
-.teaser-pain::before {
- content: ""; display: inline-block; width: 18px; height: 1px;
- background: var(--red-2); vertical-align: middle; margin-right: 10px;
-}
-.teaser-caps-list { display: grid; grid-template-columns: 1fr; gap: 0; }
-.teaser-caps-row {
- display: grid; grid-template-columns: auto 1fr auto;
- gap: 16px; padding: 12px 0;
- border-bottom: 1px solid var(--rule-d);
- align-items: baseline;
-}
-.teaser-caps-row .n { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: 10px; color: var(--ghost-2); letter-spacing: .04em; }
-.teaser-caps-row .k { font-family: var(--serif); font-size: 17px; font-weight: 500; letter-spacing: -0.005em; }
-.teaser-caps-row .v { font-size: 11px; letter-spacing: .04em; color: var(--ghost); font-weight: 400; }
-.teaser-quote {
- font-family: var(--serif); font-size: 19px; font-style: italic;
- font-weight: 400; line-height: 1.4;
- padding: 18px 0 0;
-}
-.teaser-quote .who {
- display: block;
- font-family: var(--sans); font-size: 10px; font-style: normal;
- letter-spacing: .18em; text-transform: uppercase;
- color: var(--orange); font-weight: 700;
- margin-top: 12px;
-}
-.teaser-cta {
- display: inline-flex; align-items: center; gap: 12px;
- padding: 16px 26px;
- background: var(--orange); color: var(--paper);
- font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700;
- border-radius: 999px;
- align-self: flex-start;
- transition: background .25s, gap .25s, transform .25s;
-}
-.teaser-cta:hover { background: var(--paper); color: var(--ink); }
-.teaser-section.on-paper .teaser-cta:hover { background: var(--ink); color: var(--paper); }
-.teaser-cta .arr { transition: transform .35s cubic-bezier(.16,.84,.3,1); }
-.teaser-cta:hover .arr { transform: translateX(6px); }
+.tile-future { opacity: .55; pointer-events: none; }
+.tile-future .tile-cls { color: var(--ghost-2); }
+.tile-future .tile-cta { color: var(--ghost-2); }
 
 /* ════════════════════════════════════════════════════════
- §05 ABOUT (paper)
+ §05 KNOWLEDGE · STRATA (paper)
+ ════════════════════════════════════════════════════════ */
+.strata { margin-top: 56px; position: relative; }
+.strata-wrap { position: relative; padding: 0; }
+.layer { position: relative; padding: 22px 12px 22px 0; border-top: 1px solid var(--rule); display: flex; align-items: center; gap: 16px; }
+.layer:last-child { border-bottom: 1px solid var(--rule); }
+.layer:nth-of-type(1) { background: rgba(10,14,26,0.005); }
+.layer:nth-of-type(2) { background: rgba(10,14,26,0.012); }
+.layer:nth-of-type(3) { background: rgba(10,14,26,0.022); }
+.layer:nth-of-type(4) { background: rgba(10,14,26,0.034); }
+.layer:nth-of-type(5) { background: rgba(10,14,26,0.048); }
+.layer:nth-of-type(6) { background: rgba(10,14,26,0.064); }
+.layer-name { font-family: var(--serif); font-size: 22px; font-style: normal; font-weight: 400; min-width: 110px; flex-shrink: 0; }
+.layer-meta { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); font-weight: 500; }
+.layer-data { font-size: 13px; color: var(--muted); margin-top: 4px; font-weight: 400; line-height: 1.5; }
+.layer-data b { color: var(--ink); font-weight: 600; }
+.layer-text { flex: 1; min-width: 0; }
+/* the orange spine */
+.spine { position: absolute; left: calc(110px + 16px + 50%); top: 0; bottom: 0; width: 1px; pointer-events: none; }
+.spine::before, .spine::after { content: ""; position: absolute; left: -3px; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
+.spine::before { top: -3px; }
+.spine::after { bottom: -3px; }
+.spine-line { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent 0%, var(--orange) 6%, var(--orange) 94%, transparent 100%); }
+.spine-label { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); white-space: nowrap; font-weight: 600; }
+
+/* ════════════════════════════════════════════════════════
+ §06 READINESS BRIEF · editorial (ink)
+ ════════════════════════════════════════════════════════ */
+.brief { margin-top: 56px; }
+.brief-head { font-family: var(--serif); font-size: clamp(36px, 11vw, 56px); font-weight: 300; line-height: 1.02; letter-spacing: -0.022em; }
+.brief-head em { font-style: normal; color: var(--orange); display: block; }
+.brief-meta { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); margin-top: 22px; font-weight: 600; }
+
+.brief-cols { margin-top: 48px; display: grid; gap: 48px; }
+.brief-col-title { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; font-weight: 700; }
+
+.brief-asset { padding: 18px 0; border-top: 1px solid var(--rule-d); }
+.brief-asset:first-of-type { border-top: 1px solid var(--rule-d); }
+.brief-asset:last-of-type { border-bottom: 1px solid var(--rule-d); }
+.brief-asset-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.brief-asset-name { font-family: var(--serif); font-size: 20px; font-weight: 400; }
+.brief-asset-name em { font-style: italic; font-size: 11px; opacity: .5; }
+.brief-asset-pct { font-size: 16px; color: var(--orange); font-weight: 600; font-variant-numeric: tabular-nums; }
+.brief-bar { height: 1.5px; background: var(--rule-d); position: relative; }
+.brief-bar .f { position: absolute; left: 0; top: 0; height: 100%; background: var(--orange); }
+
+.brief-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.brief-list li { display: grid; grid-template-columns: 18px 1fr; align-items: baseline; gap: 12px; font-size: 14px; line-height: 1.5; color: var(--ghost); font-weight: 300; }
+.brief-list li .bd { width: 7px; height: 7px; border-radius: 50%; margin-top: 6px; }
+.brief-list li.ok .bd { background: var(--good); }
+.brief-list li.warn .bd { background: var(--orange); }
+.brief-list li.pend .bd { border: 1px solid var(--ghost-2); }
+.brief-list li.ok { color: var(--ghost-2); }
+.brief-list li.warn { color: var(--paper); }
+.brief-list li b { font-weight: 600; color: var(--paper); }
+
+.brief-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule-d); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-weight: 500; }
+.brief-foot b { color: var(--paper); font-weight: 600; }
+
+/* ════════════════════════════════════════════════════════
+ §07 RISK · COMMAND CARDS (paper)
+ ════════════════════════════════════════════════════════ */
+.command { margin-top: 56px; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.cmd-card { padding: 32px 0 28px; border-bottom: 1px solid var(--rule); }
+.cmd-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--orange); margin-bottom: 16px; }
+.cmd-v { font-family: var(--serif); font-size: clamp(54px, 18vw, 84px); font-weight: 300; line-height: .95; letter-spacing: -0.03em; color: var(--ink); }
+.cmd-v .sub { font-family: var(--sans); font-weight: 400; font-size: .35em; letter-spacing: 0; }
+.cmd-v .acc { color: var(--orange); }
+.cmd-v.ital { font-style: italic; }
+.cmd-l { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 14px; font-weight: 500; }
+.cmd-n { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.55; font-weight: 300; max-width: 380px; }
+.cmd-n b { color: var(--ink); font-weight: 600; }
+
+/* ════════════════════════════════════════════════════════
+ §05 ABOUT · THE NEW OPERATING STANDARD (paper)
  ════════════════════════════════════════════════════════ */
 .about-grid { margin-top: 64px; display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
 .about-body { display: grid; gap: 22px; max-width: 660px; }
@@ -560,8 +531,11 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  display: flex; flex-direction: column; justify-content: space-between;
  transform: translateY(-100%);
  transition: transform .55s cubic-bezier(.16,.84,.3,1);
+ overflow: hidden auto;
+ overscroll-behavior: contain;
 }
 .mobile-menu.open { transform: none; }
+.mobile-menu nav-link { color: var(--paper); }
 .mm-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
 .mm-list li { border-bottom: 1px solid var(--rule-d); }
 .mm-list a { display: flex; align-items: baseline; justify-content: space-between; padding: 20px 0; font-family: var(--serif); font-size: 32px; font-weight: 400; }
@@ -577,7 +551,8 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  .nav-links { display: flex; gap: 28px; }
 
  .hero { padding: 96px 40px 56px; }
- /* iPad range (768–1279): stacked layout — photo appears below text */
+ /* iPad range (768–1279): keep the stacked hero layout from mobile;
+    the right-bleed photo only activates at desktop ≥1280. */
  .hero-body { position: relative; z-index: 5; max-width: 720px; padding-right: 0; }
  .hero-image { display: none; }
  .hero-image-mobile {
@@ -599,6 +574,12 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 
  .rings-mark { font-size: 17px; }
 
+ /* in-practice desktop tightens caption layout */
+ .in-practice .frame { aspect-ratio: 21 / 9; }
+ .in-practice .caption { left: 64px; right: 64px; bottom: 56px; align-items: flex-end; }
+ .in-practice .cap-asset { font-size: clamp(28px, 3vw, 40px); }
+ .in-practice .cap-right { font-size: 11px; }
+
  /* §03 capabilities desktop = 2-col grid */
  .capabilities { grid-template-columns: 1fr 1fr; column-gap: 64px; }
  .cap { padding: 28px 0; }
@@ -609,7 +590,11 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  .about-grid { grid-template-columns: 1.1fr 1fr; gap: 80px; }
  .about-body p { font-size: 20px; }
 
- /* §04 rings desktop */
+ /* §04 tiles side-by-side */
+ .class-tiles { grid-template-columns: 1fr 1fr; gap: 24px; }
+ .tile { padding: 56px 44px 44px; }
+
+ /* §02 rings desktop. Perimeter labels overlay */
  .rings-stage { position: relative; margin-top: 24px; max-width: 920px; margin-left: auto; margin-right: auto; aspect-ratio: 16 / 10; }
  .rings { max-width: none; aspect-ratio: 1 / 1; margin: 0; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 46%; }
  .rings-mark { font-size: 22px; letter-spacing: .42em; }
@@ -629,6 +614,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  .rings-labels .r-asset .pc { display: inline-block; margin-left: 12px; font-size: 14px; }
  .rings-labels .r-asset .sub { display: block; font-size: 10px; letter-spacing: .2em; color: var(--ghost-2); margin-top: 8px; padding-left: 22px; }
 
+ /* compass-position labels: NW · NE · SE · SW around the ring. Each label sits in the same quadrant as its glyph dot on the ring */
  .rings-labels .r-asset.r-aspen { left: 4%; top: 6%; text-align: left; }
  .rings-labels .r-asset.r-aspen .sub { padding-left: 22px; }
  .rings-labels .r-asset.r-miami { right: 4%; top: 6%; text-align: right; }
@@ -636,6 +622,21 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  .rings-labels .r-asset.r-ladym { right: 4%; bottom: 6%; text-align: right; }
  .rings-labels .r-asset.r-ladym .sub { padding-left: 0; }
  .rings-labels .r-asset.r-air { left: 4%; bottom: 6%; opacity: .55; text-align: left; }
+
+ /* strata layers more vertical */
+ .layer { padding: 28px 0; }
+ .layer-name { min-width: 200px; font-size: 28px; }
+ .spine { left: calc(200px + 16px + 50%); }
+
+ /* brief two columns */
+ .brief-cols { grid-template-columns: 1fr 1fr; gap: 64px; }
+ .brief-head { font-size: clamp(56px, 6vw, 72px); }
+
+ /* command cards 2x2 */
+ .command { grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); }
+ .cmd-card { padding: 40px 32px; border-right: 1px solid var(--rule); }
+ .cmd-card:nth-child(even) { border-right: none; }
+ .cmd-card:nth-last-child(-n+2):not(:nth-child(odd)+.cmd-card) { /* keep bottom rule */ }
 
  /* demo side by side */
  .demo { padding: 140px 40px; }
@@ -649,19 +650,6 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 }
 
 /* ════════════════════════════════════════════════════════
- TEASER 2-COL 900+
- ════════════════════════════════════════════════════════ */
-@media (min-width: 900px) {
- .teaser-grid { grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
- .teaser-section.flip .teaser-grid { direction: rtl; }
- .teaser-section.flip .teaser-grid > * { direction: ltr; }
- .teaser-body { padding: 16px 0; }
-}
-@media (min-width: 1200px) {
- .teaser-grid { gap: 96px; }
-}
-
-/* ════════════════════════════════════════════════════════
  DESKTOP 1280+
  ════════════════════════════════════════════════════════ */
 @media (min-width: 1280px) {
@@ -669,17 +657,21 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  .hero { padding: 112px 64px 72px; padding-right: 0; }
  .hero-image { display: block; width: 52%; }
  .hero-image-mobile { display: none; }
- .hero-body { max-width: 880px; padding-top: 56px; }
+ .hero-body { padding-right: 0; max-width: 880px; padding-top: 56px; }
  h1 { font-size: clamp(84px, 6.4vw, 112px); }
  section { padding: 160px 64px; }
  h2.section-h { font-size: clamp(64px, 4.6vw, 88px); }
  .demo { padding: 180px 64px; }
  .demo-h { font-size: clamp(64px, 5vw, 88px); }
+ .cmd-card { padding: 56px 40px; }
+ .command { grid-template-columns: repeat(4, 1fr); }
+ .cmd-card:nth-child(even) { border-right: 1px solid var(--rule); }
+ .cmd-card:last-child { border-right: none; }
  footer { padding: 96px 64px 40px; }
 }
 
 /* ════════════════════════════════════════════════════════
- DESKTOP 1440+
+ DESKTOP 1440+. Refine ratios
  ════════════════════════════════════════════════════════ */
 @media (min-width: 1440px) {
  .hero-stats { gap: 0; }
@@ -693,17 +685,203 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  h1 { font-size: 36px; }
  .hero { padding: 76px 16px 24px; }
  section, .demo, footer { padding-left: 16px; padding-right: 16px; }
+ .star { transform: translate(-50%,-50%) scale(.85); }
+ .layer-name { min-width: 90px; font-size: 18px; }
+ .brief-head { font-size: 32px; }
 }
+
+/* hide tweaks-only headline options at runtime */
+.hl-opt { display: none; }
+.hl-opt.active { display: block; }
+
 
 /* ═════════ Prevent letter-spaced UPPERCASE labels from wrapping ═════════ */
 .nav-link, .nav-cta, .nav-signin, .nav-signin span,
-.btn-primary span, .btn-primary,
+.btn-primary span, .btn-primary, .btn-secondary span, .btn-secondary,
+.plaque-h .lot, .plaque-h .status, .plaque-row b,
+.coord, .checkbox span,
+.left-foot a, .left-foot span,
+.right-top .question, .right-top .link,
+.cta-note, .hero-cta-note,
+.frame-caption .name, .frame-caption .tag,
+.field label, .form-eyebrow,
+.eyebrow,
 .tile-cta, .tile-stat, .tile-cls,
-.cap-num, .h-stat-l,
-.brand-word,
+.cap-tag, .h-stat-l,
+.season-row .mo, .season-arc .mark .mo,
+.brand-page, .brand-word,
+.section-h em + *,
 .sec-tag, .sec-num {
   white-space: nowrap;
 }
+
+/* ════════════════════════════════════════════════════════
+ §03 SUPPORTED ASSETS (ink)
+ ════════════════════════════════════════════════════════ */
+.supported { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--rule-d); }
+.sup-row {
+ display: grid;
+ grid-template-columns: 110px 1fr auto;
+ gap: 28px;
+ padding: 28px 0;
+ border-bottom: 1px solid var(--rule-d);
+ align-items: center;
+}
+.sup-num { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: 11px; color: var(--ghost-2); letter-spacing: .04em; }
+.sup-body .name { font-family: var(--serif); font-size: clamp(28px, 4vw, 40px); font-weight: 400; line-height: 1.05; letter-spacing: -0.012em; }
+.sup-body .name em { font-style: italic; opacity: .42; font-weight: 300; }
+.sup-body .desc { font-size: 13px; line-height: 1.6; color: var(--ghost); font-weight: 300; margin-top: 6px; max-width: 520px; }
+.sup-row .drill {
+ font-size: 11px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700;
+ color: var(--paper); display: inline-flex; align-items: center; gap: 10px;
+ padding: 8px 0;
+ transition: color .25s, gap .25s;
+}
+.sup-row .drill .arr { transition: transform .35s cubic-bezier(.16,.84,.3,1); }
+.sup-row:hover .drill { color: var(--orange); }
+.sup-row:hover .drill .arr { transform: translateX(6px); }
+.sup-row.future { opacity: .5; pointer-events: none; }
+.sup-row.future .drill { color: var(--ghost-2); }
+
+/* ════════════════════════════════════════════════════════
+ §05 / §06 ASSET-CLASS TEASERS (pain → caps → cta)
+ ════════════════════════════════════════════════════════ */
+.teaser-section { padding: 96px 20px; position: relative; overflow: hidden; }
+.teaser-section.on-ink .teaser-pain { color: var(--ghost); border-bottom-color: var(--rule-d); }
+.teaser-section.on-paper .teaser-pain { color: var(--muted); border-bottom-color: var(--rule); }
+.teaser-section.on-paper .teaser-caps-row { border-bottom-color: var(--rule); }
+.teaser-section.on-paper .teaser-caps-row .v { color: var(--muted); }
+
+.teaser-grid {
+ display: grid;
+ grid-template-columns: 1fr;
+ gap: 48px;
+ max-width: 1280px;
+ margin: 0 auto;
+}
+
+.teaser-photo {
+ position: relative;
+ aspect-ratio: 4 / 3;
+ overflow: hidden;
+ background: #0A1018;
+}
+.teaser-photo img {
+ width: 100%; height: 100%; object-fit: cover; display: block;
+ transition: transform 8s ease-out;
+}
+.teaser-section:hover .teaser-photo img { transform: scale(1.03); }
+.teaser-photo::after {
+ content: ""; position: absolute; inset: 0;
+ background: linear-gradient(180deg, rgba(5,10,20,0.15) 0%, rgba(5,10,20,0) 30%, rgba(5,10,20,0) 60%, rgba(5,10,20,0.7) 100%);
+ pointer-events: none;
+}
+.teaser-photo .reg {
+ position: absolute; width: 14px; height: 14px; z-index: 2;
+}
+.teaser-photo .reg::before, .teaser-photo .reg::after {
+ content: ""; position: absolute; background: rgba(241,237,228,0.5);
+}
+.teaser-photo .reg::before { left: 0; top: 50%; width: 100%; height: 1px; }
+.teaser-photo .reg::after { top: 0; left: 50%; width: 1px; height: 100%; }
+.teaser-photo .reg.tl { left: 14px; top: 14px; }
+.teaser-photo .reg.tr { right: 14px; top: 14px; }
+.teaser-photo .caption {
+ position: absolute; left: 18px; bottom: 16px; z-index: 2;
+ font-family: ui-monospace, 'JetBrains Mono', monospace;
+ font-size: 11px; color: var(--paper); letter-spacing: .04em;
+ text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+.teaser-photo .caption .tag {
+ display: block;
+ font-family: var(--sans); font-size: 9px; letter-spacing: .26em;
+ text-transform: uppercase; color: var(--orange); font-weight: 700;
+ margin-bottom: 4px;
+}
+
+.teaser-body { display: flex; flex-direction: column; gap: 28px; }
+.teaser-h { font-family: var(--serif); font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.04; letter-spacing: -0.018em; margin: 0; }
+.teaser-h em { font-style: normal; display: block; font-weight: 300; opacity: .55; }
+.teaser-lede { font-family: var(--serif); font-size: 17px; line-height: 1.55; font-weight: 400; max-width: 520px; }
+.teaser-section.on-ink .teaser-lede { color: var(--ghost); }
+.teaser-section.on-paper .teaser-lede { color: var(--muted); }
+.teaser-lede b { font-weight: 500; }
+.teaser-section.on-ink .teaser-lede b { color: var(--paper); }
+.teaser-section.on-paper .teaser-lede b { color: var(--ink); }
+
+.teaser-block-h {
+ font-family: var(--sans); font-size: 10px; letter-spacing: .18em;
+ text-transform: uppercase; font-weight: 700;
+ padding-bottom: 10px; margin-bottom: 4px;
+ border-bottom: 1px solid currentColor;
+ display: inline-block;
+}
+.teaser-block-h.pains { color: var(--red); }
+.teaser-block-h.caps { color: var(--orange); }
+.teaser-pains { display: flex; flex-direction: column; gap: 0; }
+.teaser-pain {
+ font-family: var(--serif); font-size: 17px; font-style: italic;
+ font-weight: 400; line-height: 1.45;
+ padding: 12px 0;
+ border-bottom: 1px dashed currentColor;
+ opacity: .9;
+}
+.teaser-pain:last-child { border-bottom: none; }
+.teaser-pain::before {
+ content: ""; display: inline-block; width: 18px; height: 1px;
+ background: var(--red-2, #D87765); vertical-align: middle; margin-right: 10px;
+}
+.teaser-caps-list { display: grid; grid-template-columns: 1fr; gap: 0; }
+.teaser-caps-row {
+ display: grid; grid-template-columns: auto 1fr auto;
+ gap: 16px; padding: 12px 0;
+ border-bottom: 1px solid var(--rule-d);
+ align-items: baseline;
+}
+.teaser-caps-row .n { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: 10px; color: var(--ghost-2); letter-spacing: .04em; }
+.teaser-caps-row .k { font-family: var(--serif); font-size: 17px; font-weight: 500; letter-spacing: -0.005em; }
+.teaser-caps-row .v { font-size: 11px; letter-spacing: .04em; color: var(--ghost); font-weight: 400; }
+.teaser-quote {
+ font-family: var(--serif); font-size: 19px; font-style: italic;
+ font-weight: 400; line-height: 1.4;
+ padding: 18px 0 0;
+}
+.teaser-quote .who {
+ display: block;
+ font-family: var(--sans); font-size: 10px; font-style: normal;
+ letter-spacing: .18em; text-transform: uppercase;
+ color: var(--orange); font-weight: 700;
+ margin-top: 12px;
+}
+
+.teaser-cta {
+ display: inline-flex; align-items: center; gap: 12px;
+ padding: 16px 26px;
+ background: var(--orange); color: var(--paper);
+ font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700;
+ border-radius: 999px;
+ align-self: flex-start;
+ transition: background .25s, gap .25s, transform .25s;
+}
+.teaser-cta:hover { background: var(--paper); color: var(--ink); }
+.teaser-section.on-paper .teaser-cta:hover { background: var(--ink); color: var(--paper); }
+.teaser-cta .arr { transition: transform .35s cubic-bezier(.16,.84,.3,1); }
+.teaser-cta:hover .arr { transform: translateX(6px); }
+
+@media (min-width: 900px) {
+ .teaser-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: stretch;
+ }
+ .teaser-section.flip .teaser-grid { direction: rtl; }
+ .teaser-section.flip .teaser-grid > * { direction: ltr; }
+ .teaser-body { padding: 16px 0; }
+}
+@media (min-width: 1200px) {
+ .teaser-grid { gap: 96px; }
+}
+
 </style>
 </head>
 <body>
@@ -712,34 +890,30 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  NAV
  ══════════════════════════════════════════════════════ -->
 <nav id="nav">
- <a class="brand" href="#hero" aria-label="Frame. Home">
+ <a class="brand" href="/" aria-label="Frame. Home">
  <div class="brand-mark"><div class="lb"></div><div class="lb"></div><div class="lb"></div></div>
  <div class="brand-word">Frame</div>
  </a>
  <div class="nav-links">
- <a class="nav-link" href="/vessels">Vessels</a>
- <a class="nav-link" href="/properties">Properties</a>
+ <a class="nav-link" href="docs/marketing/marine-page-concept.html">Vessels</a>
+ <a class="nav-link" href="docs/marketing/properties-page-concept.html">Properties</a>
  <a class="nav-link" href="#demo">Contact</a>
  </div>
- <div class="nav-right">
-   <a class="nav-signin" href="https://app.frameops.io/sign-in" aria-label="Sign in" title="Sign in">
-     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-       <circle cx="12" cy="7" r="4"/>
-     </svg>
-     <span>Sign in</span>
-   </a>
-   <div class="nav-cta" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Request Demo <span class="arr">→</span></div>
-   <div class="menu-btn" id="menuBtn" aria-label="Menu"><span class="ml"></span><span class="ml"></span></div>
- </div>
+ <div class="nav-right"><a class="nav-signin" href="#" aria-label="Sign in" title="Sign in">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </svg>
+    <span>Sign in</span>
+  </a><div class="nav-cta" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Request Demo <span class="arr">→</span></div><div class="menu-btn" id="menuBtn" aria-label="Menu"><span class="ml"></span><span class="ml"></span></div></div>
 </nav>
 
 <!-- mobile menu -->
 <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
  <div>
  <ul class="mm-list">
- <li><a href="/vessels">Vessels</a></li>
- <li><a href="/properties">Properties</a></li>
+ <li><a href="docs/marketing/marine-page-concept.html">Vessels</a></li>
+ <li><a href="docs/marketing/properties-page-concept.html">Properties</a></li>
  <li><a href="#demo">Contact</a></li>
  </ul>
  </div>
@@ -755,20 +929,27 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 <section class="hero on-paper" id="hero">
  <div class="grid-v" style="left: 50%;"></div>
  <div class="grid-v" style="left: 75%;"></div>
-
- <!-- yacht photograph · desktop right-bleed, mobile inline -->
- <div class="hero-image" aria-hidden="true">
-   <img src="/assets/sd90-underway.jpeg"
-        alt=""
-        loading="eager" fetchpriority="high" decoding="async" />
-   <div class="hero-image-meta">
-     <span class="tag">From the portfolio</span><br/>Vessel class · Tyrrhenian Sea
-   </div>
  </div>
- <div class="hero-image-mobile">
-   <img src="/assets/sd90-underway.jpeg"
-        alt="A motor yacht from the Frame portfolio, underway in calm Mediterranean water"
-        loading="eager" fetchpriority="high" decoding="async" />
+ <!-- yacht photograph · desktop right-bleed, mobile inline -->
+  <div class="hero-image" aria-hidden="true">
+    <img src="assets/sd90-underway.jpeg"
+         alt=""
+         loading="eager" fetchpriority="high" decoding="async" />
+    <div class="hero-image-meta">
+      <span class="tag">From the portfolio</span><br/>Vessel class · Tyrrhenian Sea
+    </div>
+  </div>
+  <div class="hero-image-mobile">
+    <img src="assets/sd90-underway.jpeg"
+         alt="A motor yacht from the Frame portfolio, underway in calm Mediterranean water"
+         loading="eager" fetchpriority="high" decoding="async" />
+  </div>
+
+  <!-- subtle constellation hint on desktop -->
+ <div class="dot" style="left: 64px; top: 28px;"></div>
+ <div class="dot" style="left: 32px; top: 70px;"></div>
+ <div class="dot signal" style="left: 88px; top: 96px;"></div>
+ <div class="dot gh" style="left: 12px; top: 110px;"></div>
  </div>
 
  <div class="hero-body">
@@ -777,8 +958,12 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  <span class="text">Private Operations Platform</span>
  </div>
 
- <h1 class="reveal d1">
-   Built for<em>private<br/><span class="acc">operations.</span></em>
+ <h1 class="reveal d1" id="heroHead">
+ <span class="hl-opt active" data-i="0">Built for<em>private<br/><span class="acc">operations.</span></em></span>
+ <span class="hl-opt" data-i="1">One operating layer.<em>Every private<br/><span class="acc">asset.</span></em></span>
+ <span class="hl-opt" data-i="2">Portfolio intelligence.<em>Private by<br/><span class="acc">design.</span></em></span>
+ <span class="hl-opt" data-i="3">Operations command<em>for private<br/><span class="acc">wealth.</span></em></span>
+ <span class="hl-opt" data-i="4">Estates. Vessels. Aircraft.<em>One operating<br/><span class="acc">layer.</span></em></span>
  </h1>
 
  <div class="hero-divider reveal d2"></div>
@@ -802,7 +987,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 </section>
 
 <!-- ══════════════════════════════════════════════════════
- 02 · WHAT IS FRAME · CAPABILITIES
+ 02 · WHAT IS FRAME · CAPABILITIES  (paper · moved up from old §03)
  ══════════════════════════════════════════════════════ -->
 <section class="on-paper" id="capabilities">
  <div class="sec-eyebrow reveal">
@@ -812,24 +997,24 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
  <h2 class="section-h reveal d1">Visibility &amp; operations,<em>across the portfolio.</em></h2>
  <hr class="acc-rule reveal d2" />
- <p class="section-lede reveal d2">Frame is one operating layer for ten capabilities: portfolio, maintenance, knowledge, procedures, risk, readiness, analytics, timeline, staff, vendors. <b>No feature dump. No add-ons.</b> Just what private operations need, available the day onboarding completes.</p>
+ <p class="section-lede reveal d2">Frame is one operating layer for ten capabilities — portfolio, maintenance, knowledge, procedures, risk, readiness, analytics, timeline, staff, vendors. <b>No feature dump. No add-ons.</b> Just what private operations need, available the day onboarding completes.</p>
 
  <div class="capabilities reveal d3">
  <div class="cap"><span class="cap-num">01</span><div class="cap-body"><div class="cap-name">Portfolio</div><div class="cap-p">Owner visibility across every asset, in one operating view.</div></div></div>
- <div class="cap"><span class="cap-num">02</span><div class="cap-body"><div class="cap-name">Maintenance</div><div class="cap-p">PMS, work orders, vendor coordination, by asset and system.</div></div></div>
- <div class="cap"><span class="cap-num">03</span><div class="cap-body"><div class="cap-name">Knowledge</div><div class="cap-p">SOPs, manuals, procedures. Durable through staff turnover.</div></div></div>
- <div class="cap"><span class="cap-num">04</span><div class="cap-body"><div class="cap-name">Procedures</div><div class="cap-p">Daily routines, watches, checklists. Executed and logged.</div></div></div>
- <div class="cap"><span class="cap-num">05</span><div class="cap-body"><div class="cap-name">Risk</div><div class="cap-p">Compliance, certificates, audits. Never expiring quietly.</div></div></div>
- <div class="cap"><span class="cap-num">06</span><div class="cap-body"><div class="cap-name">Readiness</div><div class="cap-p">Pre-arrival, pre-charter, pre-season. Always defensibly ready.</div></div></div>
- <div class="cap"><span class="cap-num">07</span><div class="cap-body"><div class="cap-name">Analytics</div><div class="cap-p">Reactive %, MTTR, cost of ownership. The metrics that matter.</div></div></div>
- <div class="cap"><span class="cap-num">08</span><div class="cap-body"><div class="cap-name">Timeline</div><div class="cap-p">Every action, every approval, every change. Provenance.</div></div></div>
- <div class="cap"><span class="cap-num">09</span><div class="cap-body"><div class="cap-name">Staff</div><div class="cap-p">Crew, house staff, family office. Roles, watches, access.</div></div></div>
- <div class="cap"><span class="cap-num">10</span><div class="cap-body"><div class="cap-name">Vendors</div><div class="cap-p">Approved suppliers, POs, service history, by asset.</div></div></div>
+ <div class="cap"><span class="cap-num">02</span><div class="cap-body"><div class="cap-name">Maintenance</div><div class="cap-p">PMS, work orders, vendor coordination — by asset, by system.</div></div></div>
+ <div class="cap"><span class="cap-num">03</span><div class="cap-body"><div class="cap-name">Knowledge</div><div class="cap-p">SOPs, manuals, procedures — durable through staff turnover.</div></div></div>
+ <div class="cap"><span class="cap-num">04</span><div class="cap-body"><div class="cap-name">Procedures</div><div class="cap-p">Daily routines, watches, checklists — executed and logged.</div></div></div>
+ <div class="cap"><span class="cap-num">05</span><div class="cap-body"><div class="cap-name">Risk</div><div class="cap-p">Compliance, certificates, audits — never expiring quietly.</div></div></div>
+ <div class="cap"><span class="cap-num">06</span><div class="cap-body"><div class="cap-name">Readiness</div><div class="cap-p">Pre-arrival, pre-charter, pre-season — always defensibly ready.</div></div></div>
+ <div class="cap"><span class="cap-num">07</span><div class="cap-body"><div class="cap-name">Analytics</div><div class="cap-p">Reactive %, MTTR, cost of ownership — the metrics that matter.</div></div></div>
+ <div class="cap"><span class="cap-num">08</span><div class="cap-body"><div class="cap-name">Timeline</div><div class="cap-p">Every action, every approval, every change — provenance.</div></div></div>
+ <div class="cap"><span class="cap-num">09</span><div class="cap-body"><div class="cap-name">Staff</div><div class="cap-p">Crew, house staff, family office — roles, watches, access.</div></div></div>
+ <div class="cap"><span class="cap-num">10</span><div class="cap-body"><div class="cap-name">Vendors</div><div class="cap-p">Approved suppliers, POs, service history — by asset.</div></div></div>
  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════
- 03 · SUPPORTED ASSETS (ink · NEW)
+ 03 · SUPPORTED ASSETS  (ink · NEW)
  ══════════════════════════════════════════════════════ -->
 <section class="on-ink" id="supported">
  <div class="sec-eyebrow reveal">
@@ -839,18 +1024,18 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
  <h2 class="section-h reveal d1">Built for three asset classes.<em>Aircraft on the roadmap.</em></h2>
  <hr class="acc-rule reveal d2" />
- <p class="section-lede reveal d2" style="color: var(--ghost);">Three product offerings on one operating layer. <b style="color: var(--paper); font-weight: 500;">Frame Portfolio</b> is the owner's cross-asset view. <b style="color: var(--paper); font-weight: 500;">Frame Vessels</b> and <b style="color: var(--paper); font-weight: 500;">Frame Properties</b> are the captain- and estate-manager surfaces. <b style="color: var(--paper); font-weight: 500;">Frame Aircraft</b> follows.</p>
+ <p class="section-lede reveal d2" style="color: var(--ghost);">Three product offerings on one operating layer. <b style="color: var(--paper); font-weight: 500;">Frame Portfolio</b> is the owner&apos;s cross-asset view. <b style="color: var(--paper); font-weight: 500;">Frame Vessels</b> and <b style="color: var(--paper); font-weight: 500;">Frame Properties</b> are the captain- and estate-manager surfaces. <b style="color: var(--paper); font-weight: 500;">Frame Aircraft</b> follows.</p>
 
  <div class="supported reveal d3">
  <a class="sup-row" href="#portfolio">
  <span class="sup-num">F · 01</span>
  <span class="sup-body">
  <span class="name">Frame Portfolio</span>
- <span class="desc">Owner visibility across every asset. Cross-portfolio readiness, risk, and operational status. The constellation view.</span>
+ <span class="desc">Owner visibility across every asset. Cross-portfolio readiness, risk, and operational status — the constellation view.</span>
  </span>
  <span class="drill">See example <span class="arr">→</span></span>
  </a>
- <a class="sup-row" href="/vessels">
+ <a class="sup-row" href="docs/marketing/marine-page-concept.html">
  <span class="sup-num">F · 02</span>
  <span class="sup-body">
  <span class="name">Frame Vessels</span>
@@ -858,7 +1043,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </span>
  <span class="drill">Explore <span class="arr">→</span></span>
  </a>
- <a class="sup-row" href="/properties">
+ <a class="sup-row" href="docs/marketing/properties-page-concept.html">
  <span class="sup-num">F · 03</span>
  <span class="sup-body">
  <span class="name">Frame Properties</span>
@@ -866,19 +1051,19 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </span>
  <span class="drill">Explore <span class="arr">→</span></span>
  </a>
- <div class="sup-row future">
+ <a class="sup-row future">
  <span class="sup-num">F · 04</span>
  <span class="sup-body">
  <span class="name">Frame Aircraft <em>· future</em></span>
- <span class="desc">In design. Flight ops, maintenance, crew, compliance. The same operating layer brought to private aviation.</span>
+ <span class="desc">In design. Flight ops, maintenance, crew, compliance — the same operating layer brought to private aviation.</span>
  </span>
  <span class="drill">Q3 2026 <span class="arr">·</span></span>
- </div>
+ </a>
  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════
- 04 · PORTFOLIO EXAMPLE · RINGS (ink)
+ 04 · PORTFOLIO EXAMPLE · RINGS  (ink · was old §02)
  ══════════════════════════════════════════════════════ -->
 <section class="sec-portfolio" id="portfolio">
  <div class="sec-eyebrow reveal">
@@ -886,9 +1071,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  <span class="rule"></span>
  <span class="sec-tag">Portfolio example · Constellation</span>
  </div>
- <h2 class="section-h reveal d1">A single client's portfolio.<em>On one operating layer.</em></h2>
+ <h2 class="section-h reveal d1">A single client&apos;s portfolio.<em>On one operating layer.</em></h2>
  <hr class="acc-rule reveal d2" />
- <p class="section-lede reveal d2" style="color: var(--ghost);"><b style="color: var(--paper); font-weight: 500;">Two estates, one vessel, one aircraft in onboarding.</b> Readiness rendered on the rings themselves. The chart <em>is</em> the data. This is the proof for everything above.</p>
+ <p class="section-lede reveal d2" style="color: var(--ghost);"><b style="color: var(--paper); font-weight: 500;">Two estates, one vessel, one aircraft in onboarding.</b> Readiness rendered on the rings themselves — the chart <em>is</em> the data. This is the proof for everything above.</p>
 
  <div class="rings-stage reveal d3">
  <div class="rings" aria-hidden="false">
@@ -938,7 +1123,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
  <div class="r-asset r-miami">
  <span class="gl"></span>
- <span class="nm">Miami Residence<em>Estate</em></span>
+ <span class="nm" style="text-align: right">Miami Residence<em>Estate</em></span>
  <span class="pc">78%</span>
  <span class="sub">Coconut Grove · FL · Attention</span>
  </div>
@@ -963,7 +1148,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 </section>
 
 <!-- ══════════════════════════════════════════════════════
- 05 · FRAME VESSELS TEASER (ink · NEW)
+ 05 · FRAME VESSELS TEASER  (ink · NEW shape · pain → caps → CTA)
  ══════════════════════════════════════════════════════ -->
 <section class="teaser-section on-ink" id="vessels-teaser">
  <div class="sec-eyebrow reveal" style="max-width: 1280px; margin: 0 auto 32px;">
@@ -1005,16 +1190,16 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 
  <p class="teaser-quote">
  &ldquo;Know what needs attention before the owner steps onboard.&rdquo;
- <span class="who">— The captain's brief</span>
+ <span class="who">— The captain&apos;s brief</span>
  </p>
 
- <a class="teaser-cta" href="/vessels">Explore Vessels <span class="arr">→</span></a>
+ <a class="teaser-cta" href="docs/marketing/marine-page-concept.html">Explore Vessels <span class="arr">→</span></a>
  </div>
  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════
- 06 · FRAME PROPERTIES TEASER (paper · flip · NEW)
+ 06 · FRAME PROPERTIES TEASER  (paper · NEW shape · pain → caps → CTA)
  ══════════════════════════════════════════════════════ -->
 <section class="teaser-section on-paper flip" id="properties-teaser">
  <div class="sec-eyebrow reveal" style="max-width: 1280px; margin: 0 auto 32px;">
@@ -1056,16 +1241,16 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 
  <p class="teaser-quote">
  &ldquo;Every residence ready before anyone arrives.&rdquo;
- <span class="who">— The estate manager's brief</span>
+ <span class="who">— The estate manager&apos;s brief</span>
  </p>
 
- <a class="teaser-cta" href="/properties">Explore Properties <span class="arr">→</span></a>
+ <a class="teaser-cta" href="docs/marketing/properties-page-concept.html">Explore Properties <span class="arr">→</span></a>
  </div>
  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════
- 07 · WHY FRAME EXISTS (paper)
+ 07 · WHY FRAME EXISTS  (paper · was old §05 about)
  ══════════════════════════════════════════════════════ -->
 <section class="on-paper" id="about">
  <div class="sec-eyebrow reveal">
@@ -1076,15 +1261,15 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  <div class="about-grid">
  <h2 class="section-h reveal d1">The new operating standard<em>for private wealth.</em></h2>
  <div class="about-body reveal d2">
- <p>Private assets (estates, vessels, aircraft) have run on <b>paper, text messages, binders, and tribal knowledge</b> for a hundred years. Every property is different. Every vessel is different. There has never been a standard.</p>
+ <p>Private assets — estates, vessels, aircraft — have run on <b>paper, text messages, binders, and tribal knowledge</b> for a hundred years. Every property is different. Every vessel is different. There has never been a standard.</p>
  <p>When the estate manager leaves, the knowledge leaves with them. When the captain rotates, the rhythm restarts. Operational excellence is rebuilt every season, from memory.</p>
  <p>Frame is the new operating standard. One operating layer for every asset, every vendor, every procedure. <b>Repeatable across the portfolio, durable across staff turnover. The way private operations should work.</b></p>
- </div>
+</div>
  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════
- 08 · CONTACT · REQUEST DEMO (deep ink)
+ 08 · CONTACT · REQUEST DEMO  (deep ink · was old §06)
  ══════════════════════════════════════════════════════ -->
 <section class="demo on-deep" id="demo">
  <div class="demo-inner">
@@ -1137,8 +1322,8 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
  <div class="foot-col">
  <h6>Asset Classes</h6>
- <a href="/vessels">Vessels</a>
- <a href="/properties">Properties</a>
+ <a href="docs/marketing/marine-page-concept.html">Vessels</a>
+ <a href="docs/marketing/properties-page-concept.html">Properties</a>
  <a>Aircraft <em style="opacity:.4;">Q3 2026</em></a>
  </div>
  <div class="foot-col">
@@ -1160,6 +1345,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </footer>
 
+<!-- ══════════════════════════════════════════════════════
+ SCRIPT
+ ══════════════════════════════════════════════════════ -->
 <script>
  // scroll reveal
  const io = new IntersectionObserver((entries) => {
@@ -1169,9 +1357,9 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  }, { threshold: 0.08 });
  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
- // nav theme — flip to dark when over dark sections
+ // nav theme. Flip to dark when over dark sections
  const nav = document.getElementById('nav');
- const darkSecs = document.querySelectorAll('.on-ink, .on-deep, .sec-portfolio, .teaser-section.on-ink');
+ const darkSecs = document.querySelectorAll('.on-ink, .on-deep, .sec-portfolio, .in-practice');
  function syncNav() {
  const y = window.scrollY + 70;
  let dark = false;
@@ -1190,18 +1378,50 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  menuBtn.addEventListener('click', () => mm.classList.toggle('open'));
  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
 
- // contact nav active state
- const desktopContactLink = document.querySelector('.nav-links .nav-link[href="#demo"]');
- const mmContactLink = mm.querySelector('a[href="#demo"]');
- const demoEl = document.getElementById('demo');
- if (demoEl) {
-  const demoObs = new IntersectionObserver((entries) => {
-   const inView = entries[0].isIntersecting;
-   if (desktopContactLink) { desktopContactLink.style.color = inView ? 'var(--orange)' : ''; desktopContactLink.style.opacity = inView ? '1' : ''; }
-   if (mmContactLink) mmContactLink.style.color = inView ? 'var(--orange)' : '';
-  }, { threshold: 0.15 });
-  demoObs.observe(demoEl);
- }
+ // headline cycling. Exposed to tweaks
+ window.__setHero = (i) => {
+ document.querySelectorAll('#heroHead .hl-opt').forEach(el => {
+ el.classList.toggle('active', String(el.dataset.i) === String(i));
+ });
+ };
+</script>
+
+<!-- TWEAKS PANEL -->
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+ const FrameTweaks = () => {
+ const defaults = /*EDITMODE-BEGIN*/{
+ "heroHeadline": 0
+ }/*EDITMODE-END*/;
+ const [t, setTweak] = useTweaks(defaults);
+
+ React.useEffect(() => {
+ if (window.__setHero) window.__setHero(t.heroHeadline);
+ }, [t.heroHeadline]);
+
+ return (
+ <TweaksPanel title="Tweaks · Frame Homepage">
+ <TweakSection title="Hero headline">
+ <TweakSelect
+ label="Option"
+ value={t.heroHeadline}
+ options={[
+ { value: 0, label: '01. Built for private operations' },
+ { value: 1, label: '02. One operating layer. Every private asset' },
+ { value: 2, label: '03. Portfolio intelligence. Private by design' },
+ { value: 3, label: '04. Operations command for private wealth' },
+ { value: 4, label: '05. Estates. Vessels. Aircraft. One layer' }
+ ]}
+ onChange={(v) => setTweak('heroHeadline', Number(v))}
+ />
+ </TweakSection>
+ </TweaksPanel>
+ );
+ };
+
+ const tweakRoot = document.createElement('div');
+ document.body.appendChild(tweakRoot);
+ ReactDOM.createRoot(tweakRoot).render(<FrameTweaks />);
 </script>
 
 </body>
