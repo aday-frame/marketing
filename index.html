@@ -387,10 +387,12 @@ h1 .ln { display: block; }
  §05 / §06 ASSET-CLASS TEASERS
  ════════════════════════════════════════════════════════ */
 .teaser-section { padding: 96px 20px; position: relative; overflow: hidden; }
-.teaser-section.on-ink .teaser-pain { color: var(--ghost); border-bottom-color: var(--rule-d); }
-.teaser-section.on-paper .teaser-pain { color: var(--muted); border-bottom-color: var(--rule); }
+.teaser-section.on-ink .teaser-body { background: var(--ink); }
+.teaser-section.on-paper .teaser-body { background: var(--paper); }
+.teaser-section.on-ink .teaser-pain { color: var(--ghost-2); border-bottom-color: var(--rule-d); }
+.teaser-section.on-paper .teaser-pain { color: rgba(10,14,26,0.70); border-bottom-color: var(--rule); }
 .teaser-section.on-paper .teaser-caps-row { border-bottom-color: var(--rule); }
-.teaser-section.on-paper .teaser-caps-row .v { color: var(--muted); }
+.teaser-section.on-paper .teaser-caps-row .v { color: rgba(10,14,26,0.65); }
 
 .teaser-grid {
  display: grid;
@@ -652,12 +654,25 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  TEASER 2-COL 900+
  ════════════════════════════════════════════════════════ */
 @media (min-width: 900px) {
+ .teaser-section { padding: 96px 40px; }
  .teaser-grid { grid-template-columns: 1fr 1fr; gap: 64px; align-items: stretch; }
  .teaser-section.flip .teaser-grid { direction: rtl; }
  .teaser-section.flip .teaser-grid > * { direction: ltr; }
  .teaser-body { padding: 16px 0; }
+ /* fade photo edge toward text column for contrast */
+ .teaser-section:not(.flip) .teaser-photo::after {
+  background:
+   linear-gradient(90deg, rgba(5,10,20,0) 55%, rgba(5,10,20,0.6) 100%),
+   linear-gradient(180deg, rgba(5,10,20,0.15) 0%, rgba(5,10,20,0) 30%, rgba(5,10,20,0) 60%, rgba(5,10,20,0.65) 100%);
+ }
+ .teaser-section.flip .teaser-photo::after {
+  background:
+   linear-gradient(270deg, rgba(5,10,20,0) 55%, rgba(5,10,20,0.45) 100%),
+   linear-gradient(180deg, rgba(5,10,20,0.15) 0%, rgba(5,10,20,0) 30%, rgba(5,10,20,0) 60%, rgba(5,10,20,0.65) 100%);
+ }
 }
 @media (min-width: 1200px) {
+ .teaser-section { padding: 96px 64px; }
  .teaser-grid { gap: 96px; }
 }
 
