@@ -1189,6 +1189,19 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  const mm = document.getElementById('mobileMenu');
  menuBtn.addEventListener('click', () => mm.classList.toggle('open'));
  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
+
+ // contact nav active state
+ const desktopContactLink = document.querySelector('.nav-links .nav-link[href="#demo"]');
+ const mmContactLink = mm.querySelector('a[href="#demo"]');
+ const demoEl = document.getElementById('demo');
+ if (demoEl) {
+  const demoObs = new IntersectionObserver((entries) => {
+   const inView = entries[0].isIntersecting;
+   if (desktopContactLink) { desktopContactLink.style.color = inView ? 'var(--orange)' : ''; desktopContactLink.style.opacity = inView ? '1' : ''; }
+   if (mmContactLink) mmContactLink.style.color = inView ? 'var(--orange)' : '';
+  }, { threshold: 0.15 });
+  demoObs.observe(demoEl);
+ }
 </script>
 
 </body>
