@@ -23,11 +23,11 @@
  --orange: #FF6A00;
  --good: #4CAF6E;
  --warn: #E8A352;
- --muted: rgba(10,14,26,0.62);   /* a11y v1: was 0.50 → bumped for 4.5:1 AA on paper */
- --faint: rgba(10,14,26,0.48);   /* a11y v1: was 0.32 → bumped for small-text safety */
- --ghost: rgba(255,255,255,0.58); /* a11y v1: was 0.42 → ~6.4:1 on ink */
- --ghost-2:rgba(255,255,255,0.74); /* a11y v1: was 0.48 → ~9.1:1 on ink */
- --orange-on-paper: #C8500A;     /* a11y v1: AA orange for text on paper (4.7:1) */
+ --muted: rgba(10,14,26,0.62);
+ --faint: rgba(10,14,26,0.48);
+ --ghost: rgba(255,255,255,0.58);
+ --ghost-2:rgba(255,255,255,0.74);
+ --orange-on-paper: #C8500A;
  --rule: rgba(10,14,26,0.10);
  --rule-2: rgba(10,14,26,0.05);
  --rule-d: rgba(255,255,255,0.08);
@@ -147,7 +147,6 @@ h2.section-h em { font-style: normal; display: block; font-weight: 300; color: c
   background: #051018;
   display: none;
 }
-/* paper gradient on hero photo removed per direction */
 .hero-image img {
   width: 100%; height: 100%;
   object-fit: cover;
@@ -180,7 +179,6 @@ h2.section-h em { font-style: normal; display: block; font-weight: 300; color: c
   object-position: 50% 50%;
   display: block;
 }
-/* mobile gradient on hero photo removed per direction */
 .hero-bg .grid-v { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule); }
 .hero-wm {
  position: absolute; right: -0.04em; bottom: -10vh;
@@ -227,10 +225,10 @@ h1 .ln { display: block; }
  transition: background .2s;
  width: max-content;
 }
-.btn-primary:hover { background: var(--orange); color: var(--ink); }  /* a11y v1: ink-on-orange = 6.6:1 AA */
+.btn-primary:hover { background: var(--orange); color: var(--ink); }
 .btn-primary .arr { font-weight: 400; font-size: 14px; }
 
-.hero-cta-note { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); font-weight: 600; }  /* a11y v1: muted + 600 for small-text legibility */
+.hero-cta-note { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 
 .hero-stats { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .h-stat { background: var(--paper); padding: 28px 16px 24px; }
@@ -239,14 +237,8 @@ h1 .ln { display: block; }
 .h-stat-v .sub { font-family: var(--sans); font-weight: 300; font-size: .5em; }
 .h-stat-l { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 8px; font-weight: 500; }
 
-/* tiny constellation hint behind hero */
-.hero-hint { position: absolute; right: 6vw; top: 18vh; pointer-events: none; opacity: .65; }
-.hero-hint .dot { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--ink); }
-.hero-hint .dot.gh { background: transparent; border: 1px dashed var(--faint); }
-.hero-hint .dot.signal { background: var(--orange); }
-
 /* ────────────────────────────────────────────────────────
- §02 PORTFOLIO · RINGS (ink). Perimeter labels
+ RINGS
  ──────────────────────────────────────────────────────── */
 .sec-portfolio { background: var(--ink); color: var(--paper); padding: 120px 20px 96px; overflow: hidden; }
 .sec-portfolio .sec-eyebrow .rule { background: var(--paper); opacity: .14; }
@@ -267,13 +259,6 @@ h1 .ln { display: block; }
 .rings-mark { font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: var(--paper); }
 .rings-sub { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--ghost-2); margin-top: 8px; font-weight: 500; }
 
-.r-bearing { position: absolute; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 600; }
-.r-bearing.t { left: 50%; top: -22px; transform: translateX(-50%); }
-.r-bearing.r { right: -28px; top: 50%; transform: translateY(-50%); }
-.r-bearing.b { left: 50%; bottom: -22px; transform: translateX(-50%); }
-.r-bearing.l { left: -28px; top: 50%; transform: translateY(-50%); }
-
-/* MOBILE. Labels listed BELOW the rings (sibling of .rings inside section) */
 .rings-labels {
  margin-top: 40px;
  display: grid;
@@ -299,46 +284,7 @@ h1 .ln { display: block; }
 .cnst-foot { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--rule-d); display: flex; justify-content: space-between; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; flex-wrap: wrap; gap: 8px; }
 
 /* ────────────────────────────────────────────────────────
-   §02·b PORTFOLIO IN PRACTICE · full-bleed editorial moment
-   ──────────────────────────────────────────────────────── */
-.in-practice { position: relative; padding: 0; background: var(--ink); overflow: hidden; }
-.in-practice .frame {
-  position: relative; display: block; width: 100%;
-  aspect-ratio: 16 / 9; overflow: hidden; background: #051018;
-}
-.in-practice .frame img {
-  display: block; width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 55%;
-}
-.in-practice .frame::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(10,14,26,0.32) 0%, rgba(10,14,26,0) 22%, rgba(10,14,26,0) 70%, rgba(10,14,26,0.55) 100%);
-}
-.in-practice .caption {
-  position: absolute; left: 6%; right: 6%; bottom: 6%;
-  display: flex; justify-content: space-between; align-items: baseline;
-  gap: 16px; flex-wrap: wrap; color: var(--paper);
-}
-.in-practice .cap-left { display: flex; flex-direction: column; gap: 6px; }
-.in-practice .cap-tag {
-  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
-  font-weight: 700; color: var(--orange);
-}
-.in-practice .cap-asset {
-  font-family: var(--serif);
-  font-size: clamp(20px, 4vw, 32px);
-  font-weight: 400; letter-spacing: -0.015em; line-height: 1.1;
-}
-.in-practice .cap-asset em { font-style: normal; opacity: .55; font-weight: 300; font-size: .65em; margin-left: 8px; }
-.in-practice .cap-right {
-  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
-  color: rgba(255,255,255,0.62); font-weight: 600; text-align: right;
-  line-height: 1.7;
-}
-.in-practice .cap-right b { color: var(--orange); font-weight: 700; }
-
-/* ────────────────────────────────────────────────────────
- §03 WHAT FRAME DOES · CAPABILITIES (paper)
+ CAPABILITIES
  ──────────────────────────────────────────────────────── */
 .capabilities { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--rule); }
 .cap {
@@ -349,154 +295,22 @@ h1 .ln { display: block; }
  gap: 18px;
  align-items: baseline;
 }
-.cap-num {
- font-size: 10px;
- letter-spacing: .14em;
- color: var(--orange);
- font-weight: 700;
- font-variant-numeric: tabular-nums;
-}
+.cap-num { font-size: 10px; letter-spacing: .14em; color: var(--orange); font-weight: 700; font-variant-numeric: tabular-nums; }
 .cap-body { display: grid; gap: 6px; }
-.cap-name {
- font-family: var(--serif);
- font-size: clamp(22px, 5.5vw, 28px);
- font-weight: 400;
- letter-spacing: -0.012em;
- line-height: 1.1;
- color: var(--ink);
-}
+.cap-name { font-family: var(--serif); font-size: clamp(22px, 5.5vw, 28px); font-weight: 400; letter-spacing: -0.012em; line-height: 1.1; color: var(--ink); }
 .cap-name em { font-style: normal; opacity: .55; font-size: .58em; font-weight: 300; }
 .cap-p { font-size: 13px; line-height: 1.55; color: var(--muted); font-weight: 300; max-width: 540px; }
 
 /* ────────────────────────────────────────────────────────
- §04 ASSET CLASSES · CLICKABLE TILES (ink)
- ──────────────────────────────────────────────────────── */
-.class-tiles { margin-top: 56px; display: grid; gap: 24px; }
-.tile {
- display: block;
- position: relative;
- overflow: hidden;
- padding: 40px 28px 32px;
- background: var(--ink-2);
- border: 1px solid var(--rule-d);
- text-decoration: none;
- color: inherit;
- transition: background .35s ease, transform .35s ease, border-color .35s ease;
-}
-.tile:hover { background: #0E1322; border-color: rgba(255,106,0,0.22); }
-.tile:hover .tile-cta { color: var(--orange); }
-.tile:hover .tile-cta .arr { transform: translateX(8px); }
-.tile-eyebrow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
-.tile-cls { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--orange); }
-.tile-stat { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; color: var(--ghost-2); }
-.tile h3 { font-family: var(--serif); font-size: clamp(28px, 8vw, 36px); font-weight: 400; line-height: 1.05; letter-spacing: -0.018em; color: var(--paper); }
-.tile h3 em { font-style: normal; display: block; font-weight: 300; opacity: .42; }
-.tile-sub { font-size: 13px; line-height: 1.65; color: var(--ghost); font-weight: 300; margin-top: 16px; max-width: 420px; }
-.tile-modules { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--rule-d); display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
-.tile-module { font-size: 11px; letter-spacing: .04em; color: var(--ghost); font-weight: 400; display: flex; align-items: baseline; gap: 8px; }
-.tile-module::before { content: "·"; color: var(--orange); font-weight: 700; }
-.tile-foot { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule-d); display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
-.tile-cta { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: var(--paper); display: inline-flex; align-items: center; gap: 12px; transition: color .25s; }
-.tile-cta .arr { display: inline-block; transition: transform .35s cubic-bezier(.16,.84,.3,1); }
-.tile-meta { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; text-align: right; }
-.tile-meta b { color: var(--paper); font-weight: 600; }
-
-.tile-future { opacity: .55; pointer-events: none; }
-.tile-future .tile-cls { color: var(--ghost-2); }
-.tile-future .tile-cta { color: var(--ghost-2); }
-
-/* ────────────────────────────────────────────────────────
- §05 KNOWLEDGE · STRATA (paper)
- ──────────────────────────────────────────────────────── */
-.strata { margin-top: 56px; position: relative; }
-.strata-wrap { position: relative; padding: 0; }
-.layer { position: relative; padding: 22px 12px 22px 0; border-top: 1px solid var(--rule); display: flex; align-items: center; gap: 16px; }
-.layer:last-child { border-bottom: 1px solid var(--rule); }
-.layer:nth-of-type(1) { background: rgba(10,14,26,0.005); }
-.layer:nth-of-type(2) { background: rgba(10,14,26,0.012); }
-.layer:nth-of-type(3) { background: rgba(10,14,26,0.022); }
-.layer:nth-of-type(4) { background: rgba(10,14,26,0.034); }
-.layer:nth-of-type(5) { background: rgba(10,14,26,0.048); }
-.layer:nth-of-type(6) { background: rgba(10,14,26,0.064); }
-.layer-name { font-family: var(--serif); font-size: 22px; font-style: normal; font-weight: 400; min-width: 110px; flex-shrink: 0; }
-.layer-meta { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); font-weight: 500; }
-.layer-data { font-size: 13px; color: var(--muted); margin-top: 4px; font-weight: 400; line-height: 1.5; }
-.layer-data b { color: var(--ink); font-weight: 600; }
-.layer-text { flex: 1; min-width: 0; }
-/* the orange spine */
-.spine { position: absolute; left: calc(110px + 16px + 50%); top: 0; bottom: 0; width: 1px; pointer-events: none; }
-.spine::before, .spine::after { content: ""; position: absolute; left: -3px; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
-.spine::before { top: -3px; }
-.spine::after { bottom: -3px; }
-.spine-line { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent 0%, var(--orange) 6%, var(--orange) 94%, transparent 100%); }
-.spine-label { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); white-space: nowrap; font-weight: 600; }
-
-/* ────────────────────────────────────────────────────────
- §06 READINESS BRIEF · editorial (ink)
- ──────────────────────────────────────────────────────── */
-.brief { margin-top: 56px; }
-.brief-head { font-family: var(--serif); font-size: clamp(36px, 11vw, 56px); font-weight: 300; line-height: 1.02; letter-spacing: -0.022em; }
-.brief-head em { font-style: normal; color: var(--orange); display: block; }
-.brief-meta { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); margin-top: 22px; font-weight: 600; }
-
-.brief-cols { margin-top: 48px; display: grid; gap: 48px; }
-.brief-col-title { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; font-weight: 700; }
-
-.brief-asset { padding: 18px 0; border-top: 1px solid var(--rule-d); }
-.brief-asset:first-of-type { border-top: 1px solid var(--rule-d); }
-.brief-asset:last-of-type { border-bottom: 1px solid var(--rule-d); }
-.brief-asset-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-.brief-asset-name { font-family: var(--serif); font-size: 20px; font-weight: 400; }
-.brief-asset-name em { font-style: italic; font-size: 11px; opacity: .5; }
-.brief-asset-pct { font-size: 16px; color: var(--orange); font-weight: 600; font-variant-numeric: tabular-nums; }
-.brief-bar { height: 1.5px; background: var(--rule-d); position: relative; }
-.brief-bar .f { position: absolute; left: 0; top: 0; height: 100%; background: var(--orange); }
-
-.brief-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
-.brief-list li { display: grid; grid-template-columns: 18px 1fr; align-items: baseline; gap: 12px; font-size: 14px; line-height: 1.5; color: var(--ghost); font-weight: 300; }
-.brief-list li .bd { width: 7px; height: 7px; border-radius: 50%; margin-top: 6px; }
-.brief-list li.ok .bd { background: var(--good); }
-.brief-list li.warn .bd { background: var(--orange); }
-.brief-list li.pend .bd { border: 1px solid var(--ghost-2); }
-.brief-list li.ok { color: var(--ghost-2); }
-.brief-list li.warn { color: var(--paper); }
-.brief-list li b { font-weight: 600; color: var(--paper); }
-
-.brief-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule-d); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-weight: 500; }
-.brief-foot b { color: var(--paper); font-weight: 600; }
-
-/* ────────────────────────────────────────────────────────
- §07 RISK · COMMAND CARDS (paper)
- ──────────────────────────────────────────────────────── */
-.command { margin-top: 56px; display: grid; gap: 0; border-top: 1px solid var(--rule); }
-.cmd-card { padding: 32px 0 28px; border-bottom: 1px solid var(--rule); }
-.cmd-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--orange); margin-bottom: 16px; }
-.cmd-v { font-family: var(--serif); font-size: clamp(54px, 18vw, 84px); font-weight: 300; line-height: .95; letter-spacing: -0.03em; color: var(--ink); }
-.cmd-v .sub { font-family: var(--sans); font-weight: 400; font-size: .35em; letter-spacing: 0; }
-.cmd-v .acc { color: var(--orange); }
-.cmd-v.ital { font-style: italic; }
-.cmd-l { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 14px; font-weight: 500; }
-.cmd-n { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.55; font-weight: 300; max-width: 380px; }
-.cmd-n b { color: var(--ink); font-weight: 600; }
-
-/* ────────────────────────────────────────────────────────
- §05 ABOUT · THE NEW OPERATING STANDARD (paper)
+ ABOUT
  ──────────────────────────────────────────────────────── */
 .about-grid { margin-top: 64px; display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
 .about-body { display: grid; gap: 22px; max-width: 660px; }
 .about-body p { font-family: var(--serif); font-size: 19px; line-height: 1.55; font-weight: 400; color: var(--ink); font-style: normal; }
 .about-body p b { font-style: normal; font-weight: 500; color: var(--ink); }
-.about-cta {
- font-family: var(--sans); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700;
- color: var(--orange); margin-top: 16px;
- display: inline-flex; align-items: center; gap: 12px;
- border-bottom: 1px solid currentColor; padding-bottom: 8px; width: max-content;
-}
-.about-cta span { transition: transform .35s cubic-bezier(.16,.84,.3,1); display: inline-block; }
-.about-cta:hover span { transform: translateX(6px); }
 
 /* ────────────────────────────────────────────────────────
- §06 REQUEST DEMO (deep)
+ DEMO
  ──────────────────────────────────────────────────────── */
 .demo { padding: 40px 20px 120px; }
 .demo-h { font-family: var(--serif); font-size: clamp(40px, 12vw, 64px); font-weight: 300; line-height: 1.0; letter-spacing: -0.028em; color: var(--paper); }
@@ -536,7 +350,6 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  overscroll-behavior: contain;
 }
 .mobile-menu.open { transform: none; }
-.mobile-menu nav-link { color: var(--paper); }
 .mm-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
 .mm-list li { border-bottom: 1px solid var(--rule-d); }
 .mm-list a { display: flex; align-items: baseline; justify-content: space-between; padding: 20px 0; font-family: var(--serif); font-size: 32px; font-weight: 400; }
@@ -544,181 +357,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 .mm-foot { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; display: flex; justify-content: space-between; }
 
 /* ────────────────────────────────────────────────────────
- TABLET 768+
- ──────────────────────────────────────────────────────── */
-@media (min-width: 768px) {
- nav { padding: 22px 40px; }
- .menu-btn { display: none; }
- .nav-links { display: flex; gap: 28px; }
-
- .hero { padding: 96px 40px 56px; }
- /* iPad range (768–1279): keep the stacked hero layout from mobile;
-    the right-bleed photo only activates at desktop ≥1280. */
- .hero-body { position: relative; z-index: 5; max-width: 720px; padding-right: 0; }
- .hero-image { display: none; }
- .hero-image-mobile {
-   display: block;
-   width: calc(100% + 80px);
-   margin: 32px -40px 0;
-   aspect-ratio: 21 / 9;
- }
- h1 { font-size: clamp(64px, 8vw, 84px); }
- .hero-sub { font-size: 16px; max-width: 540px; }
- .btn-primary { padding: 14px 26px; }
- .hero-cta { flex-direction: row; align-items: center; gap: 24px; }
- .hero-stats { grid-template-columns: repeat(4, 1fr); }
- .h-stat { padding: 32px 20px 28px; }
- .h-stat-v { font-size: 40px; }
-
- section { padding: 120px 40px; }
- h2.section-h { font-size: clamp(48px, 6vw, 64px); }
-
- .rings-mark { font-size: 17px; }
-
- /* in-practice desktop tightens caption layout */
- .in-practice .frame { aspect-ratio: 21 / 9; }
- .in-practice .caption { left: 64px; right: 64px; bottom: 56px; align-items: flex-end; }
- .in-practice .cap-asset { font-size: clamp(28px, 3vw, 40px); }
- .in-practice .cap-right { font-size: 11px; }
-
- /* §03 capabilities desktop = 2-col grid */
- .capabilities { grid-template-columns: 1fr 1fr; column-gap: 64px; }
- .cap { padding: 28px 0; }
- .cap-name { font-size: clamp(24px, 2.4vw, 30px); }
- .cap-p { font-size: 14px; }
-
- /* §05 about desktop = 2-col */
- .about-grid { grid-template-columns: 1.1fr 1fr; gap: 80px; }
- .about-body p { font-size: 20px; }
-
- /* §04 tiles side-by-side */
- .class-tiles { grid-template-columns: 1fr 1fr; gap: 24px; }
- .tile { padding: 56px 44px 44px; }
-
- /* §02 rings desktop. Perimeter labels overlay */
- .rings-stage { position: relative; margin-top: 24px; max-width: 920px; margin-left: auto; margin-right: auto; aspect-ratio: 16 / 10; }
- .rings { max-width: none; aspect-ratio: 1 / 1; margin: 0; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 46%; }
- .rings-mark { font-size: 22px; letter-spacing: .42em; }
- .rings-sub { margin-top: 12px; }
- .rings-labels {
- margin-top: 0; padding-top: 0; border-top: none;
- position: absolute; inset: 0; pointer-events: none; gap: 0;
- display: block;
- }
- .rings-labels .r-asset {
- position: absolute; padding: 0; display: block; pointer-events: auto;
- white-space: nowrap;
- }
- .rings-labels .r-asset .gl { display: inline-block; vertical-align: middle; margin-right: 12px; transform: none; }
- .rings-labels .r-asset .nm { display: inline; font-size: 22px; }
- .rings-labels .r-asset .nm em { font-size: 13px; display: inline; margin-left: 8px; }
- .rings-labels .r-asset .pc { display: inline-block; margin-left: 12px; font-size: 14px; }
- .rings-labels .r-asset .sub { display: block; font-size: 10px; letter-spacing: .2em; color: var(--ghost-2); margin-top: 8px; padding-left: 22px; }
-
- /* compass-position labels: NW · NE · SE · SW around the ring. Each label sits in the same quadrant as its glyph dot on the ring */
- .rings-labels .r-asset.r-aspen { left: 4%; top: 6%; text-align: left; }
- .rings-labels .r-asset.r-aspen .sub { padding-left: 22px; }
- .rings-labels .r-asset.r-miami { right: 4%; top: 6%; text-align: right; }
- .rings-labels .r-asset.r-miami .sub { padding-left: 0; }
- .rings-labels .r-asset.r-ladym { right: 4%; bottom: 6%; text-align: right; }
- .rings-labels .r-asset.r-ladym .sub { padding-left: 0; }
- .rings-labels .r-asset.r-air { left: 4%; bottom: 6%; opacity: .55; text-align: left; }
-
- /* strata layers more vertical */
- .layer { padding: 28px 0; }
- .layer-name { min-width: 200px; font-size: 28px; }
- .spine { left: calc(200px + 16px + 50%); }
-
- /* brief two columns */
- .brief-cols { grid-template-columns: 1fr 1fr; gap: 64px; }
- .brief-head { font-size: clamp(56px, 6vw, 72px); }
-
- /* command cards 2x2 */
- .command { grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); }
- .cmd-card { padding: 40px 32px; border-right: 1px solid var(--rule); }
- .cmd-card:nth-child(even) { border-right: none; }
- .cmd-card:nth-last-child(-n+2):not(:nth-child(odd)+.cmd-card) { /* keep bottom rule */ }
-
- /* demo side by side */
- .demo { padding: 48px 40px 140px; }
- .demo-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
- .demo-cta { flex-direction: row; }
-
- /* footer */
- footer { padding: 72px 40px 36px; }
- .foot-grid { grid-template-columns: 1.2fr 2fr; gap: 80px; }
- .foot-cols { grid-template-columns: repeat(4, 1fr); }
-}
-
-/* ────────────────────────────────────────────────────────
- DESKTOP 1280+
- ──────────────────────────────────────────────────────── */
-@media (min-width: 1280px) {
- nav { padding: 24px 64px; }
- .hero { padding: 112px 64px 72px; padding-right: 0; }
- .hero-image { display: block; width: 52%; }
- .hero-image-mobile { display: none; }
- .hero-body { padding-right: 0; max-width: 880px; padding-top: 56px; }
- h1 { font-size: clamp(84px, 6.4vw, 112px); }
- section { padding: 160px 64px; }
- h2.section-h { font-size: clamp(64px, 4.6vw, 88px); }
- .demo { padding: 56px 64px 180px; }
- .teaser-section { padding: 56px 64px 180px; }
- .demo-h { font-size: clamp(64px, 5vw, 88px); }
- .cmd-card { padding: 56px 40px; }
- .command { grid-template-columns: repeat(4, 1fr); }
- .cmd-card:nth-child(even) { border-right: 1px solid var(--rule); }
- .cmd-card:last-child { border-right: none; }
- footer { padding: 96px 64px 40px; }
-}
-
-/* ────────────────────────────────────────────────────────
- DESKTOP 1440+. Refine ratios
- ──────────────────────────────────────────────────────── */
-@media (min-width: 1440px) {
- .hero-stats { gap: 0; }
- .h-stat { padding: 40px 24px 32px; }
-}
-
-/* ────────────────────────────────────────────────────────
- 320 SAFETY
- ──────────────────────────────────────────────────────── */
-@media (max-width: 359px) {
- h1 { font-size: 36px; }
- .hero { padding: 76px 16px 24px; }
- section, .demo, footer { padding-left: 16px; padding-right: 16px; }
- .star { transform: translate(-50%,-50%) scale(.85); }
- .layer-name { min-width: 90px; font-size: 18px; }
- .brief-head { font-size: 32px; }
-}
-
-/* hide tweaks-only headline options at runtime */
-.hl-opt { display: none; }
-.hl-opt.active { display: block; }
-
-
-/* ─────────── Prevent letter-spaced UPPERCASE labels from wrapping ─────────── */
-.nav-link, .nav-cta, .nav-signin, .nav-signin span,
-.btn-primary span, .btn-primary, .btn-secondary span, .btn-secondary,
-.plaque-h .lot, .plaque-h .status, .plaque-row b,
-.coord, .checkbox span,
-.left-foot a, .left-foot span,
-.right-top .question, .right-top .link,
-.cta-note, .hero-cta-note,
-.frame-caption .name, .frame-caption .tag,
-.field label, .form-eyebrow,
-.eyebrow,
-.tile-cta, .tile-stat, .tile-cls,
-.cap-tag, .h-stat-l,
-.season-row .mo, .season-arc .mark .mo,
-.brand-page, .brand-word,
-.section-h em + *,
-.sec-tag, .sec-num {
-  white-space: nowrap;
-}
-
-/* ────────────────────────────────────────────────────────
- §03 SUPPORTED ASSETS (ink)
+ SUPPORTED ASSETS
  ──────────────────────────────────────────────────────── */
 .supported { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--rule-d); }
 .sup-row {
@@ -746,7 +385,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 .sup-row.future .drill { color: var(--ghost-2); }
 
 /* ────────────────────────────────────────────────────────
- §05 / §06 ASSET-CLASS TEASERS (pain → caps → cta)
+ TEASER SECTIONS — full-bleed photo + body grid
  ──────────────────────────────────────────────────────── */
 #properties-teaser { padding-top: 12px; }
 #demo { padding-top: 16px; }
@@ -772,17 +411,20 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 .teaser-grid {
  display: grid;
  grid-template-columns: 1fr;
- gap: 48px;
- max-width: 1280px;
- margin: 0 auto;
- align-items: center;
+ gap: 32px;
+ max-width: none;
+ margin: 0;
+ align-items: stretch;
 }
 
+/* Full-bleed photo — bleeds to section edges on mobile */
 .teaser-photo {
  position: relative;
- aspect-ratio: 4 / 3;
+ aspect-ratio: 16 / 9;
  overflow: hidden;
  background: #0A1018;
+ width: 100vw;
+ margin-left: calc(50% - 50vw);
 }
 .teaser-photo img {
  width: 100%; height: 100%; object-fit: cover; display: block;
@@ -794,16 +436,6 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  background: linear-gradient(180deg, rgba(5,10,20,0.15) 0%, rgba(5,10,20,0) 30%, rgba(5,10,20,0) 60%, rgba(5,10,20,0.7) 100%);
  pointer-events: none;
 }
-.teaser-photo .reg {
- position: absolute; width: 14px; height: 14px; z-index: 2;
-}
-.teaser-photo .reg::before, .teaser-photo .reg::after {
- content: ""; position: absolute; background: rgba(241,237,228,0.5);
-}
-.teaser-photo .reg::before { left: 0; top: 50%; width: 100%; height: 1px; }
-.teaser-photo .reg::after { top: 0; left: 50%; width: 1px; height: 100%; }
-.teaser-photo .reg.tl { left: 14px; top: 14px; }
-.teaser-photo .reg.tr { right: 14px; top: 14px; }
 .teaser-photo .caption {
  position: absolute; left: 18px; bottom: 16px; z-index: 2;
  font-family: ui-monospace, 'JetBrains Mono', monospace;
@@ -885,20 +517,144 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 .teaser-cta .arr { transition: transform .35s cubic-bezier(.16,.84,.3,1); }
 .teaser-cta:hover .arr { transform: translateX(6px); }
 
-@media (min-width: 900px) {
- .teaser-grid {
-  grid-template-columns: 1.1fr 1fr;
-  gap: 48px;
-  align-items: center;
- }
- .teaser-section.flip .teaser-grid { direction: rtl; }
- .teaser-section.flip .teaser-grid > * { direction: ltr; }
- .teaser-section.on-ink .teaser-body,
- .teaser-section.on-paper .teaser-body { padding: 40px 36px; min-height: 0; }
-}@media (min-width: 1200px) {
- .teaser-grid { gap: 96px; }
+/* ────────────────────────────────────────────────────────
+ PREVENT WRAPPING
+ ──────────────────────────────────────────────────────── */
+.nav-link, .nav-cta, .nav-signin, .nav-signin span,
+.btn-primary span, .btn-primary,
+.hero-cta-note,
+.tile-cta, .tile-stat, .tile-cls,
+.h-stat-l,
+.brand-word,
+.sec-tag, .sec-num {
+  white-space: nowrap;
 }
 
+/* ────────────────────────────────────────────────────────
+ TABLET 768+
+ ──────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+ nav { padding: 22px 40px; }
+ .menu-btn { display: none; }
+ .nav-links { display: flex; gap: 28px; }
+
+ .hero { padding: 96px 40px 56px; }
+ .hero-body { position: relative; z-index: 5; max-width: 720px; padding-right: 0; }
+ .hero-image { display: none; }
+ .hero-image-mobile {
+   display: block;
+   width: calc(100% + 80px);
+   margin: 32px -40px 0;
+   aspect-ratio: 21 / 9;
+ }
+ h1 { font-size: clamp(64px, 8vw, 84px); }
+ .hero-sub { font-size: 16px; max-width: 540px; }
+ .btn-primary { padding: 14px 26px; }
+ .hero-cta { flex-direction: row; align-items: center; gap: 24px; }
+ .hero-stats { grid-template-columns: repeat(4, 1fr); }
+ .h-stat { padding: 32px 20px 28px; }
+ .h-stat-v { font-size: 40px; }
+
+ section { padding: 120px 40px; }
+ h2.section-h { font-size: clamp(48px, 6vw, 64px); }
+
+ .capabilities { grid-template-columns: 1fr 1fr; column-gap: 64px; }
+ .cap { padding: 28px 0; }
+ .cap-name { font-size: clamp(24px, 2.4vw, 30px); }
+ .cap-p { font-size: 14px; }
+
+ .about-grid { grid-template-columns: 1.1fr 1fr; gap: 80px; }
+ .about-body p { font-size: 20px; }
+
+ /* Rings desktop */
+ .rings-mark { font-size: 17px; }
+ .rings-stage { position: relative; margin-top: 24px; max-width: 920px; margin-left: auto; margin-right: auto; aspect-ratio: 16 / 10; }
+ .rings { max-width: none; aspect-ratio: 1 / 1; margin: 0; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 46%; }
+ .rings-mark { font-size: 22px; letter-spacing: .42em; }
+ .rings-sub { margin-top: 12px; }
+ .rings-labels {
+ margin-top: 0; padding-top: 0; border-top: none;
+ position: absolute; inset: 0; pointer-events: none; gap: 0;
+ display: block;
+ }
+ .rings-labels .r-asset {
+ position: absolute; padding: 0; display: block; pointer-events: auto;
+ white-space: nowrap;
+ }
+ .rings-labels .r-asset .gl { display: inline-block; vertical-align: middle; margin-right: 12px; transform: none; }
+ .rings-labels .r-asset .nm { display: inline; font-size: 22px; }
+ .rings-labels .r-asset .nm em { font-size: 13px; display: inline; margin-left: 8px; }
+ .rings-labels .r-asset .pc { display: inline-block; margin-left: 12px; font-size: 14px; }
+ .rings-labels .r-asset .sub { display: block; font-size: 10px; letter-spacing: .2em; color: var(--ghost-2); margin-top: 8px; padding-left: 22px; }
+ .rings-labels .r-asset.r-aspen { left: 4%; top: 6%; text-align: left; }
+ .rings-labels .r-asset.r-miami { right: 4%; top: 6%; text-align: right; }
+ .rings-labels .r-asset.r-miami .sub { padding-left: 0; }
+ .rings-labels .r-asset.r-ladym { right: 4%; bottom: 6%; text-align: right; }
+ .rings-labels .r-asset.r-ladym .sub { padding-left: 0; }
+ .rings-labels .r-asset.r-air { left: 4%; bottom: 6%; opacity: .55; text-align: left; }
+
+ /* Demo */
+ .demo { padding: 48px 40px 140px; }
+ .demo-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+ .demo-cta { flex-direction: row; }
+
+ footer { padding: 72px 40px 36px; }
+ .foot-grid { grid-template-columns: 1.2fr 2fr; gap: 80px; }
+ .foot-cols { grid-template-columns: repeat(4, 1fr); }
+
+ /* Teaser: wide photo + 2-col body below */
+ .teaser-grid { gap: 56px; }
+ .teaser-section.on-ink .teaser-body,
+ .teaser-section.on-paper .teaser-body { padding: 0; border: none; }
+ .teaser-photo { aspect-ratio: 21 / 9; }
+ .teaser-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+ }
+}
+
+/* ────────────────────────────────────────────────────────
+ DESKTOP 1280+
+ ──────────────────────────────────────────────────────── */
+@media (min-width: 1280px) {
+ nav { padding: 24px 64px; }
+ .hero { padding: 112px 64px 72px; padding-right: 0; }
+ .hero-image { display: block; width: 52%; }
+ .hero-image-mobile { display: none; }
+ .hero-body { padding-right: 0; max-width: 880px; padding-top: 56px; }
+ h1 { font-size: clamp(84px, 6.4vw, 112px); }
+ section { padding: 160px 64px; }
+ h2.section-h { font-size: clamp(64px, 4.6vw, 88px); }
+ .demo { padding: 56px 64px 180px; }
+ .teaser-section { padding: 56px 64px 180px; }
+ .demo-h { font-size: clamp(64px, 5vw, 88px); }
+ footer { padding: 96px 64px 40px; }
+ .teaser-body { gap: 96px; padding: 0 40px; }
+}
+
+/* ────────────────────────────────────────────────────────
+ 1440+
+ ──────────────────────────────────────────────────────── */
+@media (min-width: 1440px) {
+ .hero-stats { gap: 0; }
+ .h-stat { padding: 40px 24px 32px; }
+}
+
+/* ────────────────────────────────────────────────────────
+ 320 SAFETY
+ ──────────────────────────────────────────────────────── */
+@media (max-width: 359px) {
+ h1 { font-size: 36px; }
+ .hero { padding: 76px 16px 24px; }
+ section, .demo, footer { padding-left: 16px; padding-right: 16px; }
+}
+
+.hl-opt { display: none; }
+.hl-opt.active { display: block; }
 </style>
 <template id="__bundler_thumbnail" data-bg-color="#0A0E1A">
 <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
@@ -914,9 +670,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
 </head>
 <body>
 
-<!-- ────────────────────────────────────────────────────
- NAV
- ──────────────────────────────────────────────────── -->
+<!-- NAV -->
 <nav id="nav">
  <a class="brand" href="/" aria-label="Frame. Home">
  <div class="brand-mark"><div class="lb"></div><div class="lb"></div><div class="lb"></div></div>
@@ -927,13 +681,17 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  <a class="nav-link" href="/properties/">Properties</a>
  <a class="nav-link" href="#demo">Contact</a>
  </div>
- <div class="nav-right"><a class="nav-signin" href="#" aria-label="Sign in" title="Sign in">
+ <div class="nav-right">
+  <a class="nav-signin" href="#" aria-label="Sign in" title="Sign in">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
       <circle cx="12" cy="7" r="4"/>
     </svg>
     <span>Sign in</span>
-  </a><div class="nav-cta" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Request Demo <span class="arr">→</span></div><div class="menu-btn" id="menuBtn" aria-label="Menu"><span class="ml"></span><span class="ml"></span></div></div>
+  </a>
+  <div class="nav-cta" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Request Demo <span class="arr">→</span></div>
+  <div class="menu-btn" id="menuBtn" aria-label="Menu"><span class="ml"></span><span class="ml"></span></div>
+ </div>
 </nav>
 
 <!-- mobile menu -->
@@ -947,38 +705,23 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
  <div class="mm-foot">
  <span>Frame · Private Operations</span>
- <span>v2.0</span>
+ <span>v3.0</span>
  </div>
 </aside>
 
-<!-- ────────────────────────────────────────────────────
- 01 · HERO
- ──────────────────────────────────────────────────── -->
+<!-- 01 · HERO -->
 <section class="hero on-paper" id="hero">
  <div class="grid-v" style="left: 50%;"></div>
  <div class="grid-v" style="left: 75%;"></div>
- </div>
- <!-- yacht photograph · desktop right-bleed, mobile inline -->
-  <div class="hero-image" aria-hidden="true">
-    <img src="assets/sd90-underway.jpeg"
-         alt=""
-         loading="eager" fetchpriority="high" decoding="async" />
+ <div class="hero-image" aria-hidden="true">
+    <img src="assets/viva-underway.jpg" alt="" loading="eager" fetchpriority="high" decoding="async" />
     <div class="hero-image-meta">
-      <span class="tag">From the portfolio</span><br/>Vessel class · Tyrrhenian Sea
+      <span class="tag">From the portfolio</span><br/>Vessel class · North Sea
     </div>
   </div>
   <div class="hero-image-mobile">
-    <img src="assets/sd90-underway.jpeg"
-         alt="A motor yacht from the Frame portfolio, underway in calm Mediterranean water"
-         loading="eager" fetchpriority="high" decoding="async" />
+    <img src="assets/viva-underway.jpg" alt="A large motor yacht from the Frame portfolio, underway at sea" loading="eager" fetchpriority="high" decoding="async" />
   </div>
-
-  <!-- subtle constellation hint on desktop -->
- <div class="dot" style="left: 64px; top: 28px;"></div>
- <div class="dot" style="left: 32px; top: 70px;"></div>
- <div class="dot signal" style="left: 88px; top: 96px;"></div>
- <div class="dot gh" style="left: 12px; top: 110px;"></div>
- </div>
 
  <div class="hero-body">
  <div class="hero-eyebrow reveal">
@@ -1014,9 +757,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </section>
 
-<!-- ────────────────────────────────────────────────────
- 02 · WHAT IS FRAME · CAPABILITIES  (paper · moved up from old §03)
- ──────────────────────────────────────────────────── -->
+<!-- 02 · CAPABILITIES -->
 <section class="on-paper" id="capabilities">
  <div class="sec-eyebrow reveal">
  <span class="sec-num">02</span>
@@ -1041,9 +782,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </section>
 
-<!-- ────────────────────────────────────────────────────
- 03 · SUPPORTED ASSETS  (ink · NEW)
- ──────────────────────────────────────────────────── -->
+<!-- 03 · SUPPORTED ASSETS -->
 <section class="on-ink" id="supported">
  <div class="sec-eyebrow reveal">
  <span class="sec-num" style="color: var(--orange);">03</span>
@@ -1090,9 +829,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </section>
 
-<!-- ────────────────────────────────────────────────────
- 04 · PORTFOLIO EXAMPLE · RINGS  (ink · was old §02)
- ──────────────────────────────────────────────────── -->
+<!-- 04 · PORTFOLIO RINGS -->
 <section class="sec-portfolio" id="portfolio" style="padding: 120px 20px 30px">
  <div class="sec-eyebrow reveal">
  <span class="sec-num">04</span>
@@ -1135,7 +872,6 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  <g transform="rotate(-135) translate(0,-130)"><circle r="7" fill="none" stroke="rgba(241,237,228,0.5)" stroke-width="1.25" stroke-dasharray="2 2"/></g>
  </g>
  </svg>
-
  <div class="rings-center">
  <div class="rings-mark">Portfolio</div>
  <div class="rings-sub">Command · 0,0</div>
@@ -1175,9 +911,7 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
 </section>
 
-<!-- ────────────────────────────────────────────────────
- 05 · FRAME VESSELS TEASER  (ink · NEW shape · pain → caps → CTA)
- ──────────────────────────────────────────────────── -->
+<!-- 05 · FRAME VESSELS TEASER -->
 <section class="teaser-section on-ink" id="vessels-teaser">
  <div class="sec-eyebrow reveal" style="max-width: 1280px; margin: 0 auto 32px;">
  <span class="sec-num" style="color: var(--orange);">05</span>
@@ -1186,11 +920,10 @@ footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px;
  </div>
  <div class="teaser-grid">
  <figure class="teaser-photo reveal d1">
- <img src="assets/sd90-underway.jpeg" alt="Motor yacht underway in Mediterranean water." loading="lazy" decoding="async" />
- <span class="caption">REFERENCE VESSEL
-M / Y UNICA · 35 m · Tyrrhenian Sea</span>
+ <img src="assets/viva-underway.jpg" alt="Motor yacht Viva underway." loading="lazy" decoding="async" style="object-fit: cover; object-position: 50% 40%;" />
+ <span class="caption">REFERENCE VESSEL M / Y VIVA · 94 m · North Sea</span>
  </figure>
- <div class="teaser-body">
+ <div class="teaser-body" style="border: none;">
  <h2 class="teaser-h">For what lives on water.<em>For who keeps her ready.</em></h2>
  <p class="teaser-lede">Captains, yacht managers, charter managers, owner reps. Frame Vessels ends the cycle of <b>missed maintenance, lost knowledge, and compiled-the-morning-of guest readiness</b>.</p>
 
@@ -1225,9 +958,7 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  </div>
 </section>
 
-<!-- ────────────────────────────────────────────────────
- 06 · FRAME PROPERTIES TEASER  (paper · NEW shape · pain → caps → CTA)
- ──────────────────────────────────────────────────── -->
+<!-- 06 · FRAME PROPERTIES TEASER -->
 <section class="teaser-section on-paper flip" id="properties-teaser">
  <div class="sec-eyebrow reveal" style="max-width: 1280px; margin: 0 auto 32px;">
  <span class="sec-num">06</span>
@@ -1239,7 +970,7 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  <img src="assets/aspen-house.webp" alt="Modern estate at golden hour." loading="lazy" decoding="async" />
  <span class="caption"><span class="tag">Reference estate</span>Aspen Lodge · Snowmass · CO</span>
  </figure>
- <div class="teaser-body">
+ <div class="teaser-body" style="border: none;">
  <h2 class="teaser-h">For what stands on land.<em>For who keeps it ready.</em></h2>
  <p class="teaser-lede">Estate managers, chiefs of staff, house managers, family office. Frame Properties ends the cycle of <b>paper manuals, basement binders, and operational excellence rebuilt every season from memory</b>.</p>
 
@@ -1274,9 +1005,7 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  </div>
 </section>
 
-<!-- ────────────────────────────────────────────────────
- 07 · WHY FRAME EXISTS  (paper · was old §05 about)
- ──────────────────────────────────────────────────── -->
+<!-- 07 · WHY FRAME EXISTS -->
 <section class="on-paper" id="about">
  <div class="sec-eyebrow reveal">
  <span class="sec-num">07</span>
@@ -1289,13 +1018,11 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  <p>Private assets — estates, vessels, aircraft — have run on <b>paper, text messages, binders, and tribal knowledge</b> for a hundred years. Every property is different. Every vessel is different. There has never been a standard.</p>
  <p>When the estate manager leaves, the knowledge leaves with them. When the captain rotates, the rhythm restarts. Operational excellence is rebuilt every season, from memory.</p>
  <p>Frame is the new operating standard. One operating layer for every asset, every vendor, every procedure. <b>Repeatable across the portfolio, durable across staff turnover. The way private operations should work.</b></p>
-</div>
+ </div>
  </div>
 </section>
 
-<!-- ────────────────────────────────────────────────────
- 08 · CONTACT · REQUEST DEMO  (deep ink · was old §06)
- ──────────────────────────────────────────────────── -->
+<!-- 08 · CONTACT -->
 <section class="demo on-deep" id="demo">
  <div class="demo-inner">
  <div>
@@ -1306,7 +1033,6 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  </div>
  <div class="demo-h reveal d1">Speak with<em>Frame.</em></div>
  <p class="demo-sub reveal d2">Frame is offered by invitation. Private onboarding only. No self-serve, no marketing list. Tell us about the portfolio.</p>
-
  <div class="demo-cta reveal d3">
  <button class="btn-primary"><span>Request Demo</span><span class="arr">→</span></button>
  </div>
@@ -1325,9 +1051,7 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  </div>
 </section>
 
-<!-- ────────────────────────────────────────────────────
- FOOTER
- ──────────────────────────────────────────────────── -->
+<!-- FOOTER -->
 <footer>
  <div class="foot-grid">
  <div class="foot-brand">
@@ -1370,11 +1094,7 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  </div>
 </footer>
 
-<!-- ────────────────────────────────────────────────────
- SCRIPT
- ──────────────────────────────────────────────────── -->
 <script>
- // scroll reveal
  const io = new IntersectionObserver((entries) => {
  for (const e of entries) {
  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
@@ -1382,7 +1102,6 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  }, { threshold: 0.08 });
  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
- // nav theme. Flip to dark when over dark sections
  const nav = document.getElementById('nav');
  const darkSecs = document.querySelectorAll('.on-ink, .on-deep, .sec-portfolio, .in-practice');
  function syncNav() {
@@ -1397,13 +1116,11 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  window.addEventListener('scroll', syncNav, { passive: true });
  syncNav();
 
- // mobile menu
  const menuBtn = document.getElementById('menuBtn');
  const mm = document.getElementById('mobileMenu');
  menuBtn.addEventListener('click', () => mm.classList.toggle('open'));
  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
 
- // headline cycling. Exposed to tweaks
  window.__setHero = (i) => {
  document.querySelectorAll('#heroHead .hl-opt').forEach(el => {
  el.classList.toggle('active', String(el.dataset.i) === String(i));
@@ -1411,25 +1128,18 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  };
 </script>
 
-<!-- TWEAKS PANEL -->
 <script type="text/babel" src="tweaks-panel.jsx"></script>
 <script type="text/babel">
  const FrameTweaks = () => {
- const defaults = /*EDITMODE-BEGIN*/{
- "heroHeadline": 0
- }/*EDITMODE-END*/;
+ const defaults = /*EDITMODE-BEGIN*/{ "heroHeadline": 0 }/*EDITMODE-END*/;
  const [t, setTweak] = useTweaks(defaults);
-
  React.useEffect(() => {
  if (window.__setHero) window.__setHero(t.heroHeadline);
  }, [t.heroHeadline]);
-
  return (
  <TweaksPanel title="Tweaks · Frame Homepage">
  <TweakSection title="Hero headline">
- <TweakSelect
- label="Option"
- value={t.heroHeadline}
+ <TweakSelect label="Option" value={t.heroHeadline}
  options={[
  { value: 0, label: '01. Built for private operations' },
  { value: 1, label: '02. One operating layer. Every private asset' },
@@ -1437,13 +1147,11 @@ M / Y UNICA · 35 m · Tyrrhenian Sea</span>
  { value: 3, label: '04. Operations command for private wealth' },
  { value: 4, label: '05. Estates. Vessels. Aircraft. One layer' }
  ]}
- onChange={(v) => setTweak('heroHeadline', Number(v))}
- />
+ onChange={(v) => setTweak('heroHeadline', Number(v))} />
  </TweakSection>
  </TweaksPanel>
  );
  };
-
  const tweakRoot = document.createElement('div');
  document.body.appendChild(tweakRoot);
  ReactDOM.createRoot(tweakRoot).render(<FrameTweaks />);
