@@ -71,6 +71,7 @@
         '</div>' +
         '<div class="access-sub">INVITATION ONLY · WHITE-GLOVE ONBOARDING<br />REPLIES WITHIN ONE BUSINESS DAY</div>' +
         '<form id="accessForm" novalidate>' +
+          '<input type="text" name="_honey" id="af-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0;" />' +
           '<div class="access-field"><label for="af-name">NAME</label>' +
             '<input id="af-name" name="name" type="text" autocomplete="name" required /></div>' +
           '<div class="access-field"><label for="af-contact">CONTACT — EMAIL OR PHONE</label>' +
@@ -88,8 +89,10 @@
   var status = document.getElementById('accessStatus');
   var submitBtn = form.querySelector('.access-submit');
 
+  var openedAt = 0;
   function openModal(e) {
     if (e) e.preventDefault();
+    openedAt = Date.now();
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
     setTimeout(function () { document.getElementById('af-name').focus(); }, 320);
@@ -108,12 +111,23 @@
     if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
   });
 
+  function showSuccess() {
+    form.querySelectorAll('.access-field, .access-submit').forEach(function (el) { el.style.display = 'none'; });
+    status.className = 'access-status ok';
+    status.textContent = 'REQUEST RECEIVED. WE REPLY WITHIN ONE BUSINESS DAY.';
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = document.getElementById('af-name').value.trim();
     var contact = document.getElementById('af-contact').value.trim();
     var message = document.getElementById('af-message').value.trim();
     status.className = 'access-status';
+    // spam gates: honeypot filled or submitted inhumanly fast → pretend success, send nothing
+    if (document.getElementById('af-hp').value || Date.now() - openedAt < 3000) {
+      showSuccess();
+      return;
+    }
     if (!name || !contact || !message) {
       status.className = 'access-status err';
       status.textContent = 'ALL FIELDS REQUIRED.';
@@ -134,9 +148,7 @@
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     }).then(function () {
-      form.querySelectorAll('.access-field, .access-submit').forEach(function (el) { el.style.display = 'none'; });
-      status.className = 'access-status ok';
-      status.textContent = 'REQUEST RECEIVED. WE REPLY WITHIN ONE BUSINESS DAY.';
+      showSuccess();
     }).catch(function () {
       submitBtn.disabled = false;
       submitBtn.textContent = 'TRANSMIT REQUEST →';
