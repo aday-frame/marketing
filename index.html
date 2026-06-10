@@ -3,1159 +3,267 @@
 <head>
 <meta charset="utf-8" />
 <title>Frame. Operating System for Private Operations</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="The operating system behind $50B+ in private assets. Estates, vessels, aircraft — maintenance, crew, compliance, and readiness in one picture." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+<!-- OpenGraph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Frame" />
+<meta property="og:title" content="Frame. Operating System for Private Operations" />
+<meta property="og:description" content="The operating system behind $50B+ in private assets. Estates, vessels, aircraft — maintenance, crew, compliance, and readiness in one picture." />
+<meta property="og:image" content="https://frameops.io/assets/og-image.jpg" />
+<meta property="og:url" content="https://frameops.io/" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Frame. Operating System for Private Operations" />
+<meta name="twitter:description" content="The operating system behind $50B+ in private assets. Estates, vessels, aircraft — maintenance, crew, compliance, and readiness in one picture." />
+<meta name="twitter:image" content="https://frameops.io/assets/og-image.jpg" />
+
+<!-- Canonical -->
+<link rel="canonical" href="https://frameops.io/" />
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+<link rel="manifest" href="/assets/site.webmanifest" />
+<meta name="theme-color" content="#04060B" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Figtree:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/mission.css" />
 <style>
-/* ────────────────────────────────────────────────────────
- RESET + TOKENS (site-matched)
- ──────────────────────────────────────────────────────── */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
- --paper: #F1EDE4;
- --paper-2:#EAE4D5;
- --ink: #0A0E1A;
- --ink-2: #060810;
- --orange: #FF6A00;
- --good: #4CAF6E;
- --warn: #E8A352;
- --muted: rgba(10,14,26,0.62);
- --faint: rgba(10,14,26,0.48);
- --ghost: rgba(255,255,255,0.58);
- --ghost-2:rgba(255,255,255,0.74);
- --orange-on-paper: #C8500A;
- --rule: rgba(10,14,26,0.10);
- --rule-2: rgba(10,14,26,0.05);
- --rule-d: rgba(255,255,255,0.08);
- --rule-d2:rgba(255,255,255,0.04);
- --serif: 'Cormorant Garamond', Georgia, serif;
- --sans: 'Figtree', system-ui, -apple-system, sans-serif;
- --mono-spc: 0.16em;
-}
-html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
-body { font-family: var(--sans); background: var(--paper); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-a { color: inherit; text-decoration: none; }
-img, svg { display: block; max-width: 100%; }
+/* ── homepage hero photo ── */
+.hero-photo img { object-position: 50% 45%; }
 
-/* ────── reusable atoms ────── */
-.label { font-family: var(--sans); font-size: 10px; letter-spacing: var(--mono-spc); text-transform: uppercase; font-weight: 600; }
-.label.orange { color: var(--orange); }
-.label.muted { color: var(--muted); }
-.label.ghost { color: var(--ghost); }
-.serif { font-family: var(--serif); }
-.italic { font-style: italic; }
-.acc-rule { width: 32px; height: 1.5px; background: var(--orange); margin: 18px 0 24px; border: none; }
+/* ── ops ticker ── */
+.ticker-wrap { position: relative; z-index: 2; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--panel); overflow: hidden; }
+.ticker { display: flex; white-space: nowrap; animation: tick 42s linear infinite; width: max-content; padding: 13px 0; }
+.ticker-wrap:hover .ticker { animation-play-state: paused; }
+@keyframes tick { to { transform: translateX(-50%); } }
+.tick-item { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--dim); padding: 0 34px; }
+.tick-item .k { color: var(--orange); }
+.tick-item .g { color: var(--green); }
+.tick-item .a { color: var(--amber); }
+@media (prefers-reduced-motion: reduce) { .ticker { animation: none; } }
 
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity .9s cubic-bezier(.16,.84,.3,1), transform .9s cubic-bezier(.16,.84,.3,1); }
-.reveal.in { opacity: 1; transform: none; }
-.d1 { transition-delay: .08s; } .d2 { transition-delay: .18s; } .d3 { transition-delay: .30s; } .d4 { transition-delay: .42s; } .d5 { transition-delay: .56s; }
+/* ── systems rows ── */
+.sys-row { display: grid; grid-template-columns: 1fr; gap: 26px; border-top: 1px solid var(--line); padding: 38px 0; transition: background .3s; }
+.sys-row:last-of-type { border-bottom: 1px solid var(--line); }
+.sys-row:hover { background: rgba(255,255,255,0.015); }
+a.sys-row { cursor: pointer; }
+@media (min-width: 920px) { .sys-row { grid-template-columns: 90px 1.2fr 1fr 320px; align-items: center; gap: 36px; } }
+.sys-num { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; color: var(--faint); }
+.sys-name { font-weight: 800; font-size: clamp(26px, 3.4vw, 44px); letter-spacing: -0.01em; text-transform: uppercase; line-height: 1; }
+.sys-name .st { display: block; margin-top: 12px; }
+.sys-go { font-family: var(--mono); font-size: 9.5px; letter-spacing: .22em; color: var(--orange); margin-top: 16px; display: inline-block; opacity: .7; transition: opacity .2s, transform .25s; }
+a.sys-row:hover .sys-go { opacity: 1; transform: translateX(4px); }
+.sys-desc { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; line-height: 2; color: var(--dim); }
+.sys-photo { position: relative; aspect-ratio: 16/9; overflow: hidden; border: 1px solid var(--line); }
+.sys-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) brightness(.8); transition: transform .9s cubic-bezier(.2,.6,.2,1), filter .4s; }
+.sys-row:hover .sys-photo img { transform: scale(1.06); filter: saturate(1) brightness(.95); }
+.sys-photo .ph-tag { position: absolute; left: 10px; bottom: 8px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .2em; color: var(--white); text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.sys-photo.awaiting { display: flex; align-items: center; justify-content: center; background: var(--panel-2); }
+.sys-photo.awaiting .ph-wait { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; color: var(--faint); text-align: center; line-height: 2.2; }
+@media (max-width: 879px) { .sys-desc { display: none; } }
 
-/* ────────────────────────────────────────────────────────
- NAV
- ──────────────────────────────────────────────────────── */
-nav {
- position: fixed; top: 0; left: 0; right: 0; z-index: 100;
- display: flex; align-items: center; justify-content: space-between;
- padding: 16px 20px;
- background: rgba(241,237,228,0.86);
- -webkit-backdrop-filter: saturate(140%) blur(14px);
- backdrop-filter: saturate(140%) blur(14px);
- border-bottom: 1px solid var(--rule);
-}
-nav.on-dark { background: rgba(10,14,26,0.78); border-bottom-color: var(--rule-d); color: var(--paper); }
-.brand { display: flex; align-items: center; gap: 10px; }
-.brand-mark { display: flex; flex-direction: column; gap: 4px; width: 22px; }
-.brand-mark .lb { height: 2px; border-radius: 2px; background: currentColor; }
-.brand-mark .lb:nth-child(1) { width: 100%; opacity: .22; }
-.brand-mark .lb:nth-child(2) { width: 68%; opacity: .55; }
-.brand-mark .lb:nth-child(3) { width: 42%; background: var(--orange); opacity: 1; }
-.brand-word { font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
-
-.nav-links { display: none; }
-.nav-link { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; color: inherit; opacity: .55; cursor: pointer; transition: opacity .2s; }
-.nav-link:hover { opacity: 1; }
-
-.nav-cta { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; cursor: pointer; padding: 10px 14px; border: 1px solid currentColor; border-radius: 999px; }
-.nav-cta .arr { margin-left: 8px; }
-
-.nav-right { display: inline-flex; align-items: center; gap: 14px; }
-.nav-signin {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
-  color: inherit; opacity: .75; cursor: pointer; padding: 8px 4px;
-  transition: opacity .2s;
-}
-.nav-signin:hover { opacity: 1; color: var(--orange); }
-.nav-signin svg { display: block; }
-.nav-signin span { display: none; }
-@media (min-width: 768px) {
-  .nav-signin span { display: inline; }
-}
-
-.menu-btn { display: inline-flex; flex-direction: column; gap: 4px; padding: 8px; cursor: pointer; }
-.menu-btn .ml { width: 18px; height: 1.5px; background: currentColor; }
-
-/* ────────────────────────────────────────────────────────
- SECTION SCAFFOLD
- ──────────────────────────────────────────────────────── */
-section { position: relative; padding: 96px 20px; }
-.on-paper { background: var(--paper); color: var(--ink); }
-.on-ink { background: var(--ink); color: var(--paper); }
-.on-deep { background: var(--ink-2); color: var(--paper); }
-
-.sec-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-.sec-num { font-size: 10px; letter-spacing: .2em; font-weight: 700; color: var(--orange); }
-.sec-eyebrow .rule { flex: 1; height: 1px; background: currentColor; opacity: .14; max-width: 64px; }
-.sec-tag { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; opacity: .6; }
-
-h2.section-h {
- font-family: var(--serif);
- font-weight: 400;
- font-size: clamp(40px, 11vw, 56px);
- line-height: 1.02;
- letter-spacing: -0.022em;
- margin: 0;
-}
-h2.section-h em { font-style: normal; display: block; font-weight: 300; color: currentColor; opacity: .55; }
-.on-ink h2.section-h em { opacity: .42; }
-
-.section-lede { font-size: 15px; font-weight: 300; line-height: 1.65; max-width: 520px; }
-.on-paper .section-lede { color: var(--muted); }
-.on-ink .section-lede { color: var(--ghost); }
-
-/* ────────────────────────────────────────────────────────
- HERO (01)
- ──────────────────────────────────────────────────────── */
-.hero {
- min-height: 100svh;
- padding: 84px 20px 36px;
- position: relative;
- overflow: hidden;
- display: flex; flex-direction: column;
-}
-.hero-bg { position: absolute; inset: 0; pointer-events: none; }
-.hero-image {
-  position: absolute;
-  right: 0; top: 0; bottom: 0;
-  width: 56%;
-  overflow: hidden;
-  z-index: 1;
-  background: #051018;
-  display: none;
-}
-.hero-image img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
-  display: block;
-}
-.hero-image-meta {
-  position: absolute;
-  right: 32px; bottom: 28px;
-  z-index: 3;
-  color: var(--paper);
-  font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
-  font-weight: 600;
-  text-align: right;
-  line-height: 1.7;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.45);
-}
-.hero-image-meta .tag { color: var(--orange); }
-.hero-image-mobile {
-  position: relative;
-  width: calc(100% + 40px);
-  margin: 0 -20px 24px;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: #051018;
-}
-.hero-image-mobile img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
-  display: block;
-}
-.hero-bg .grid-v { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule); }
-.hero-wm {
- position: absolute; right: -0.04em; bottom: -10vh;
- font-family: var(--serif); font-style: italic;
- font-size: clamp(220px, 70vw, 620px);
- font-weight: 300; color: transparent;
- -webkit-text-stroke: 1px rgba(10,14,26,0.05);
- line-height: .9; white-space: nowrap; user-select: none;
-}
-
-.hero-body { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 32px; }
-.hero-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
-.hero-eyebrow .line { width: 24px; height: 1.5px; background: var(--orange); }
-.hero-eyebrow .text { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
-
-h1 {
- font-family: var(--serif);
- font-weight: 400;
- font-size: clamp(40px, 12vw, 56px);
- line-height: 1.0;
- letter-spacing: -0.028em;
- color: var(--ink);
- text-wrap: balance;
-}
-h1 em { font-style: normal; font-weight: 300; display: block; opacity: .55; }
-h1 .acc { color: var(--orange); }
-h1 .ln { display: block; }
-
-.hero-divider { width: 100%; max-width: 540px; height: 1px; background: var(--rule); margin: 28px 0; }
-.hero-sub { font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 460px; }
-.hero-sub b { font-weight: 500; color: var(--ink); }
-
-.hero-cta { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
-.btn-primary {
- background: var(--ink);
- color: var(--paper);
- font-family: var(--sans);
- font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
- padding: 14px 22px;
- display: inline-flex; align-items: center; justify-content: center; gap: 14px;
- cursor: pointer;
- border: none; border-radius: 999px;
- box-shadow: none; -webkit-appearance: none; appearance: none;
- transition: background .2s;
- width: max-content;
-}
-.btn-primary:hover { background: var(--orange); color: var(--ink); }
-.btn-primary .arr { font-weight: 400; font-size: 14px; }
-
-.hero-cta-note { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-
-.hero-stats { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-.h-stat { background: var(--paper); padding: 28px 16px 24px; }
-.h-stat-v { font-family: var(--serif); font-size: 32px; font-weight: 400; letter-spacing: -0.022em; line-height: 1; color: var(--ink); }
-.h-stat-v .acc { color: var(--orange); }
-.h-stat-v .sub { font-family: var(--sans); font-weight: 300; font-size: .5em; }
-.h-stat-l { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 8px; font-weight: 500; }
-
-/* ────────────────────────────────────────────────────────
- RINGS
- ──────────────────────────────────────────────────────── */
-.sec-portfolio { background: var(--ink); color: var(--paper); padding: 120px 20px 96px; overflow: hidden; }
-.sec-portfolio .sec-eyebrow .rule { background: var(--paper); opacity: .14; }
-.sec-portfolio .sec-tag { color: var(--ghost-2); }
-
-.rings {
- position: relative;
- margin: 56px auto 0;
- width: 100%;
- aspect-ratio: 1 / 1;
- max-width: 420px;
-}
-.rings svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.rings-center {
- position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
- text-align: center; padding: 18px 22px; pointer-events: none;
-}
-.rings-mark { font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: var(--paper); }
-.rings-sub { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--ghost-2); margin-top: 8px; font-weight: 500; }
-
-.rings-labels {
- margin-top: 40px;
- display: grid;
- gap: 14px;
- border-top: 1px solid var(--rule-d);
- padding-top: 24px;
-}
-.r-asset {
- display: grid;
- grid-template-columns: 14px 1fr auto;
- column-gap: 14px;
- align-items: baseline;
- padding: 12px 0;
-}
-.r-asset .gl { width: 8px; height: 8px; border-radius: 50%; background: var(--paper); transform: translateY(4px); }
-.r-asset.future .gl { background: transparent; border: 1px dashed var(--ghost-2); }
-.r-asset .nm { font-family: var(--serif); font-size: 19px; font-weight: 400; line-height: 1.1; }
-.r-asset .nm em { font-style: italic; opacity: .5; font-size: 13px; }
-.r-asset .pc { font-size: 14px; color: var(--orange); font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: .04em; }
-.r-asset .sub { grid-column: 2 / -1; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); margin-top: 6px; font-weight: 600; }
-.r-asset.future .pc, .r-asset.future .nm { color: var(--ghost-2); }
-
-.cnst-foot { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--rule-d); display: flex; justify-content: space-between; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; flex-wrap: wrap; gap: 8px; }
-
-/* ────────────────────────────────────────────────────────
- CAPABILITIES
- ──────────────────────────────────────────────────────── */
-.capabilities { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--rule); }
-.cap {
- padding: 24px 0;
- border-bottom: 1px solid var(--rule);
- display: grid;
- grid-template-columns: 32px 1fr;
- gap: 18px;
- align-items: baseline;
-}
-.cap-num { font-size: 10px; letter-spacing: .14em; color: var(--orange); font-weight: 700; font-variant-numeric: tabular-nums; }
-.cap-body { display: grid; gap: 6px; }
-.cap-name { font-family: var(--serif); font-size: clamp(22px, 5.5vw, 28px); font-weight: 400; letter-spacing: -0.012em; line-height: 1.1; color: var(--ink); }
-.cap-name em { font-style: normal; opacity: .55; font-size: .58em; font-weight: 300; }
-.cap-p { font-size: 13px; line-height: 1.55; color: var(--muted); font-weight: 300; max-width: 540px; }
-
-/* ────────────────────────────────────────────────────────
- ABOUT
- ──────────────────────────────────────────────────────── */
-.about-grid { margin-top: 64px; display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
-.about-body { display: grid; gap: 22px; max-width: 660px; }
-.about-body p { font-family: var(--serif); font-size: 19px; line-height: 1.55; font-weight: 400; color: var(--ink); font-style: normal; }
-.about-body p b { font-style: normal; font-weight: 500; color: var(--ink); }
-
-/* ────────────────────────────────────────────────────────
- DEMO
- ──────────────────────────────────────────────────────── */
-.demo { padding: 40px 20px 120px; }
-.demo-h { font-family: var(--serif); font-size: clamp(40px, 12vw, 64px); font-weight: 300; line-height: 1.0; letter-spacing: -0.028em; color: var(--paper); }
-.demo-h em { font-style: normal; color: var(--ghost-2); display: block; }
-.demo-sub { font-size: 14px; font-weight: 300; line-height: 1.7; color: var(--ghost); margin-top: 20px; max-width: 440px; }
-.demo-cta { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
-.demo-cta .btn-primary { background: var(--orange); color: var(--paper); }
-.demo-cta .btn-primary:hover { background: var(--paper); color: var(--ink); }
-.demo-fields { margin-top: 24px; display: grid; gap: 14px; }
-.demo-field { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; padding-bottom: 12px; border-bottom: 1px solid var(--rule-d); display: flex; justify-content: space-between; align-items: baseline; }
-.demo-field b { color: var(--paper); font-weight: 600; }
-.demo-note { margin-top: 36px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; }
-
-/* ────────────────────────────────────────────────────────
- FOOTER
- ──────────────────────────────────────────────────────── */
-footer { background: var(--ink-2); color: var(--paper); padding: 56px 20px 36px; }
-.foot-grid { display: grid; gap: 36px; }
-.foot-brand .brand-word { color: var(--paper); }
-.foot-tagline { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--ghost-2); margin-top: 14px; max-width: 280px; line-height: 1.4; }
-.foot-cols { display: grid; gap: 24px; grid-template-columns: 1fr 1fr; }
-.foot-col h6 { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); margin-bottom: 12px; font-weight: 600; }
-.foot-col a { display: block; font-size: 12px; color: var(--ghost); padding: 4px 0; font-weight: 400; }
-.foot-bot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--rule-d); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; }
-
-/* ────────────────────────────────────────────────────────
- MOBILE MENU
- ──────────────────────────────────────────────────────── */
-.mobile-menu {
- position: fixed; inset: 0; z-index: 90;
- background: var(--ink); color: var(--paper);
- padding: 96px 24px 32px;
- display: flex; flex-direction: column; justify-content: space-between;
- transform: translateY(-100%);
- transition: transform .55s cubic-bezier(.16,.84,.3,1);
- overflow: hidden auto;
- overscroll-behavior: contain;
-}
-.mobile-menu.open { transform: none; }
-.mm-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
-.mm-list li { border-bottom: 1px solid var(--rule-d); }
-.mm-list a { display: flex; align-items: baseline; justify-content: space-between; padding: 20px 0; font-family: var(--serif); font-size: 32px; font-weight: 400; }
-.mm-list a em { font-style: italic; opacity: .35; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-family: var(--sans); font-weight: 500; }
-.mm-foot { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ghost-2); font-weight: 500; display: flex; justify-content: space-between; }
-
-/* ────────────────────────────────────────────────────────
- SUPPORTED ASSETS
- ──────────────────────────────────────────────────────── */
-.supported { margin-top: 56px; display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--rule-d); }
-.sup-row {
- display: grid;
- grid-template-columns: 110px 1fr auto;
- gap: 28px;
- padding: 28px 0;
- border-bottom: 1px solid var(--rule-d);
- align-items: center;
-}
-.sup-num { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: 11px; color: var(--ghost-2); letter-spacing: .04em; }
-.sup-body .name { font-family: var(--serif); font-size: clamp(28px, 4vw, 40px); font-weight: 400; line-height: 1.05; letter-spacing: -0.012em; }
-.sup-body .name em { font-style: italic; opacity: .42; font-weight: 300; }
-.sup-body .desc { font-size: 13px; line-height: 1.6; color: var(--ghost); font-weight: 300; margin-top: 6px; max-width: 520px; }
-.sup-row .drill {
- font-size: 11px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700;
- color: var(--paper); display: inline-flex; align-items: center; gap: 10px;
- padding: 8px 0;
- transition: color .25s, gap .25s;
-}
-.sup-row .drill .arr { transition: transform .35s cubic-bezier(.16,.84,.3,1); }
-.sup-row:hover .drill { color: var(--orange); }
-.sup-row:hover .drill .arr { transform: translateX(6px); }
-.sup-row.future { opacity: .5; pointer-events: none; }
-.sup-row.future .drill { color: var(--ghost-2); }
-
-/* ────────────────────────────────────────────────────────
- TEASER SECTIONS — full-bleed photo + body grid
- ──────────────────────────────────────────────────────── */
-#properties-teaser { padding-top: 12px; }
-#demo { padding-top: 16px; }
-@media (min-width: 768px) { #demo { padding-top: 24px; } }
-@media (min-width: 1280px) { #properties-teaser { padding-top: 24px; } #demo { padding-top: 32px; } }
-
-.teaser-section { padding: 32px 20px 96px; position: relative; overflow: hidden; }
-.teaser-section.on-ink .teaser-body {
- background: var(--ink);
- padding: 32px 20px;
- border: 1px solid var(--rule-d);
-}
-.teaser-section.on-paper .teaser-body {
- background: var(--paper);
- padding: 32px 20px;
- border: 1px solid var(--rule);
-}
-.teaser-section.on-ink .teaser-pain { color: var(--paper); border-bottom-color: var(--rule-d); }
-.teaser-section.on-paper .teaser-pain { color: var(--ink); border-bottom-color: var(--rule); }
-.teaser-section.on-paper .teaser-caps-row { border-bottom-color: var(--rule); }
-.teaser-section.on-paper .teaser-caps-row .v { color: var(--muted); }
-
-.teaser-grid {
- display: grid;
- grid-template-columns: 1fr;
- gap: 32px;
- max-width: none;
- margin: 0;
- align-items: stretch;
-}
-
-/* Full-bleed photo — bleeds to section edges on mobile */
-.teaser-photo {
- position: relative;
- aspect-ratio: 16 / 9;
- overflow: hidden;
- background: #0A1018;
- width: 100vw;
- margin-left: calc(50% - 50vw);
-}
-.teaser-photo img {
- width: 100%; height: 100%; object-fit: cover; display: block;
- transition: transform 8s ease-out;
-}
-.teaser-section:hover .teaser-photo img { transform: scale(1.03); }
-.teaser-photo::after {
- content: ""; position: absolute; inset: 0;
- background: linear-gradient(180deg, rgba(5,10,20,0.15) 0%, rgba(5,10,20,0) 30%, rgba(5,10,20,0) 60%, rgba(5,10,20,0.7) 100%);
- pointer-events: none;
-}
-.teaser-photo .caption {
- position: absolute; left: 18px; bottom: 16px; z-index: 2;
- font-family: ui-monospace, 'JetBrains Mono', monospace;
- font-size: 11px; color: var(--paper); letter-spacing: .04em;
- text-shadow: 0 1px 6px rgba(0,0,0,0.5);
-}
-.teaser-photo .caption .tag {
- display: block;
- font-family: var(--sans); font-size: 9px; letter-spacing: .26em;
- text-transform: uppercase; color: var(--orange); font-weight: 700;
- margin-bottom: 4px;
-}
-
-.teaser-body { display: flex; flex-direction: column; gap: 28px; }
-.teaser-h { font-family: var(--serif); font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.04; letter-spacing: -0.018em; margin: 0; }
-.teaser-h em { font-style: normal; display: block; font-weight: 300; opacity: .85; }
-.teaser-lede { font-family: var(--serif); font-size: 17px; line-height: 1.55; font-weight: 400; max-width: 520px; }
-.teaser-section.on-ink .teaser-lede { color: var(--ghost); }
-.teaser-section.on-paper .teaser-lede { color: var(--muted); }
-.teaser-lede b { font-weight: 500; }
-.teaser-section.on-ink .teaser-lede b { color: var(--paper); }
-.teaser-section.on-paper .teaser-lede b { color: var(--ink); }
-
-.teaser-block-h {
- font-family: var(--sans); font-size: 10px; letter-spacing: .18em;
- text-transform: uppercase; font-weight: 700;
- padding-bottom: 10px; margin-bottom: 4px;
- border-bottom: 1px solid currentColor;
- display: inline-block;
-}
-.teaser-block-h.pains { color: var(--red); }
-.teaser-block-h.caps { color: var(--orange); }
-.teaser-pains { display: flex; flex-direction: column; gap: 0; }
-.teaser-pain {
- font-family: var(--serif); font-size: 17px; font-style: italic;
- font-weight: 500; line-height: 1.45;
- padding: 12px 0;
- border-bottom: 1px dashed currentColor;
-}
-.teaser-pain:last-child { border-bottom: none; }
-.teaser-pain::before {
- content: ""; display: inline-block; width: 18px; height: 1px;
- background: var(--red-2, #D87765); vertical-align: middle; margin-right: 10px;
-}
-.teaser-caps-list { display: grid; grid-template-columns: 1fr; gap: 0; }
-.teaser-caps-row {
- display: grid; grid-template-columns: auto 1fr auto;
- gap: 16px; padding: 12px 0;
- border-bottom: 1px solid var(--rule-d);
- align-items: baseline;
-}
-.teaser-caps-row .n { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: 10px; color: var(--ghost-2); letter-spacing: .04em; }
-.teaser-caps-row .k { font-family: var(--serif); font-size: 17px; font-weight: 500; letter-spacing: -0.005em; }
-.teaser-caps-row .v { font-size: 11px; letter-spacing: .04em; color: var(--ghost); font-weight: 400; }
-.teaser-quote {
- font-family: var(--serif); font-size: 19px; font-style: italic;
- font-weight: 400; line-height: 1.4;
- padding: 18px 0 0;
-}
-.teaser-quote .who {
- display: block;
- font-family: var(--sans); font-size: 10px; font-style: normal;
- letter-spacing: .18em; text-transform: uppercase;
- color: var(--orange); font-weight: 700;
- margin-top: 12px;
-}
-
-.teaser-cta {
- display: inline-flex; align-items: center; gap: 12px;
- padding: 16px 26px;
- background: var(--orange); color: var(--paper);
- font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700;
- border-radius: 999px;
- align-self: flex-start;
- transition: background .25s, gap .25s, transform .25s;
-}
-.teaser-cta:hover { background: var(--paper); color: var(--ink); }
-.teaser-section.on-paper .teaser-cta:hover { background: var(--ink); color: var(--paper); }
-.teaser-cta .arr { transition: transform .35s cubic-bezier(.16,.84,.3,1); }
-.teaser-cta:hover .arr { transform: translateX(6px); }
-
-/* ────────────────────────────────────────────────────────
- PREVENT WRAPPING
- ──────────────────────────────────────────────────────── */
-.nav-link, .nav-cta, .nav-signin, .nav-signin span,
-.btn-primary span, .btn-primary,
-.hero-cta-note,
-.tile-cta, .tile-stat, .tile-cls,
-.h-stat-l,
-.brand-word,
-.sec-tag, .sec-num {
-  white-space: nowrap;
-}
-
-/* ────────────────────────────────────────────────────────
- TABLET 768+
- ──────────────────────────────────────────────────────── */
-@media (min-width: 768px) {
- nav { padding: 22px 40px; }
- .menu-btn { display: none; }
- .nav-links { display: flex; gap: 28px; }
-
- .hero { padding: 96px 40px 56px; }
- .hero-body { position: relative; z-index: 5; max-width: 720px; padding-right: 0; }
- .hero-image { display: none; }
- .hero-image-mobile {
-   display: block;
-   width: calc(100% + 80px);
-   margin: 32px -40px 0;
-   aspect-ratio: 21 / 9;
- }
- h1 { font-size: clamp(64px, 8vw, 84px); }
- .hero-sub { font-size: 16px; max-width: 540px; }
- .btn-primary { padding: 14px 26px; }
- .hero-cta { flex-direction: row; align-items: center; gap: 24px; }
- .hero-stats { grid-template-columns: repeat(4, 1fr); }
- .h-stat { padding: 32px 20px 28px; }
- .h-stat-v { font-size: 40px; }
-
- section { padding: 120px 40px; }
- h2.section-h { font-size: clamp(48px, 6vw, 64px); }
-
- .capabilities { grid-template-columns: 1fr 1fr; column-gap: 64px; }
- .cap { padding: 28px 0; }
- .cap-name { font-size: clamp(24px, 2.4vw, 30px); }
- .cap-p { font-size: 14px; }
-
- .about-grid { grid-template-columns: 1.1fr 1fr; gap: 80px; }
- .about-body p { font-size: 20px; }
-
- /* Rings desktop */
- .rings-mark { font-size: 17px; }
- .rings-stage { position: relative; margin-top: 24px; max-width: 920px; margin-left: auto; margin-right: auto; aspect-ratio: 16 / 10; }
- .rings { max-width: none; aspect-ratio: 1 / 1; margin: 0; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 46%; }
- .rings-mark { font-size: 22px; letter-spacing: .42em; }
- .rings-sub { margin-top: 12px; }
- .rings-labels {
- margin-top: 0; padding-top: 0; border-top: none;
- position: absolute; inset: 0; pointer-events: none; gap: 0;
- display: block;
- }
- .rings-labels .r-asset {
- position: absolute; padding: 0; display: block; pointer-events: auto;
- white-space: nowrap;
- }
- .rings-labels .r-asset .gl { display: inline-block; vertical-align: middle; margin-right: 12px; transform: none; }
- .rings-labels .r-asset .nm { display: inline; font-size: 22px; }
- .rings-labels .r-asset .nm em { font-size: 13px; display: inline; margin-left: 8px; }
- .rings-labels .r-asset .pc { display: inline-block; margin-left: 12px; font-size: 14px; }
- .rings-labels .r-asset .sub { display: block; font-size: 10px; letter-spacing: .2em; color: var(--ghost-2); margin-top: 8px; padding-left: 22px; }
- .rings-labels .r-asset.r-aspen { left: 4%; top: 6%; text-align: left; }
- .rings-labels .r-asset.r-miami { right: 4%; top: 6%; text-align: right; }
- .rings-labels .r-asset.r-miami .sub { padding-left: 0; }
- .rings-labels .r-asset.r-ladym { right: 4%; bottom: 6%; text-align: right; }
- .rings-labels .r-asset.r-ladym .sub { padding-left: 0; }
- .rings-labels .r-asset.r-air { left: 4%; bottom: 6%; opacity: .55; text-align: left; }
-
- /* Demo */
- .demo { padding: 48px 40px 140px; }
- .demo-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
- .demo-cta { flex-direction: row; }
-
- footer { padding: 72px 40px 36px; }
- .foot-grid { grid-template-columns: 1.2fr 2fr; gap: 80px; }
- .foot-cols { grid-template-columns: repeat(4, 1fr); }
-
- /* Teaser: wide photo + 2-col body below */
- .teaser-grid { gap: 56px; }
- .teaser-section.on-ink .teaser-body,
- .teaser-section.on-paper .teaser-body { padding: 0; border: none; }
- .teaser-photo { aspect-ratio: 21 / 9; }
- .teaser-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px;
- }
-}
-
-/* ────────────────────────────────────────────────────────
- DESKTOP 1280+
- ──────────────────────────────────────────────────────── */
-@media (min-width: 1280px) {
- nav { padding: 24px 64px; }
- .hero { padding: 112px 64px 72px; padding-right: 0; }
- .hero-image { display: block; width: 52%; }
- .hero-image-mobile { display: none; }
- .hero-body { padding-right: 0; max-width: 880px; padding-top: 56px; }
- h1 { font-size: clamp(84px, 6.4vw, 112px); }
- section { padding: 160px 64px; }
- h2.section-h { font-size: clamp(64px, 4.6vw, 88px); }
- .demo { padding: 56px 64px 180px; }
- .teaser-section { padding: 56px 64px 180px; }
- .demo-h { font-size: clamp(64px, 5vw, 88px); }
- footer { padding: 96px 64px 40px; }
- .teaser-body { gap: 96px; padding: 0 40px; }
-}
-
-/* ────────────────────────────────────────────────────────
- 1440+
- ──────────────────────────────────────────────────────── */
-@media (min-width: 1440px) {
- .hero-stats { gap: 0; }
- .h-stat { padding: 40px 24px 32px; }
-}
-
-/* ────────────────────────────────────────────────────────
- 320 SAFETY
- ──────────────────────────────────────────────────────── */
-@media (max-width: 359px) {
- h1 { font-size: 36px; }
- .hero { padding: 76px 16px 24px; }
- section, .demo, footer { padding-left: 16px; padding-right: 16px; }
-}
-
-.hl-opt { display: none; }
-.hl-opt.active { display: block; }
+/* ── modules grid ── */
+.mod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.mod { background: var(--panel-2); padding: 26px 22px 22px; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; transition: background .25s; position: relative; overflow: hidden; }
+.mod::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--orange); transition: width .35s cubic-bezier(.5,0,.2,1); }
+.mod:hover { background: #0E1420; }
+.mod:hover::after { width: 100%; }
+.mod-id { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; color: var(--orange); margin-bottom: 14px; }
+.mod-name { font-weight: 700; font-size: 15.5px; letter-spacing: .02em; text-transform: uppercase; }
+.mod-desc { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; line-height: 1.8; color: var(--faint); margin-top: 10px; }
 </style>
-<template id="__bundler_thumbnail" data-bg-color="#0A0E1A">
-<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-<rect width="1200" height="800" fill="#0A0E1A"/>
-<g transform="translate(420 320)">
-<rect x="0" y="0" width="360" height="32" rx="4" fill="#F1EDE4" opacity="0.35"/>
-<rect x="0" y="56" width="244" height="32" rx="4" fill="#F1EDE4" opacity="0.65"/>
-<rect x="0" y="112" width="151" height="32" rx="4" fill="#FF6A00"/>
-</g>
-<text x="600" y="560" text-anchor="middle" font-family="Figtree, sans-serif" font-size="48" font-weight="700" letter-spacing="18" fill="#F1EDE4">FRAME</text>
-</svg>
-</template>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
- <a class="brand" href="/" aria-label="Frame. Home">
- <div class="brand-mark"><div class="lb"></div><div class="lb"></div><div class="lb"></div></div>
- <div class="brand-word">Frame</div>
- </a>
- <div class="nav-links">
- <a class="nav-link" href="/vessels/">Vessels</a>
- <a class="nav-link" href="/properties/">Properties</a>
- <a class="nav-link" href="#demo">Contact</a>
- </div>
- <div class="nav-right">
-  <a class="nav-signin" href="#" aria-label="Sign in" title="Sign in">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-      <circle cx="12" cy="7" r="4"/>
-    </svg>
-    <span>Sign in</span>
-  </a>
-  <div class="nav-cta" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Request Demo <span class="arr">→</span></div>
-  <div class="menu-btn" id="menuBtn" aria-label="Menu"><span class="ml"></span><span class="ml"></span></div>
- </div>
+<div id="progress"></div>
+<div class="gridlines" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<nav>
+  <a class="brand" href="/">FRAME<span class="cursor">_</span></a>
+  <div class="nav-status"><span class="dot"></span>ALL SYSTEMS NOMINAL · 14 MODULES ACTIVE</div>
+  <div class="nav-links">
+    <a class="nav-link" href="/vessels">VESSELS</a>
+    <a class="nav-link" href="/properties">PROPERTIES</a>
+    <a class="nav-link" href="#access">CONTACT</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-clock" id="clock">00:00:00 UTC</span>
+    <a class="nav-signin" href="https://app.frameops.io/">SIGN IN</a>
+    <a class="nav-cta" href="#access">REQUEST ACCESS</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu"><span class="ml"></span><span class="ml"></span></button>
+  </div>
 </nav>
 
-<!-- mobile menu -->
-<aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
- <div>
- <ul class="mm-list">
- <li><a href="/vessels/">Vessels</a></li>
- <li><a href="/properties/">Properties</a></li>
- <li><a href="#demo">Contact</a></li>
- </ul>
- </div>
- <div class="mm-foot">
- <span>Frame · Private Operations</span>
- <span>v3.0</span>
- </div>
+<aside class="mobile-menu" id="mobileMenu">
+  <ul class="mm-list">
+    <li><a href="/vessels">Vessels<span class="tag">SYS-02</span></a></li>
+    <li><a href="/properties">Properties<span class="tag">SYS-01</span></a></li>
+    <li><a href="#access">Contact<span class="tag">ACCESS</span></a></li>
+    <li><a href="https://app.frameops.io/">Sign in<span class="tag">APP</span></a></li>
+  </ul>
+  <div class="mm-foot"><span>FRAME — PRIVATE OPERATIONS</span><span>FRAMEOPS.IO</span></div>
 </aside>
 
-<!-- 01 · HERO -->
-<section class="hero on-paper" id="hero">
- <div class="grid-v" style="left: 50%;"></div>
- <div class="grid-v" style="left: 75%;"></div>
- <div class="hero-image" aria-hidden="true">
-    <img src="assets/sd90-underway.jpeg" alt="" loading="eager" fetchpriority="high" decoding="async" />
-    <div class="hero-image-meta">
-      <span class="tag">From the portfolio</span><br/>Vessel class · North Sea
+<header class="hero">
+  <div class="hero-photo" aria-hidden="true">
+    <img src="/assets/sd90-underway.jpeg" alt="" loading="eager" fetchpriority="high" decoding="async" />
+  </div>
+  <div class="photo-meta mono">
+    <div class="tag">LIVE FEED — VESSEL 02</div>
+    <div>SD90 · UNDERWAY · 14.2 KN</div>
+  </div>
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow rv">MISSION: PRIVATE OPERATIONS</div>
+      <h1>
+        <span class="ln rv rd1">Every asset.</span>
+        <span class="ln ghost rv rd2">One command.</span>
+      </h1>
+      <p class="hero-sub rv rd3">
+        THE OPERATING SYSTEM BEHIND <b>$50B+</b> IN PRIVATE ASSETS.<br />
+        ESTATES · VESSELS · AIRCRAFT — <b>ONE PICTURE.</b>
+      </p>
+      <div class="hero-cta-row rv rd4">
+        <a class="btn-launch" href="#access">REQUEST ACCESS →</a>
+        <a class="btn-ghost" href="#systems">VIEW SYSTEMS ▾</a>
+      </div>
+    </div>
+    <div class="telemetry hud rv rd3">
+      <div class="tele-head"><span>PORTFOLIO TELEMETRY</span><span class="live">LIVE</span></div>
+      <div class="tele-row">
+        <div class="tele-label">FLEET READINESS</div>
+        <div class="tele-val-row"><span class="tele-val" data-count="98.2" data-suffix="%">0%</span><div class="tele-bar"><i class="g" style="--w:98%"></i></div></div>
+      </div>
+      <div class="tele-row">
+        <div class="tele-label">WORK ORDERS — OPEN / ON SCHEDULE</div>
+        <div class="tele-val-row"><span class="tele-val" data-count="47">0</span><div class="tele-bar"><i style="--w:38%"></i></div></div>
+      </div>
+      <div class="tele-row">
+        <div class="tele-label">CREW &amp; STAFF ON ROTATION</div>
+        <div class="tele-val-row"><span class="tele-val" data-count="128">0</span><div class="tele-bar"><i class="g" style="--w:64%"></i></div></div>
+      </div>
+      <div class="tele-row">
+        <div class="tele-label">CERTIFICATES EXPIRING — 30 DAYS</div>
+        <div class="tele-val-row"><span class="tele-val" data-count="3">0</span><div class="tele-bar"><i class="a" style="--w:12%"></i></div></div>
+      </div>
     </div>
   </div>
-  <div class="hero-image-mobile">
-    <img src="assets/sd90-underway.jpeg" alt="A large motor yacht from the Frame portfolio, underway at sea" loading="eager" fetchpriority="high" decoding="async" />
+</header>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker" id="ticker">
+    <span class="tick-item"><span class="k">WO-1042</span> GENERATOR 2 SERVICE — <span class="g">CLOSED</span></span>
+    <span class="tick-item"><span class="k">CERT</span> MCA RENEWAL FILED — M/Y LADY M</span>
+    <span class="tick-item"><span class="k">CREW</span> ROTATION CONFIRMED — 4 ON / 4 OFF</span>
+    <span class="tick-item"><span class="k">EST-ASPEN</span> SNOWMELT SYSTEM — <span class="g">NOMINAL</span></span>
+    <span class="tick-item"><span class="k">WO-1051</span> TENDER 100HR SERVICE — <span class="a">SCHEDULED</span></span>
+    <span class="tick-item"><span class="k">VENDOR</span> HVAC CONTRACT RENEWED — PALM BEACH</span>
+    <span class="tick-item"><span class="k">SOP-114</span> HURRICANE PREP — REVIEWED</span>
+    <span class="tick-item"><span class="k">AUDIT</span> 1,284 ACTIONS LOGGED THIS WEEK</span>
   </div>
+</div>
 
- <div class="hero-body">
- <div class="hero-eyebrow reveal">
- <span class="line"></span>
- <span class="text">Private Operations Platform</span>
- </div>
+<section id="systems">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-id">SEC / 01</span>
+      <h2>Three systems. <span class="dim">One screen.</span></h2>
+    </div>
 
- <h1 class="reveal d1" id="heroHead">
- <span class="hl-opt active" data-i="0">Built for<em>private<br/><span class="acc">operations.</span></em></span>
- <span class="hl-opt" data-i="1">One operating layer.<em>Every private<br/><span class="acc">asset.</span></em></span>
- <span class="hl-opt" data-i="2">Portfolio intelligence.<em>Private by<br/><span class="acc">design.</span></em></span>
- <span class="hl-opt" data-i="3">Operations command<em>for private<br/><span class="acc">wealth.</span></em></span>
- <span class="hl-opt" data-i="4">Estates. Vessels. Aircraft.<em>One operating<br/><span class="acc">layer.</span></em></span>
- </h1>
+    <a class="sys-row rv" href="/properties">
+      <div class="sys-num">SYS-01</div>
+      <div class="sys-name">Estates<span class="st g">● OPERATIONAL</span><span class="sys-go">ENTER SYSTEM →</span></div>
+      <div class="sys-desc">PREVENTATIVE MAINTENANCE, HOUSEHOLD SOPS, VENDOR COORDINATION, AND SEASONAL READINESS — FROM ASPEN TO PALM BEACH.</div>
+      <div class="sys-photo"><img src="/assets/aspen-house.webp" alt="Estate in Aspen" loading="lazy" /><span class="ph-tag">EST-01 · ASPEN</span></div>
+    </a>
 
- <div class="hero-divider reveal d2"></div>
+    <a class="sys-row rv" href="/vessels">
+      <div class="sys-num">SYS-02</div>
+      <div class="sys-name">Vessels<span class="st g">● OPERATIONAL</span><span class="sys-go">ENTER SYSTEM →</span></div>
+      <div class="sys-desc">PLANNED MAINTENANCE, CLASS &amp; FLAG COMPLIANCE, CREW ROTATIONS, AND YARD PERIODS — AT ANCHOR OR UNDERWAY.</div>
+      <div class="sys-photo"><img src="/assets/lady-m-underway.avif" alt="Motor yacht underway" loading="lazy" /><span class="ph-tag">VSL-02 · UNDERWAY</span></div>
+    </a>
 
- <p class="hero-sub reveal d2">
- Frame is the first platform built for the complexity of private asset operations. <b>Not one estate. Not one vessel.</b> The entire portfolio, on one operating layer.
- </p>
-
- <div class="hero-cta reveal d3">
- <button class="btn-primary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})"><span>Request Demo</span><span class="arr">→</span></button>
- <span class="hero-cta-note">Private onboarding only · No self-serve</span>
- </div>
-
- <div class="hero-stats reveal d4">
- <div class="h-stat"><div class="h-stat-v">$50<span class="sub">B+</span></div><div class="h-stat-l">Assets on Platform</div></div>
- <div class="h-stat"><div class="h-stat-v">14</div><div class="h-stat-l">Modules</div></div>
- <div class="h-stat"><div class="h-stat-v">3</div><div class="h-stat-l">Asset Classes</div></div>
- <div class="h-stat"><div class="h-stat-v">24<span class="sub">/7</span></div><div class="h-stat-l">Operations</div></div>
- </div>
- </div>
+    <div class="sys-row rv">
+      <div class="sys-num">SYS-03</div>
+      <div class="sys-name">Aircraft<span class="st a">◐ IN DEVELOPMENT — Q3 2026</span></div>
+      <div class="sys-desc">AIRWORTHINESS DIRECTIVES, FLIGHT CREW CURRENCY, AND MAINTENANCE TRACKING — THE THIRD SYSTEM COMES ONLINE Q3.</div>
+      <div class="sys-photo awaiting"><div class="ph-wait">ACFT-01<br />AWAITING FEED · Q3 2026</div></div>
+    </div>
+  </div>
 </section>
 
-<!-- 02 · CAPABILITIES -->
-<section class="on-paper" id="capabilities">
- <div class="sec-eyebrow reveal">
- <span class="sec-num">02</span>
- <span class="rule"></span>
- <span class="sec-tag">What is Frame</span>
- </div>
- <h2 class="section-h reveal d1">Visibility &amp; operations,<em>across the portfolio.</em></h2>
- <hr class="acc-rule reveal d2" />
- <p class="section-lede reveal d2">Frame is one operating layer for ten capabilities · portfolio, maintenance, knowledge, procedures, risk, readiness, analytics, timeline, staff, vendors. <b>No feature dump. No add-ons.</b> Just what private operations need, available the day onboarding completes.</p>
-
- <div class="capabilities reveal d3">
- <div class="cap"><span class="cap-num">01</span><div class="cap-body"><div class="cap-name">Portfolio</div><div class="cap-p">Owner visibility across every asset, in one operating view.</div></div></div>
- <div class="cap"><span class="cap-num">02</span><div class="cap-body"><div class="cap-name">Maintenance</div><div class="cap-p">PMS, work orders, vendor coordination · by asset, by system.</div></div></div>
- <div class="cap"><span class="cap-num">03</span><div class="cap-body"><div class="cap-name">Knowledge</div><div class="cap-p">SOPs, manuals, procedures · durable through staff turnover.</div></div></div>
- <div class="cap"><span class="cap-num">04</span><div class="cap-body"><div class="cap-name">Procedures</div><div class="cap-p">Daily routines, watches, checklists · executed and logged.</div></div></div>
- <div class="cap"><span class="cap-num">05</span><div class="cap-body"><div class="cap-name">Risk</div><div class="cap-p">Compliance, certificates, audits · never expiring quietly.</div></div></div>
- <div class="cap"><span class="cap-num">06</span><div class="cap-body"><div class="cap-name">Readiness</div><div class="cap-p">Pre-arrival, pre-charter, pre-season · always defensibly ready.</div></div></div>
- <div class="cap"><span class="cap-num">07</span><div class="cap-body"><div class="cap-name">Analytics</div><div class="cap-p">Reactive %, MTTR, cost of ownership · the metrics that matter.</div></div></div>
- <div class="cap"><span class="cap-num">08</span><div class="cap-body"><div class="cap-name">Timeline</div><div class="cap-p">Every action, every approval, every change · provenance.</div></div></div>
- <div class="cap"><span class="cap-num">09</span><div class="cap-body"><div class="cap-name">Staff</div><div class="cap-p">Crew, house staff, family office · roles, watches, access.</div></div></div>
- <div class="cap"><span class="cap-num">10</span><div class="cap-body"><div class="cap-name">Vendors</div><div class="cap-p">Approved suppliers, POs, service history · by asset.</div></div></div>
- </div>
+<section class="on-panel" id="modules">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-id">SEC / 02</span>
+      <h2>14 modules. <span class="dim">Zero blind spots.</span></h2>
+    </div>
+    <div class="mod-grid rv">
+      <div class="mod"><div><div class="mod-id">MOD-01</div><div class="mod-name">Work Orders</div></div><div class="mod-desc">CREATE, ASSIGN, CLOSE — WITH FULL HISTORY.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-02</div><div class="mod-name">Preventative Maintenance</div></div><div class="mod-desc">SCHEDULES THAT FIRE BEFORE FAILURES DO.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-03</div><div class="mod-name">Compliance &amp; Certificates</div></div><div class="mod-desc">EXPIRY HORIZON ON EVERY DOCUMENT.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-04</div><div class="mod-name">Crew &amp; Staff</div></div><div class="mod-desc">ROTATIONS, ROLES, AND ACCESS CONTROL.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-05</div><div class="mod-name">SOPs &amp; Knowledge</div></div><div class="mod-desc">HOW THE HOUSE RUNS — WRITTEN DOWN, FOREVER.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-06</div><div class="mod-name">Vendors</div></div><div class="mod-desc">EVERY CONTRACT, EVERY SERVICE VISIT, RATED.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-07</div><div class="mod-name">Analytics</div></div><div class="mod-desc">COST OF OWNERSHIP, RESPONSE TIMES, TRENDS.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-08</div><div class="mod-name">Audit Trail</div></div><div class="mod-desc">WHO DID WHAT, WHEN — IMMUTABLE.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-09</div><div class="mod-name">Portfolio Dashboard</div></div><div class="mod-desc">EVERY ASSET, ONE OPERATING PICTURE.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-10</div><div class="mod-name">Inventory &amp; Spares</div></div><div class="mod-desc">WHAT'S ABOARD, WHAT'S IN STORAGE, WHAT'S LOW.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-11</div><div class="mod-name">Documents</div></div><div class="mod-desc">MANUALS, DRAWINGS, SURVEYS — INDEXED.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-12</div><div class="mod-name">Budgets &amp; Spend</div></div><div class="mod-desc">COST OF OWNERSHIP, TRACKED TO THE LINE ITEM.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-13</div><div class="mod-name">Incidents</div></div><div class="mod-desc">LOG IT, ESCALATE IT, CLOSE THE LOOP.</div></div>
+      <div class="mod"><div><div class="mod-id">MOD-14</div><div class="mod-name">Reporting</div></div><div class="mod-desc">OWNER-READY SUMMARIES, ON SCHEDULE.</div></div>
+      <div class="mod" style="justify-content:center;"><div class="mod-desc" style="margin:0;">MOD-15 ░░░░░░░░░░<br />RESERVED — AIRCRAFT · Q3 2026</div></div>
+    </div>
+  </div>
 </section>
 
-<!-- 03 · SUPPORTED ASSETS -->
-<section class="on-ink" id="supported">
- <div class="sec-eyebrow reveal">
- <span class="sec-num" style="color: var(--orange);">03</span>
- <span class="rule" style="background: var(--paper); opacity: .14;"></span>
- <span class="sec-tag" style="color: var(--ghost-2);">Supported assets</span>
- </div>
- <h2 class="section-h reveal d1">Built for three asset classes.<em>Aircraft on the roadmap.</em></h2>
- <hr class="acc-rule reveal d2" />
- <p class="section-lede reveal d2" style="color: var(--ghost);">Three product offerings on one operating layer. <b style="color: var(--paper); font-weight: 500;">Frame Portfolio</b> is the owner&apos;s cross-asset view. <b style="color: var(--paper); font-weight: 500;">Frame Vessels</b> and <b style="color: var(--paper); font-weight: 500;">Frame Properties</b> are the captain- and estate-manager surfaces. <b style="color: var(--paper); font-weight: 500;">Frame Aircraft</b> follows.</p>
-
- <div class="supported reveal d3">
- <a class="sup-row" href="#portfolio">
- <span class="sup-num">F · 01</span>
- <span class="sup-body">
- <span class="name">Frame Portfolio</span>
- <span class="desc">Owner visibility across every asset. Cross-portfolio readiness, risk, and operational status · the constellation view.</span>
- </span>
- <span class="drill">See example <span class="arr">→</span></span>
- </a>
- <a class="sup-row" href="/vessels/">
- <span class="sup-num">F · 02</span>
- <span class="sup-body">
- <span class="name">Frame Vessels</span>
- <span class="desc">Private vessels and fleets. PMS, charter readiness, logbook, certificates, crew. ISM &amp; STCW aligned.</span>
- </span>
- <span class="drill">Explore <span class="arr">→</span></span>
- </a>
- <a class="sup-row" href="/properties/">
- <span class="sup-num">F · 03</span>
- <span class="sup-body">
- <span class="name">Frame Properties</span>
- <span class="desc">Private estates and residences. Arrival readiness, manuals, seasonal operations, vendors and staff.</span>
- </span>
- <span class="drill">Explore <span class="arr">→</span></span>
- </a>
- <a class="sup-row future">
- <span class="sup-num">F · 04</span>
- <span class="sup-body">
- <span class="name">Frame Aircraft <em>· future</em></span>
- <span class="desc">In design. Flight ops, maintenance, crew, compliance · the same operating layer brought to private aviation.</span>
- </span>
- <span class="drill">Q3 2026 <span class="arr">·</span></span>
- </a>
- </div>
+<section>
+  <div class="wrap">
+    <div class="stats-band rv">
+      <div class="stat"><div class="stat-v">$<span data-count="50">0</span><span class="acc">B+</span></div><div class="stat-l">ASSETS UNDER OPERATION (USD)</div></div>
+      <div class="stat"><div class="stat-v"><span data-count="14">0</span></div><div class="stat-l">INTEGRATED MODULES</div></div>
+      <div class="stat"><div class="stat-v"><span data-count="98.2" data-suffix="%">0</span></div><div class="stat-l">PORTFOLIO READINESS</div></div>
+      <div class="stat"><div class="stat-v">24<span class="acc">/7</span></div><div class="stat-l">OPERATIONAL VISIBILITY</div></div>
+    </div>
+  </div>
 </section>
 
-<!-- 04 · PORTFOLIO RINGS -->
-<section class="sec-portfolio" id="portfolio" style="padding: 120px 20px 30px">
- <div class="sec-eyebrow reveal">
- <span class="sec-num">04</span>
- <span class="rule"></span>
- <span class="sec-tag">Portfolio example · Constellation</span>
- </div>
- <h2 class="section-h reveal d1">A single client&apos;s portfolio.<em>On one operating layer.</em></h2>
- <hr class="acc-rule reveal d2" />
- <p class="section-lede reveal d2" style="color: var(--ghost);"><b style="color: var(--paper); font-weight: 500;">Two estates, one vessel, one aircraft in onboarding.</b> Readiness rendered on the rings themselves · the chart <em>is</em> the data. This is the proof for everything above.</p>
-
- <div class="rings-stage reveal d3">
- <div class="rings" aria-hidden="false">
- <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
- <defs>
- <g id="rtick"><line x1="0" y1="-5" x2="0" y2="5" stroke="rgba(241,237,228,0.20)" stroke-width="1"/></g>
- </defs>
- <g transform="translate(400,400)">
- <line x1="-380" y1="0" x2="380" y2="0" stroke="rgba(241,237,228,0.06)" stroke-width="0.75"/>
- <line x1="0" y1="-380" x2="0" y2="380" stroke="rgba(241,237,228,0.06)" stroke-width="0.75"/>
- <circle r="320" fill="none" stroke="rgba(241,237,228,0.13)" stroke-width="0.9"/>
- <circle r="220" fill="none" stroke="rgba(241,237,228,0.10)" stroke-width="0.9"/>
- <circle r="130" fill="none" stroke="rgba(241,237,228,0.08)" stroke-width="0.9" stroke-dasharray="2 6"/>
- <use href="#rtick" transform="translate(0,-320)"/>
- <use href="#rtick" transform="rotate(30) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(60) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(90) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(120) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(150) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(180) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(210) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(240) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(270) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(300) translate(0,-320)"/>
- <use href="#rtick" transform="rotate(330) translate(0,-320)"/>
- <circle r="320" fill="none" stroke="#FF6A00" stroke-width="2" stroke-dasharray="1850 2010" transform="rotate(-90)" opacity="0.92"/>
- <circle r="220" fill="none" stroke="#FF6A00" stroke-width="2" stroke-dasharray="1078 1383" transform="rotate(-90)" opacity="0.78"/>
- <g transform="rotate(-45) translate(0,-320)"><circle r="7" fill="#F1EDE4"/></g>
- <g transform="rotate(45) translate(0,-320)"><circle r="7" fill="#F1EDE4"/></g>
- <g transform="rotate(135) translate(0,-320)"><circle r="7" fill="#F1EDE4"/></g>
- <g transform="rotate(-135) translate(0,-130)"><circle r="7" fill="none" stroke="rgba(241,237,228,0.5)" stroke-width="1.25" stroke-dasharray="2 2"/></g>
- </g>
- </svg>
- <div class="rings-center">
- <div class="rings-mark">Portfolio</div>
- <div class="rings-sub">Command · 0,0</div>
- </div>
- </div>
-
- <div class="rings-labels">
- <div class="r-asset r-aspen">
- <span class="gl"></span>
- <span class="nm">Aspen Lodge<em>Estate</em></span>
- <span class="pc">92%</span>
- <span class="sub">Snowmass · CO · Active</span>
- </div>
- <div class="r-asset r-miami">
- <span class="gl"></span>
- <span class="nm" style="text-align: right">Miami Residence<em>Estate</em></span>
- <span class="pc">78%</span>
- <span class="sub">Coconut Grove · FL · Attention</span>
- </div>
- <div class="r-asset r-ladym">
- <span class="gl"></span>
- <span class="nm">M / Y Lady M<em>Vessel</em></span>
- <span class="pc">97%</span>
- <span class="sub">Monaco · 164ft · Active</span>
- </div>
- <div class="r-asset r-air future">
- <span class="gl"></span>
- <span class="nm">Aircraft<em>..</em></span>
- <span class="pc">..</span>
- <span class="sub">Future · Planning · Q3 2026</span>
- </div>
- </div>
- </div>
-
- <div class="cnst-foot reveal d4">
- <span>Frame · Portfolio Intelligence</span>
- </div>
+<section class="sec-cta" id="access">
+  <div class="eyebrow rv">CLEARANCE REQUIRED</div>
+  <div class="cta-h rv rd1">Request<span class="ghost">access.</span></div>
+  <p class="cta-note rv rd2">INVITATION ONLY · WHITE-GLOVE ONBOARDING · PRIVATE CLOUD · SOC 2 TYPE II</p>
+  <div class="rv rd3"><a class="btn-launch" href="mailto:access@frameops.io">BEGIN CLEARANCE →</a></div>
 </section>
 
-<!-- 05 · FRAME VESSELS TEASER -->
-<section class="teaser-section on-ink" id="vessels-teaser">
- <div class="sec-eyebrow reveal" style="max-width: 1280px; margin: 0 auto 32px;">
- <span class="sec-num" style="color: var(--orange);">05</span>
- <span class="rule" style="background: var(--paper); opacity: .14;"></span>
- <span class="sec-tag" style="color: var(--ghost-2);">Frame Vessels</span>
- </div>
- <div class="teaser-grid">
- <figure class="teaser-photo reveal d1">
- <img src="assets/viva-underway.jpg" alt="Motor yacht Viva underway." loading="lazy" decoding="async" style="object-fit: cover; object-position: 50% 40%;" />
- <span class="caption">REFERENCE VESSEL M / Y VIVA · 94 m · North Sea</span>
- </figure>
- <div class="teaser-body" style="border: none;">
- <h2 class="teaser-h">For what lives on water.<em>For who keeps her ready.</em></h2>
- <p class="teaser-lede">Captains, yacht managers, charter managers, owner reps. Frame Vessels ends the cycle of <b>missed maintenance, lost knowledge, and compiled-the-morning-of guest readiness</b>.</p>
-
- <div>
- <div class="teaser-block-h pains">What it ends</div>
- <div class="teaser-pains">
- <div class="teaser-pain">Missed maintenance · across crew rotations.</div>
- <div class="teaser-pain">Crew handoffs that lose context.</div>
- <div class="teaser-pain">Guest readiness compiled the morning of.</div>
- <div class="teaser-pain">Knowledge that walks off with the captain.</div>
- <div class="teaser-pain">Operational chaos with no record.</div>
- </div>
- </div>
-
- <div>
- <div class="teaser-block-h caps">What it brings</div>
- <div class="teaser-caps-list">
- <div class="teaser-caps-row"><span class="n">01</span><span class="k">Maintenance</span><span class="v">PMS · work orders · vendors</span></div>
- <div class="teaser-caps-row"><span class="n">02</span><span class="k">Procedures</span><span class="v">Crew · watches · checklists</span></div>
- <div class="teaser-caps-row"><span class="n">03</span><span class="k">Logbook</span><span class="v">Certificates · audit-complete</span></div>
- <div class="teaser-caps-row"><span class="n">04</span><span class="k">Knowledge &amp; risk</span><span class="v">SOPs · readiness · compliance</span></div>
- </div>
- </div>
-
- <p class="teaser-quote">
- &ldquo;Know what needs attention before the owner steps onboard.&rdquo;
- <span class="who">· The captain&apos;s brief</span>
- </p>
-
- <a class="teaser-cta" href="/vessels/">Explore Vessels <span class="arr">→</span></a>
- </div>
- </div>
-</section>
-
-<!-- 06 · FRAME PROPERTIES TEASER -->
-<section class="teaser-section on-paper flip" id="properties-teaser">
- <div class="sec-eyebrow reveal" style="max-width: 1280px; margin: 0 auto 32px;">
- <span class="sec-num">06</span>
- <span class="rule"></span>
- <span class="sec-tag">Frame Properties</span>
- </div>
- <div class="teaser-grid">
- <figure class="teaser-photo reveal d1">
- <img src="assets/aspen-house.webp" alt="Modern estate at golden hour." loading="lazy" decoding="async" />
- <span class="caption"><span class="tag">Reference estate</span>Aspen Lodge · Snowmass · CO</span>
- </figure>
- <div class="teaser-body" style="border: none;">
- <h2 class="teaser-h">For what stands on land.<em>For who keeps it ready.</em></h2>
- <p class="teaser-lede">Estate managers, chiefs of staff, house managers, family office. Frame Properties ends the cycle of <b>paper manuals, basement binders, and operational excellence rebuilt every season from memory</b>.</p>
-
- <div>
- <div class="teaser-block-h pains">What it ends</div>
- <div class="teaser-pains">
- <div class="teaser-pain">Paper manuals · binders in basements.</div>
- <div class="teaser-pain">Staff turnover · institutional knowledge lost.</div>
- <div class="teaser-pain">Emergency response, undocumented.</div>
- <div class="teaser-pain">Vendor relationships that don&apos;t survive transitions.</div>
- <div class="teaser-pain">Seasonal operations rebuilt from memory.</div>
- </div>
- </div>
-
- <div>
- <div class="teaser-block-h caps">What it brings</div>
- <div class="teaser-caps-list">
- <div class="teaser-caps-row"><span class="n">01</span><span class="k">Maintenance &amp; manuals</span><span class="v">PMS · SOPs · systems</span></div>
- <div class="teaser-caps-row"><span class="n">02</span><span class="k">Emergency &amp; staff</span><span class="v">Response · rosters · access</span></div>
- <div class="teaser-caps-row"><span class="n">03</span><span class="k">Vendors</span><span class="v">Approved · history · contracts</span></div>
- <div class="teaser-caps-row"><span class="n">04</span><span class="k">Knowledge &amp; readiness</span><span class="v">Seasonal · pre-arrival · owner reporting</span></div>
- </div>
- </div>
-
- <p class="teaser-quote">
- &ldquo;Every residence ready before anyone arrives.&rdquo;
- <span class="who">· The estate manager&apos;s brief</span>
- </p>
-
- <a class="teaser-cta" href="/properties/">Explore Properties <span class="arr">→</span></a>
- </div>
- </div>
-</section>
-
-<!-- 07 · WHY FRAME EXISTS -->
-<section class="on-paper" id="about">
- <div class="sec-eyebrow reveal">
- <span class="sec-num">07</span>
- <span class="rule"></span>
- <span class="sec-tag">Why Frame exists</span>
- </div>
- <div class="about-grid">
- <h2 class="section-h reveal d1">The new operating standard<em>for private wealth.</em></h2>
- <div class="about-body reveal d2">
- <p>Private assets — estates, vessels, aircraft — have run on <b>paper, text messages, binders, and tribal knowledge</b> for a hundred years. Every property is different. Every vessel is different. There has never been a standard.</p>
- <p>When the estate manager leaves, the knowledge leaves with them. When the captain rotates, the rhythm restarts. Operational excellence is rebuilt every season, from memory.</p>
- <p>Frame is the new operating standard. One operating layer for every asset, every vendor, every procedure. <b>Repeatable across the portfolio, durable across staff turnover. The way private operations should work.</b></p>
- </div>
- </div>
-</section>
-
-<!-- 08 · CONTACT -->
-<section class="demo on-deep" id="demo">
- <div class="demo-inner">
- <div>
- <div class="sec-eyebrow reveal">
- <span class="sec-num">08</span>
- <span class="rule" style="background: var(--paper); opacity: .14;"></span>
- <span class="sec-tag" style="color: var(--ghost-2);">Private onboarding</span>
- </div>
- <div class="demo-h reveal d1">Speak with<em>Frame.</em></div>
- <p class="demo-sub reveal d2">Frame is offered by invitation. Private onboarding only. No self-serve, no marketing list. Tell us about the portfolio.</p>
- <div class="demo-cta reveal d3">
- <button class="btn-primary"><span>Request Demo</span><span class="arr">→</span></button>
- </div>
- <div class="demo-note reveal d4">Replies within one business day · By appointment only</div>
- </div>
- <div class="reveal d3">
- <div class="demo-fields">
- <div class="demo-field"><span>Asset classes</span><b>Vessels · Estates · Aircraft</b></div>
- <div class="demo-field"><span>Portfolios served</span><b>$50B+ total assets</b></div>
- <div class="demo-field"><span>Onboarding</span><b>4–6 weeks, white-glove</b></div>
- <div class="demo-field"><span>Compliance</span><b>SOC 2 II · Private cloud</b></div>
- <div class="demo-field"><span>Locations</span><b>Aspen · Coconut Grove · Monaco</b></div>
- <div class="demo-field"><span>Reference call</span><b>Available on request</b></div>
- </div>
- </div>
- </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
- <div class="foot-grid">
- <div class="foot-brand">
- <a class="brand" href="/" aria-label="Frame. Home">
- <div class="brand-mark"><div class="lb"></div><div class="lb"></div><div class="lb"></div></div>
- <div class="brand-word">Frame</div>
- </a>
- <div class="foot-tagline">The operating system for private operations.</div>
- </div>
- <div class="foot-cols">
- <div class="foot-col">
- <h6>Frame</h6>
- <a href="#capabilities">What is Frame</a>
- <a href="#supported">Supported assets</a>
- <a href="#portfolio">Portfolio example</a>
- <a href="#about">Why Frame exists</a>
- </div>
- <div class="foot-col">
- <h6>Asset Classes</h6>
- <a href="/vessels/">Vessels</a>
- <a href="/properties/">Properties</a>
- <a>Aircraft <em style="opacity:.4;">Q3 2026</em></a>
- </div>
- <div class="foot-col">
- <h6>Company</h6>
- <a href="#about">About</a>
- <a href="#demo">Contact</a>
- <a>Press</a>
- </div>
- <div class="foot-col">
- <h6>Trust</h6>
- <a>Security</a>
- <a>SOC 2</a>
- <a>Privacy</a>
- </div>
- </div>
- </div>
- <div class="foot-bot">
- <span>© 2026 Frame Operations</span>
- </div>
+  <div class="foot-grid">
+    <div>
+      <a class="brand" href="/">FRAME<span class="cursor">_</span></a>
+      <div class="foot-tag">OPERATING SYSTEM FOR<br />PRIVATE OPERATIONS</div>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col"><h6>Platform</h6><a href="#systems">SYSTEMS</a><a href="#modules">MODULES</a><a href="#access">ACCESS</a></div>
+      <div class="foot-col"><h6>Asset Classes</h6><a href="/vessels">VESSELS</a><a href="/properties">PROPERTIES</a><a>AIRCRAFT <span class="tag">· Q3 2026</span></a></div>
+      <div class="foot-col"><h6>Company</h6><a href="#access">CONTACT</a><a>PRESS</a></div>
+      <div class="foot-col"><h6>Trust</h6><a>SECURITY</a><a>SOC 2</a><a>PRIVACY</a></div>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>© 2026 FRAME OPERATIONS, INC.</span>
+    <span>26°42′N 80°02′W · PALM BEACH</span>
+    <span>FRAMEOPS.IO</span>
+  </div>
 </footer>
 
-<script>
- const io = new IntersectionObserver((entries) => {
- for (const e of entries) {
- if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
- }
- }, { threshold: 0.08 });
- document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
- const nav = document.getElementById('nav');
- const darkSecs = document.querySelectorAll('.on-ink, .on-deep, .sec-portfolio, .in-practice');
- function syncNav() {
- const y = window.scrollY + 70;
- let dark = false;
- darkSecs.forEach(s => {
- const top = s.offsetTop, bot = top + s.offsetHeight;
- if (y > top && y < bot) dark = true;
- });
- nav.classList.toggle('on-dark', dark);
- }
- window.addEventListener('scroll', syncNav, { passive: true });
- syncNav();
-
- const menuBtn = document.getElementById('menuBtn');
- const mm = document.getElementById('mobileMenu');
- menuBtn.addEventListener('click', () => mm.classList.toggle('open'));
- mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('open')));
-
- window.__setHero = (i) => {
- document.querySelectorAll('#heroHead .hl-opt').forEach(el => {
- el.classList.toggle('active', String(el.dataset.i) === String(i));
- });
- };
-</script>
-
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel">
- const FrameTweaks = () => {
- const defaults = /*EDITMODE-BEGIN*/{ "heroHeadline": 0 }/*EDITMODE-END*/;
- const [t, setTweak] = useTweaks(defaults);
- React.useEffect(() => {
- if (window.__setHero) window.__setHero(t.heroHeadline);
- }, [t.heroHeadline]);
- return (
- <TweaksPanel title="Tweaks · Frame Homepage">
- <TweakSection title="Hero headline">
- <TweakSelect label="Option" value={t.heroHeadline}
- options={[
- { value: 0, label: '01. Built for private operations' },
- { value: 1, label: '02. One operating layer. Every private asset' },
- { value: 2, label: '03. Portfolio intelligence. Private by design' },
- { value: 3, label: '04. Operations command for private wealth' },
- { value: 4, label: '05. Estates. Vessels. Aircraft. One layer' }
- ]}
- onChange={(v) => setTweak('heroHeadline', Number(v))} />
- </TweakSection>
- </TweaksPanel>
- );
- };
- const tweakRoot = document.createElement('div');
- document.body.appendChild(tweakRoot);
- ReactDOM.createRoot(tweakRoot).render(<FrameTweaks />);
-</script>
-
+<script src="/assets/mission.js"></script>
 </body>
 </html>
