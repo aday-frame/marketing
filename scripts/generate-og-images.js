@@ -1,8 +1,8 @@
 /**
- * Generates OG social images for frameops.io
+ * Generates OG social images for frameops.io — MISSION CONTROL edition
  *
  * Output:
- *   assets/og-image.jpg        1200×630  (Twitter/LinkedIn/Facebook)
+ *   assets/og-image.jpg        1200×630  (Twitter/LinkedIn/Facebook/iMessage)
  *   assets/og-image-square.jpg 1080×1080 (Instagram/profile)
  */
 
@@ -13,42 +13,39 @@ const path  = require('path');
 const ASSETS = path.join(__dirname, '..', 'assets');
 const PHOTO  = path.join(ASSETS, 'sd90-underway.jpeg');
 
-/* ── Brand colours ─────────────────────────────────────── */
-const INK    = '#0A0E1A';
-const PAPER  = '#F1EDE4';
+/* ── Brand colours (mission control) ───────────────────── */
+const VOID   = '#04060B';
+const WHITE  = '#F4F4F0';
 const ORANGE = '#FF6A00';
+const GREEN  = '#2FD96E';
 
-/* ── SVG overlay factory ────────────────────────────────
-   Produces the gradient + F-mark + headline text layer.
-   All measurements are in image-pixels so the result is
-   crisp at every output size.
-────────────────────────────────────────────────────────── */
-function makeSVG(w, h, layout) {
+const DISPLAY = `'Arial Black', 'Helvetica Neue', Arial, sans-serif`;
+const MONO    = `'Courier New', Courier, monospace`;
+
+/* ── SVG overlay factory ────────────────────────────────── */
+function makeSVG(w, h, L) {
   const {
-    mX, mY,             // F-mark top-left
-    mW,                 // F-mark full-bar width (px)
-    mH, mGap,          // bar height, inter-bar gap
-    brandX, brandY,    // FRAME wordmark baseline
-    brandSize,         // wordmark font-size
-    h1Y, h2Y, h3Y,    // headline line baselines
-    headSize,          // headline font-size
-    headTracking,      // headline letter-spacing
-    footY,             // footer label baseline
-    footSize,          // footer font-size
-  } = layout;
+    pad,                  // outer padding
+    eyebrowY, eyebrowSize,
+    h1Y, h2Y, headSize,   // headline baselines + size
+    subY, subSize,        // sub line
+    brandSize,
+  } = L;
+
+  const bracket = 34;     // HUD corner bracket arm length
+  const bStroke = 5;
 
   return Buffer.from(`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- left → right: deep dark to transparent (text legibility zone) -->
     <linearGradient id="gL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="${INK}" stop-opacity="0.94"/>
-      <stop offset="52%"  stop-color="${INK}" stop-opacity="0.74"/>
-      <stop offset="100%" stop-color="${INK}" stop-opacity="0.15"/>
+      <stop offset="0%"   stop-color="${VOID}" stop-opacity="0.96"/>
+      <stop offset="55%"  stop-color="${VOID}" stop-opacity="0.80"/>
+      <stop offset="100%" stop-color="${VOID}" stop-opacity="0.30"/>
     </linearGradient>
-    <!-- top → bottom: subtle darkening at base -->
     <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="${INK}" stop-opacity="0"/>
-      <stop offset="100%" stop-color="${INK}" stop-opacity="0.46"/>
+      <stop offset="0%"   stop-color="${VOID}" stop-opacity="0.55"/>
+      <stop offset="35%"  stop-color="${VOID}" stop-opacity="0"/>
+      <stop offset="100%" stop-color="${VOID}" stop-opacity="0.62"/>
     </linearGradient>
   </defs>
 
@@ -56,38 +53,52 @@ function makeSVG(w, h, layout) {
   <rect width="${w}" height="${h}" fill="url(#gL)"/>
   <rect width="${w}" height="${h}" fill="url(#gB)"/>
 
-  <!-- ── F-mark (3 bars) ── -->
-  <rect x="${mX}" y="${mY}"              width="${mW}"          height="${mH}" rx="${mH/2}" fill="white"       fill-opacity="0.22"/>
-  <rect x="${mX}" y="${mY + mGap}"       width="${mW * 0.68}"   height="${mH}" rx="${mH/2}" fill="white"       fill-opacity="0.55"/>
-  <rect x="${mX}" y="${mY + mGap * 2}"   width="${mW * 0.42}"   height="${mH}" rx="${mH/2}" fill="${ORANGE}"/>
+  <!-- faint vertical gridlines -->
+  <rect x="${w * 0.25}" y="0" width="1.5" height="${h}" fill="white" fill-opacity="0.06"/>
+  <rect x="${w * 0.50}" y="0" width="1.5" height="${h}" fill="white" fill-opacity="0.06"/>
+  <rect x="${w * 0.75}" y="0" width="1.5" height="${h}" fill="white" fill-opacity="0.06"/>
 
-  <!-- ── FRAME wordmark ── -->
-  <text x="${brandX}" y="${brandY}"
-    font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-    font-size="${brandSize}" font-weight="700" letter-spacing="${Math.round(brandSize * 0.28)}"
-    fill="white">FRAME</text>
+  <!-- HUD corner brackets -->
+  <path d="M ${pad} ${pad + bracket} V ${pad} H ${pad + bracket}" fill="none" stroke="${ORANGE}" stroke-width="${bStroke}"/>
+  <path d="M ${w - pad - bracket} ${h - pad} H ${w - pad} V ${h - pad - bracket}" fill="none" stroke="${ORANGE}" stroke-width="${bStroke}"/>
 
-  <!-- ── Headline ── -->
-  <text x="${mX}" y="${h1Y}"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="${headSize}" font-weight="400" letter-spacing="${headTracking}"
-    fill="${PAPER}">Built for</text>
+  <!-- ── FRAME_ wordmark (top, inside bracket) ── -->
+  <text x="${pad + 28}" y="${pad + 30}"
+    font-family="${DISPLAY}" font-size="${brandSize}" font-weight="900" letter-spacing="${Math.round(brandSize * 0.30)}"
+    fill="${WHITE}">FRAME</text>
+  <text x="${pad + 28 + brandSize * 5.7}" y="${pad + 30}"
+    font-family="${DISPLAY}" font-size="${brandSize}" font-weight="900"
+    fill="${ORANGE}">_</text>
 
-  <text x="${mX}" y="${h2Y}"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="${headSize}" font-weight="400" letter-spacing="${headTracking}"
-    fill="rgba(241,237,228,0.50)">private</text>
+  <!-- live dot, top right -->
+  <circle cx="${w - pad - 150}" cy="${pad + 22}" r="7" fill="${GREEN}"/>
+  <text x="${w - pad - 130}" y="${pad + 30}"
+    font-family="${MONO}" font-size="20" font-weight="bold" letter-spacing="4"
+    fill="rgba(244,244,240,0.6)">LIVE</text>
 
-  <text x="${mX}" y="${h3Y}"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="${headSize}" font-weight="400" letter-spacing="${headTracking}"
-    fill="${ORANGE}">operations.</text>
+  <!-- ── eyebrow ── -->
+  <rect x="${pad}" y="${eyebrowY - 9}" width="44" height="6" fill="${ORANGE}"/>
+  <text x="${pad + 62}" y="${eyebrowY}"
+    font-family="${MONO}" font-size="${eyebrowSize}" font-weight="bold" letter-spacing="${Math.round(eyebrowSize * 0.32)}"
+    fill="${ORANGE}">MISSION: PRIVATE OPERATIONS</text>
 
-  <!-- ── Footer label ── -->
-  <text x="${mX}" y="${footY}"
-    font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
-    font-size="${footSize}" font-weight="600" letter-spacing="${Math.round(footSize * 0.28)}"
-    fill="rgba(241,237,228,0.36)">PRIVATE OPERATIONS PLATFORM</text>
+  <!-- ── headline ── -->
+  <text x="${pad - 6}" y="${h1Y}"
+    font-family="${DISPLAY}" font-size="${headSize}" font-weight="900" letter-spacing="-3"
+    fill="${WHITE}">EVERY ASSET.</text>
+
+  <text x="${pad - 6}" y="${h2Y}"
+    font-family="${DISPLAY}" font-size="${headSize}" font-weight="900" letter-spacing="-3"
+    fill="none" stroke="rgba(244,244,240,0.55)" stroke-width="2.5">ONE COMMAND.</text>
+
+  <!-- ── sub line ── -->
+  <text x="${pad}" y="${subY}"
+    font-family="${MONO}" font-size="${subSize}" font-weight="bold" letter-spacing="${Math.round(subSize * 0.18)}"
+    fill="rgba(244,244,240,0.78)">ESTATES &#183; VESSELS &#183; AIRCRAFT &#8212; <tspan fill="${ORANGE}">$50B+</tspan> UNDER OPERATION</text>
+
+  ${L.showUrl ? `<text x="${w - pad - 28}" y="${h - pad - 26}" text-anchor="end"
+    font-family="${MONO}" font-size="22" font-weight="bold" letter-spacing="5"
+    fill="rgba(244,244,240,0.55)">FRAMEOPS.IO</text>` : ''}
 </svg>`);
 }
 
@@ -95,20 +106,22 @@ function makeSVG(w, h, layout) {
 
 // 1200 × 630 — landscape OG card
 const LAYOUT_1200 = {
-  mX: 72,  mY: 68,  mW: 56, mH: 7, mGap: 13,
-  brandX: 142, brandY: 90, brandSize: 17,
-  headSize: 90, headTracking: -2,
-  h1Y: 232, h2Y: 338, h3Y: 444,
-  footY: 598, footSize: 11,
+  pad: 64,
+  brandSize: 26,
+  eyebrowY: 248, eyebrowSize: 21,
+  headSize: 108, h1Y: 366, h2Y: 478,
+  subY: 545, subSize: 21,
+  showUrl: false,
 };
 
 // 1080 × 1080 — square social card
 const LAYOUT_1080 = {
-  mX: 80,  mY: 80,  mW: 56, mH: 7, mGap: 13,
-  brandX: 150, brandY: 102, brandSize: 17,
-  headSize: 88, headTracking: -2,
-  h1Y: 430, h2Y: 534, h3Y: 638,
-  footY: 1020, footSize: 11,
+  pad: 72,
+  brandSize: 26,
+  eyebrowY: 524, eyebrowSize: 21,
+  headSize: 96, h1Y: 632, h2Y: 732,
+  subY: 800, subSize: 19,
+  showUrl: true,
 };
 
 /* ── Render ─────────────────────────────────────────────── */
@@ -117,6 +130,7 @@ async function render(outFile, w, h, layout) {
 
   await sharp(PHOTO)
     .resize({ width: w, height: h, fit: 'cover', position: 'center' })
+    .modulate({ brightness: 0.72, saturation: 0.82 })
     .composite([{ input: overlay, blend: 'over' }])
     .jpeg({ quality: 92, mozjpeg: true })
     .toFile(outFile);
