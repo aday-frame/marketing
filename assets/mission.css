@@ -57,19 +57,14 @@ nav {
 .brand .sub-page { font-family: var(--mono); font-size: 9px; font-weight: 500; letter-spacing: .22em; color: var(--dim); margin-left: 14px; }
 @keyframes blink { 50% { opacity: 0; } }
 
-.nav-status { display: none; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--dim); }
-.nav-status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2.4s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .45; } }
 
-.nav-links { display: none; align-items: center; gap: 22px; }
+.nav-links { display: none; align-items: center; gap: 28px; position: absolute; left: 50%; transform: translateX(-50%); }
 .nav-link { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--faint); transition: color .2s; }
 .nav-link:hover { color: var(--white); }
 .nav-link.current { color: var(--orange); }
 
 .nav-right { display: flex; align-items: center; gap: 16px; }
-.nav-clock { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--faint); display: none; }
-.nav-signin { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--dim); transition: color .2s; display: none; }
-.nav-signin:hover { color: var(--orange); }
 .nav-cta {
   font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .2em;
   color: var(--orange); border: 1px solid rgba(255,106,0,0.5);
@@ -82,10 +77,7 @@ nav {
 .menu-btn.open .ml:nth-child(1) { transform: translateY(3.25px) rotate(45deg); }
 .menu-btn.open .ml:nth-child(2) { transform: translateY(-3.25px) rotate(-45deg); }
 @media (min-width: 880px) {
-  .nav-status { display: flex; }
-  .nav-clock { display: block; }
   .nav-links { display: flex; }
-  .nav-signin { display: block; }
   .menu-btn { display: none; }
 }
 
@@ -277,6 +269,45 @@ footer { position: relative; z-index: 2; border-top: 1px solid var(--line); padd
   .sec-lede { margin: -16px 0 40px; }
   .sec-cta { padding: 110px 20px 100px; }
 }
+
+/* ── access modal ── */
+.access-modal {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(4,6,11,0.88);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+  overflow-y: auto;
+}
+.access-modal.open { opacity: 1; pointer-events: auto; }
+.access-panel {
+  background: var(--panel); border: 1px solid var(--line);
+  width: min(520px, 100%); padding: 36px 32px 32px;
+  transform: translateY(16px); transition: transform .35s cubic-bezier(.16,.84,.3,1);
+  margin: auto;
+}
+.access-modal.open .access-panel { transform: none; }
+.access-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.access-title { font-weight: 800; font-size: 24px; letter-spacing: -0.01em; text-transform: uppercase; }
+.access-close { background: none; border: none; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: .2em; color: var(--faint); padding: 6px; transition: color .2s; }
+.access-close:hover { color: var(--white); }
+.access-sub { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--faint); margin-bottom: 28px; line-height: 1.9; }
+.access-field { margin-bottom: 20px; }
+.access-field label { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--dim); margin-bottom: 9px; }
+.access-field input, .access-field textarea {
+  width: 100%; background: var(--void); border: 1px solid var(--line);
+  color: var(--white); font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em;
+  padding: 13px 14px; outline: none; transition: border-color .2s; border-radius: 0;
+  -webkit-appearance: none; appearance: none;
+}
+.access-field input:focus, .access-field textarea:focus { border-color: var(--orange); }
+.access-field textarea { resize: vertical; min-height: 96px; line-height: 1.8; }
+.access-submit { width: 100%; margin-top: 6px; }
+.access-status { font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; margin-top: 16px; line-height: 1.9; display: none; }
+.access-status.ok { display: block; color: var(--green); }
+.access-status.err { display: block; color: var(--red); }
+.access-status a { color: var(--orange); text-decoration: underline; }
 
 /* ── reduced motion ── */
 @media (prefers-reduced-motion: reduce) {

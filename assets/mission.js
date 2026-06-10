@@ -2,18 +2,6 @@
 (function () {
   'use strict';
 
-  // live UTC clock
-  var clock = document.getElementById('clock');
-  if (clock) {
-    var tick = function () {
-      var d = new Date();
-      var p = function (n) { return String(n).padStart(2, '0'); };
-      clock.textContent = p(d.getUTCHours()) + ':' + p(d.getUTCMinutes()) + ':' + p(d.getUTCSeconds()) + ' UTC';
-    };
-    tick();
-    setInterval(tick, 1000);
-  }
-
   // scroll progress
   var progress = document.getElementById('progress');
   if (progress) {
@@ -71,4 +59,89 @@
     });
   }, { threshold: 0.18 });
   document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+
+  // ── request access modal ──
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/aday@castellomgmt.com';
+  document.body.insertAdjacentHTML('beforeend',
+    '<div class="access-modal" id="accessModal" role="dialog" aria-modal="true" aria-labelledby="accessTitle">' +
+      '<div class="access-panel hud">' +
+        '<div class="access-head">' +
+          '<div class="access-title" id="accessTitle">Request access</div>' +
+          '<button class="access-close" type="button" aria-label="Close">ESC ✕</button>' +
+        '</div>' +
+        '<div class="access-sub">INVITATION ONLY · WHITE-GLOVE ONBOARDING<br />REPLIES WITHIN ONE BUSINESS DAY</div>' +
+        '<form id="accessForm" novalidate>' +
+          '<div class="access-field"><label for="af-name">NAME</label>' +
+            '<input id="af-name" name="name" type="text" autocomplete="name" required /></div>' +
+          '<div class="access-field"><label for="af-contact">CONTACT — EMAIL OR PHONE</label>' +
+            '<input id="af-contact" name="contact" type="text" autocomplete="email" required /></div>' +
+          '<div class="access-field"><label for="af-message">HOW DO YOU PLAN TO USE FRAME?</label>' +
+            '<textarea id="af-message" name="message" required></textarea></div>' +
+          '<button class="btn-launch access-submit" type="submit">TRANSMIT REQUEST →</button>' +
+          '<div class="access-status" id="accessStatus"></div>' +
+        '</form>' +
+      '</div>' +
+    '</div>');
+
+  var modal = document.getElementById('accessModal');
+  var form = document.getElementById('accessForm');
+  var status = document.getElementById('accessStatus');
+  var submitBtn = form.querySelector('.access-submit');
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { document.getElementById('af-name').focus(); }, 320);
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-access]').forEach(function (el) {
+    el.addEventListener('click', openModal);
+  });
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  modal.querySelector('.access-close').addEventListener('click', closeModal);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('af-name').value.trim();
+    var contact = document.getElementById('af-contact').value.trim();
+    var message = document.getElementById('af-message').value.trim();
+    status.className = 'access-status';
+    if (!name || !contact || !message) {
+      status.className = 'access-status err';
+      status.textContent = 'ALL FIELDS REQUIRED.';
+      return;
+    }
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'TRANSMITTING…';
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        contact: contact,
+        message: message,
+        _subject: 'Frame — Access Request from ' + name
+      })
+    }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function () {
+      form.querySelectorAll('.access-field, .access-submit').forEach(function (el) { el.style.display = 'none'; });
+      status.className = 'access-status ok';
+      status.textContent = 'REQUEST RECEIVED. WE REPLY WITHIN ONE BUSINESS DAY.';
+    }).catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'TRANSMIT REQUEST →';
+      status.className = 'access-status err';
+      status.innerHTML = 'TRANSMISSION FAILED. EMAIL US DIRECTLY: <a href="mailto:aday@castellomgmt.com">ADAY@CASTELLOMGMT.COM</a>';
+    });
+  });
 })();
