@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>FRAME — Your world, in one frame.</title>
+<meta name="robots" content="noindex" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --void: #04060B;
+  --line: rgba(244,244,240,0.10);
+  --white: #F4F4F0;
+  --dim: rgba(244,244,240,0.6);
+  --faint: rgba(244,244,240,0.36);
+  --orange: #FF6A00;
+  --sans: 'Space Grotesk', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--void); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--orange); color: var(--void); }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: linear-gradient(180deg, rgba(4,6,11,0.85), rgba(4,6,11,0));
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { display: flex; flex-direction: column; gap: 4px; width: 22px; }
+.brand-mark i { height: 2.5px; border-radius: 2px; background: var(--white); display: block; }
+.brand-mark i:nth-child(1) { opacity: .22; }
+.brand-mark i:nth-child(2) { width: 68%; opacity: .55; }
+.brand-mark i:nth-child(3) { width: 42%; background: var(--orange); opacity: 1; }
+.brand-word { font-size: 13px; font-weight: 600; letter-spacing: .24em; }
+.nav-cta {
+  font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: .16em;
+  color: var(--white); border: 1px solid rgba(244,244,240,0.35);
+  padding: 10px 18px; border-radius: 999px; transition: background .2s, color .2s, border-color .2s;
+}
+.nav-cta:hover { background: var(--orange); border-color: var(--orange); color: var(--void); }
+
+.hero { position: relative; height: 100svh; overflow: hidden; }
+#globe { position: absolute; inset: 0; transform: translateX(13%); }
+@media (max-width: 879px) { #globe { transform: none; } }
+#globe canvas { outline: none; }
+.hero-veil { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(4,6,11,0.88) 0%, rgba(4,6,11,0.45) 34%, rgba(4,6,11,0) 60%); }
+.hero-copy { position: absolute; left: 0; right: 0; bottom: 0; top: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 28px; max-width: 620px; pointer-events: none; z-index: 2; }
+.hero-copy > * { pointer-events: auto; }
+.eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font-family: var(--mono); font-size: 10px; letter-spacing: .26em; color: var(--orange); }
+.eyebrow::before { content: ''; width: 26px; height: 1.5px; background: var(--orange); }
+h1 { font-weight: 600; font-size: clamp(44px, 5.6vw, 86px); line-height: 1.0; letter-spacing: -0.03em; }
+h1 .acc { color: var(--orange); }
+.hero-sub { margin-top: 22px; font-size: 14.5px; font-weight: 300; line-height: 1.75; color: var(--dim); max-width: 440px; }
+.hero-cta-row { margin-top: 32px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.btn { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; background: var(--orange); color: var(--void); padding: 15px 28px; border-radius: 999px; display: inline-block; transition: background .2s, color .2s; }
+.btn:hover { background: var(--white); }
+.hero-note { font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; color: var(--faint); }
+.drag-cue { position: absolute; right: 28px; bottom: 26px; z-index: 2; font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--faint); }
+
+section { padding: 120px 28px; }
+.wrap { max-width: 1200px; margin: 0 auto; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+@media (min-width: 880px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stat { background: var(--void); padding: 40px 28px; }
+.stat-v { font-size: clamp(34px, 3.6vw, 50px); font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+.stat-v .acc { color: var(--orange); }
+.stat-l { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--faint); margin-top: 13px; }
+
+.cta { text-align: center; padding: 140px 28px 130px; }
+.cta h2 { font-weight: 600; font-size: clamp(36px, 5vw, 68px); letter-spacing: -0.03em; line-height: 1.02; }
+.cta h2 .soft { color: var(--faint); }
+.cta-note { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--faint); margin-top: 22px; line-height: 2; }
+.cta .btn { margin-top: 36px; }
+
+footer { border-top: 1px solid var(--line); padding: 30px 28px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; color: var(--faint); }
+
+@media (max-width: 879px) {
+  .hero-copy { justify-content: flex-end; padding-bottom: 96px; max-width: 100%; }
+  .hero-veil { background: linear-gradient(180deg, rgba(4,6,11,0.2) 0%, rgba(4,6,11,0.35) 45%, rgba(4,6,11,0.92) 78%); }
+  h1 { font-size: clamp(40px, 11vw, 60px); }
+  .drag-cue { display: none; }
+  section { padding: 84px 22px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="/"><span class="brand-mark"><i></i><i></i><i></i></span><span class="brand-word">FRAME</span></a>
+  <a class="nav-cta" href="#access">REQUEST ACCESS</a>
+</nav>
+
+<header class="hero">
+  <div id="globe" aria-label="Rotating globe showing Frame-managed assets in Aspen, Palm Beach, Monaco, and in flight"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-copy">
+    <div class="eyebrow">THE OPERATING SYSTEM FOR PRIVATE OPERATIONS</div>
+    <h1>Your world,<br /><span class="acc">one frame.</span></h1>
+    <p class="hero-sub">Estates, vessels, aircraft — every property, every crew, every movement, run as a single living system. Quietly, precisely, end to end.</p>
+    <div class="hero-cta-row">
+      <a class="btn" href="#access">REQUEST ACCESS →</a>
+      <span class="hero-note">INVITATION ONLY · PRIVATE CLOUD</span>
+    </div>
+  </div>
+  <div class="drag-cue">DRAG TO ROTATE</div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="stat-v">$50<span class="acc">B+</span></div><div class="stat-l">ASSETS UNDER OPERATION</div></div>
+      <div class="stat"><div class="stat-v">3</div><div class="stat-l">ASSET CLASSES</div></div>
+      <div class="stat"><div class="stat-v">14</div><div class="stat-l">INTEGRATED MODULES</div></div>
+      <div class="stat"><div class="stat-v">24<span class="acc">/7</span></div><div class="stat-l">OPERATIONAL VISIBILITY</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="access">
+  <h2>Run your world <span class="soft">on Frame.</span></h2>
+  <p class="cta-note">INVITATION ONLY · WHITE-GLOVE ONBOARDING · PRIVATE CLOUD</p>
+  <a class="btn" href="#">REQUEST ACCESS →</a>
+</section>
+
+<footer>
+  <span>FRAME — OPERATING SYSTEM FOR PRIVATE OPERATIONS</span>
+  <span>© 2026 FRAME OPERATIONS, INC.</span>
+</footer>
+
+<script src="https://unpkg.com/globe.gl@2.32.2/dist/globe.gl.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var el = document.getElementById('globe');
+  if (!el || typeof Globe === 'undefined') return;
+
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ORANGE = '#FF6A00';
+
+  var nodes = [
+    { lat: 39.19, lng: -106.82, name: 'ASPEN' },
+    { lat: 26.71, lng: -80.04, name: 'PALM BEACH' },
+    { lat: 43.74, lng: 7.43, name: 'MONACO' },
+    { lat: 38.5, lng: -38.0, name: 'FL450', dim: true }
+  ];
+
+  var arcs = [
+    { startLat: 39.19, startLng: -106.82, endLat: 26.71, endLng: -80.04 },
+    { startLat: 26.71, startLng: -80.04, endLat: 38.5, endLng: -38.0 },
+    { startLat: 38.5, startLng: -38.0, endLat: 43.74, endLng: 7.43 },
+    { startLat: 39.19, startLng: -106.82, endLat: 43.74, endLng: 7.43 }
+  ];
+
+  var world = Globe()(el)
+    .width(el.clientWidth)
+    .height(el.clientHeight)
+    .backgroundColor('rgba(0,0,0,0)')
+    .showAtmosphere(true)
+    .atmosphereColor(ORANGE)
+    .atmosphereAltitude(0.07)
+    .arcsData(arcs)
+    .arcColor(function () { return ORANGE; })
+    .arcAltitude(0.26)
+    .arcStroke(0.62)
+    .arcDashLength(0.4)
+    .arcDashGap(1.4)
+    .arcDashAnimateTime(reduced ? 0 : 3400)
+    .pointsData(nodes)
+    .pointColor(function (d) { return d.dim ? 'rgba(255,106,0,0.55)' : ORANGE; })
+    .pointAltitude(0.004)
+    .pointRadius(0.5)
+    .labelsData(nodes)
+    .labelLat(function (d) { return d.lat; })
+    .labelLng(function (d) { return d.lng; })
+    .labelText(function (d) { return d.name; })
+    .labelSize(1.05)
+    .labelDotRadius(0.001)
+    .labelAltitude(0.015)
+    .labelResolution(2)
+    .labelColor(function (d) { return d.dim ? 'rgba(244,244,240,0.5)' : 'rgba(244,244,240,0.88)'; });
+
+  if (!reduced) {
+    world.ringsData(nodes.filter(function (d) { return !d.dim; }))
+      .ringColor(function () { return function (t) { return 'rgba(255,106,0,' + (0.55 * (1 - t)) + ')'; }; })
+      .ringMaxRadius(2.6)
+      .ringPropagationSpeed(1.0)
+      .ringRepeatPeriod(2400);
+  }
+
+  // globe surface: near-black, faint sheen
+  var mat = world.globeMaterial();
+  if (mat) {
+    mat.color.set('#0A1018');
+    if (mat.emissive) mat.emissive.set('#04060B');
+    mat.shininess = 6;
+  }
+
+  // dotted continents
+  fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
+    .then(function (r) { return r.json(); })
+    .then(function (geo) {
+      world.hexPolygonsData(geo.features)
+        .hexPolygonResolution(3)
+        .hexPolygonMargin(0.72)
+        .hexPolygonAltitude(0.003)
+        .hexPolygonColor(function () { return 'rgba(244,244,240,0.12)'; });
+      world.pointOfView({ lat: 32, lng: -45, altitude: window.innerWidth < 880 ? 3.4 : 2.55 }, 800);
+    })
+    .catch(function () { /* continents are decorative — globe still works without them */ });
+
+  var controls = world.controls();
+  if (controls) {
+    controls.autoRotate = !reduced;
+    controls.autoRotateSpeed = 0.28;
+    controls.enableZoom = false;
+  }
+
+  // open on the Atlantic so all four nodes are visible
+  world.pointOfView({ lat: 32, lng: -45, altitude: window.innerWidth < 880 ? 3.4 : 2.55 });
+
+  addEventListener('resize', function () {
+    world.width(el.clientWidth).height(el.clientHeight);
+  }, { passive: true });
+
+  // pause rendering when tab hidden
+  document.addEventListener('visibilitychange', function () {
+    world.pauseAnimation && (document.hidden ? world.pauseAnimation() : world.resumeAnimation());
+  });
+})();
+</script>
+</body>
+</html>

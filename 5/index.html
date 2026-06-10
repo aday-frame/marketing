@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>FRAME — Your world, in one frame.</title>
+<meta name="robots" content="noindex" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --void: #04060B;
+  --line: rgba(244,244,240,0.10);
+  --white: #F4F4F0;
+  --dim: rgba(244,244,240,0.6);
+  --faint: rgba(244,244,240,0.36);
+  --orange: #FF6A00;
+  --sans: 'Space Grotesk', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--void); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--orange); color: var(--void); }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: linear-gradient(180deg, rgba(4,6,11,0.85), rgba(4,6,11,0));
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { display: flex; flex-direction: column; gap: 4px; width: 22px; }
+.brand-mark i { height: 2.5px; border-radius: 2px; background: var(--white); display: block; }
+.brand-mark i:nth-child(1) { opacity: .22; }
+.brand-mark i:nth-child(2) { width: 68%; opacity: .55; }
+.brand-mark i:nth-child(3) { width: 42%; background: var(--orange); opacity: 1; }
+.brand-word { font-size: 13px; font-weight: 600; letter-spacing: .24em; }
+.nav-cta {
+  font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: .16em;
+  color: var(--white); border: 1px solid rgba(244,244,240,0.35);
+  padding: 10px 18px; border-radius: 999px; transition: background .2s, color .2s, border-color .2s;
+}
+.nav-cta:hover { background: var(--orange); border-color: var(--orange); color: var(--void); }
+
+.hero { position: relative; height: 100svh; overflow: hidden; }
+#stage { position: absolute; inset: 0; }
+.node-label {
+  position: absolute; z-index: 3; pointer-events: none;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .24em; color: rgba(244,244,240,0.85);
+  transform: translate(14px, -50%); white-space: nowrap;
+  transition: opacity .25s linear;
+}
+.node-label::before { content: ''; position: absolute; left: -12px; top: 50%; width: 9px; height: 1px; background: rgba(244,244,240,0.4); }
+.node-label .sub { display: block; font-size: 8px; color: rgba(255,106,0,0.8); margin-top: 3px; letter-spacing: .2em; }
+.hero-veil { position: absolute; inset: 0; pointer-events: none; z-index: 2; background: linear-gradient(90deg, rgba(4,6,11,0.85) 0%, rgba(4,6,11,0.4) 36%, rgba(4,6,11,0) 62%); }
+.hero-copy { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 28px; max-width: 620px; pointer-events: none; z-index: 4; }
+.hero-copy > * { pointer-events: auto; }
+.eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font-family: var(--mono); font-size: 10px; letter-spacing: .26em; color: var(--orange); }
+.eyebrow::before { content: ''; width: 26px; height: 1.5px; background: var(--orange); }
+h1 { font-weight: 600; font-size: clamp(44px, 5.6vw, 86px); line-height: 1.0; letter-spacing: -0.03em; }
+h1 .acc { color: var(--orange); }
+.hero-sub { margin-top: 22px; font-size: 14.5px; font-weight: 300; line-height: 1.75; color: var(--dim); max-width: 440px; }
+.hero-cta-row { margin-top: 32px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.btn { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; background: var(--orange); color: var(--void); padding: 15px 28px; border-radius: 999px; display: inline-block; transition: background .2s; }
+.btn:hover { background: var(--white); }
+.hero-note { font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; color: var(--faint); }
+
+section { padding: 120px 28px; }
+.wrap { max-width: 1200px; margin: 0 auto; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+@media (min-width: 880px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stat { background: var(--void); padding: 40px 28px; }
+.stat-v { font-size: clamp(34px, 3.6vw, 50px); font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+.stat-v .acc { color: var(--orange); }
+.stat-l { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--faint); margin-top: 13px; }
+
+.cta { text-align: center; padding: 140px 28px 130px; }
+.cta h2 { font-weight: 600; font-size: clamp(36px, 5vw, 68px); letter-spacing: -0.03em; line-height: 1.02; }
+.cta h2 .soft { color: var(--faint); }
+.cta-note { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--faint); margin-top: 22px; line-height: 2; }
+.cta .btn { margin-top: 36px; }
+
+footer { border-top: 1px solid var(--line); padding: 30px 28px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; color: var(--faint); }
+
+@media (max-width: 879px) {
+  .hero-copy { justify-content: flex-end; padding-bottom: 90px; max-width: 100%; }
+  .hero-veil { background: linear-gradient(180deg, rgba(4,6,11,0.15) 0%, rgba(4,6,11,0.4) 48%, rgba(4,6,11,0.92) 80%); }
+  h1 { font-size: clamp(40px, 11vw, 60px); }
+  section { padding: 84px 22px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="/"><span class="brand-mark"><i></i><i></i><i></i></span><span class="brand-word">FRAME</span></a>
+  <a class="nav-cta" href="#access">REQUEST ACCESS</a>
+</nav>
+
+<header class="hero">
+  <div id="stage" aria-label="Abstract rotating sphere of light connecting Frame-managed assets"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-copy">
+    <div class="eyebrow">THE OPERATING SYSTEM FOR PRIVATE OPERATIONS</div>
+    <h1>Your world,<br /><span class="acc">one frame.</span></h1>
+    <p class="hero-sub">Estates, vessels, aircraft — every property, every crew, every movement, run as a single living system. Quietly, precisely, end to end.</p>
+    <div class="hero-cta-row">
+      <a class="btn" href="#access">REQUEST ACCESS →</a>
+      <span class="hero-note">INVITATION ONLY · PRIVATE CLOUD</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="stat-v">$50<span class="acc">B+</span></div><div class="stat-l">ASSETS UNDER OPERATION</div></div>
+      <div class="stat"><div class="stat-v">3</div><div class="stat-l">ASSET CLASSES</div></div>
+      <div class="stat"><div class="stat-v">14</div><div class="stat-l">INTEGRATED MODULES</div></div>
+      <div class="stat"><div class="stat-v">24<span class="acc">/7</span></div><div class="stat-l">OPERATIONAL VISIBILITY</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="access">
+  <h2>Run your world <span class="soft">on Frame.</span></h2>
+  <p class="cta-note">INVITATION ONLY · WHITE-GLOVE ONBOARDING · PRIVATE CLOUD</p>
+  <a class="btn" href="#">REQUEST ACCESS →</a>
+</section>
+
+<footer>
+  <span>FRAME — OPERATING SYSTEM FOR PRIVATE OPERATIONS</span>
+  <span>© 2026 FRAME OPERATIONS, INC.</span>
+</footer>
+
+<script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var stage = document.getElementById('stage');
+  if (!stage || typeof THREE === 'undefined') return;
+
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ORANGE = 0xFF6A00;
+
+  var W = stage.clientWidth, H = stage.clientHeight;
+  var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  renderer.setSize(W, H);
+  stage.appendChild(renderer.domElement);
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(38, W / H, 0.1, 50);
+  camera.position.set(0.7, 0.1, 4.5);
+  camera.lookAt(0.7, 0, 0);
+
+  var globe = new THREE.Group();
+  globe.position.x = 0.7;
+  scene.add(globe);
+
+  // ── sphere of faint dots (fibonacci) ──
+  var DOTS = 1300, R = 1;
+  var pos = new Float32Array(DOTS * 3);
+  var golden = Math.PI * (3 - Math.sqrt(5));
+  for (var i = 0; i < DOTS; i++) {
+    var y = 1 - (i / (DOTS - 1)) * 2;
+    var rad = Math.sqrt(1 - y * y);
+    var th = golden * i;
+    pos[i * 3] = Math.cos(th) * rad * R;
+    pos[i * 3 + 1] = y * R;
+    pos[i * 3 + 2] = Math.sin(th) * rad * R;
+  }
+  var dotGeo = new THREE.BufferGeometry();
+  dotGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  globe.add(new THREE.Points(dotGeo, new THREE.PointsMaterial({
+    color: 0xF4F4F0, size: 0.012, sizeAttenuation: true, transparent: true, opacity: 0.42, depthWrite: false
+  })));
+
+  // ── far starfield ──
+  var STARS = 320;
+  var spos = new Float32Array(STARS * 3);
+  for (var s = 0; s < STARS; s++) {
+    var v = new THREE.Vector3().randomDirection().multiplyScalar(6 + Math.random() * 6);
+    spos[s * 3] = v.x; spos[s * 3 + 1] = v.y; spos[s * 3 + 2] = v.z;
+  }
+  var starGeo = new THREE.BufferGeometry();
+  starGeo.setAttribute('position', new THREE.BufferAttribute(spos, 3));
+  scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({
+    color: 0xF4F4F0, size: 0.02, sizeAttenuation: true, transparent: true, opacity: 0.18, depthWrite: false
+  })));
+
+  // ── graticule rings ──
+  function ring(tiltX, tiltZ, opacity) {
+    var pts = [];
+    for (var a = 0; a <= 128; a++) {
+      var t = (a / 128) * Math.PI * 2;
+      pts.push(new THREE.Vector3(Math.cos(t) * R, 0, Math.sin(t) * R));
+    }
+    var g = new THREE.BufferGeometry().setFromPoints(pts);
+    var m = new THREE.LineBasicMaterial({ color: 0xF4F4F0, transparent: true, opacity: opacity });
+    var line = new THREE.LineLoop(g, m);
+    line.rotation.x = tiltX; line.rotation.z = tiltZ;
+    globe.add(line);
+  }
+  ring(0, 0, 0.07);
+  ring(Math.PI / 2.6, 0.3, 0.05);
+  ring(Math.PI / 1.7, -0.5, 0.05);
+
+  // ── glow sprite texture ──
+  function glowTexture() {
+    var c = document.createElement('canvas');
+    c.width = c.height = 64;
+    var ctx = c.getContext('2d');
+    var grd = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grd.addColorStop(0, 'rgba(255,140,40,1)');
+    grd.addColorStop(0.25, 'rgba(255,106,0,0.55)');
+    grd.addColorStop(1, 'rgba(255,106,0,0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+  }
+  var glowTex = glowTexture();
+
+  // ── nodes at lat/lng ──
+  function toVec(lat, lng, radius) {
+    var phi = (90 - lat) * Math.PI / 180;
+    var theta = (lng + 180) * Math.PI / 180;
+    return new THREE.Vector3(
+      -radius * Math.sin(phi) * Math.cos(theta),
+      radius * Math.cos(phi),
+      radius * Math.sin(phi) * Math.sin(theta)
+    );
+  }
+  var NODES = [
+    { lat: 39.19, lng: -106.82, name: 'ASPEN' },
+    { lat: 26.71, lng: -80.04, name: 'PALM BEACH' },
+    { lat: 43.74, lng: 7.43, name: 'MONACO' },
+    { lat: 38.5, lng: -38.0, name: 'FL450', sub: 'Q3 2026', dim: true }
+  ];
+  NODES.forEach(function (n) {
+    n.v = toVec(n.lat, n.lng, R);
+    var core = new THREE.Mesh(
+      new THREE.SphereGeometry(0.013, 12, 12),
+      new THREE.MeshBasicMaterial({ color: ORANGE, transparent: true, opacity: n.dim ? 0.6 : 1 })
+    );
+    core.position.copy(n.v);
+    globe.add(core);
+    var glow = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: glowTex, transparent: true, opacity: n.dim ? 0.35 : 0.7,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    }));
+    glow.scale.setScalar(0.11);
+    glow.position.copy(n.v);
+    globe.add(glow);
+    n.glow = glow;
+
+    var label = document.createElement('div');
+    label.className = 'node-label';
+    label.innerHTML = n.name + (n.sub ? '<span class="sub">' + n.sub + '</span>' : '');
+    stage.appendChild(label);
+    n.el = label;
+  });
+
+  // ── arcs + traveling pulses ──
+  var LINKS = [[0, 1], [1, 3], [3, 2], [0, 2]];
+  var pulses = [];
+  LINKS.forEach(function (pair, idx) {
+    var a = NODES[pair[0]].v, b = NODES[pair[1]].v;
+    var mid = a.clone().add(b).multiplyScalar(0.5);
+    var lift = 1 + a.distanceTo(b) * 0.38;
+    mid.normalize().multiplyScalar(R * lift);
+    var curve = new THREE.QuadraticBezierCurve3(a, mid, b);
+    var tube = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 60, 0.0024, 6, false),
+      new THREE.MeshBasicMaterial({ color: ORANGE, transparent: true, opacity: 0.38, depthWrite: false })
+    );
+    globe.add(tube);
+
+    var pulse = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: glowTex, transparent: true, opacity: 0.95,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    }));
+    pulse.scale.setScalar(0.05);
+    globe.add(pulse);
+    pulses.push({ curve: curve, sprite: pulse, t: idx * 0.27, speed: 0.0024 + idx * 0.0004 });
+  });
+
+  // ── interaction: slow spin + mouse parallax + drag ──
+  var targetRotY = 0, targetRotX = 0, dragging = false, lastX = 0, lastY = 0, autoSpin = reduced ? 0 : 0.0011;
+  stage.addEventListener('pointerdown', function (e) { dragging = true; lastX = e.clientX; lastY = e.clientY; });
+  addEventListener('pointerup', function () { dragging = false; });
+  addEventListener('pointermove', function (e) {
+    if (dragging) {
+      targetRotY += (e.clientX - lastX) * 0.005;
+      targetRotX += (e.clientY - lastY) * 0.003;
+      targetRotX = Math.max(-0.7, Math.min(0.7, targetRotX));
+      lastX = e.clientX; lastY = e.clientY;
+    }
+  });
+
+  var camDir = new THREE.Vector3();
+  var world = new THREE.Vector3();
+
+  function frame() {
+    if (!dragging) targetRotY += autoSpin;
+    globe.rotation.y += (targetRotY - globe.rotation.y) * 0.08;
+    globe.rotation.x += (targetRotX - globe.rotation.x) * 0.08;
+
+    var t = performance.now() / 1000;
+    NODES.forEach(function (n, i) {
+      if (n.glow) n.glow.scale.setScalar(0.11 + Math.sin(t * 1.4 + i) * 0.013);
+      // project label
+      world.copy(n.v).applyMatrix4(globe.matrixWorld);
+      var facing = world.clone().sub(globe.position).normalize().dot(camera.getWorldDirection(camDir).negate());
+      var p = world.clone().project(camera);
+      var x = (p.x * 0.5 + 0.5) * stage.clientWidth;
+      var y = (-p.y * 0.5 + 0.5) * stage.clientHeight;
+      n.el.style.left = x + 'px';
+      n.el.style.top = y + 'px';
+      n.el.style.opacity = facing > 0.18 ? Math.min(1, (facing - 0.18) * 3) : 0;
+    });
+
+    if (!reduced) {
+      pulses.forEach(function (p) {
+        p.t = (p.t + p.speed) % 1;
+        p.sprite.position.copy(p.curve.getPointAt(p.t));
+      });
+    }
+
+    renderer.render(scene, camera);
+    raf = requestAnimationFrame(frame);
+  }
+
+  var raf = requestAnimationFrame(frame);
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) cancelAnimationFrame(raf);
+    else raf = requestAnimationFrame(frame);
+  });
+
+  addEventListener('resize', function () {
+    W = stage.clientWidth; H = stage.clientHeight;
+    camera.aspect = W / H;
+    camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+    if (innerWidth < 880) { globe.position.x = 0; camera.position.z = 5.4; camera.lookAt(0, 0, 0); }
+    else { globe.position.x = 0.7; camera.position.z = 4.5; camera.lookAt(0.7, 0, 0); }
+  }, { passive: true });
+
+  if (innerWidth < 880) { globe.position.x = 0; camera.position.z = 5.4; camera.lookAt(0, 0, 0); }
+})();
+</script>
+</body>
+</html>
