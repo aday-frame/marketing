@@ -36,27 +36,13 @@ function makeSVG(w, h, L) {
   const bStroke = 5;
 
   return Buffer.from(`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="gL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="${VOID}" stop-opacity="0.96"/>
-      <stop offset="55%"  stop-color="${VOID}" stop-opacity="0.80"/>
-      <stop offset="100%" stop-color="${VOID}" stop-opacity="0.30"/>
-    </linearGradient>
-    <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="${VOID}" stop-opacity="0.55"/>
-      <stop offset="35%"  stop-color="${VOID}" stop-opacity="0"/>
-      <stop offset="100%" stop-color="${VOID}" stop-opacity="0.62"/>
-    </linearGradient>
-  </defs>
-
-  <!-- gradient overlays -->
-  <rect width="${w}" height="${h}" fill="url(#gL)"/>
-  <rect width="${w}" height="${h}" fill="url(#gB)"/>
+  <!-- void black canvas -->
+  <rect width="${w}" height="${h}" fill="${VOID}"/>
 
   <!-- faint vertical gridlines -->
-  <rect x="${w * 0.25}" y="0" width="1.5" height="${h}" fill="white" fill-opacity="0.06"/>
-  <rect x="${w * 0.50}" y="0" width="1.5" height="${h}" fill="white" fill-opacity="0.06"/>
-  <rect x="${w * 0.75}" y="0" width="1.5" height="${h}" fill="white" fill-opacity="0.06"/>
+  <rect x="${w * 0.25}" y="0" width="1.5" height="${h}" fill="white" fill-opacity="0.05"/>
+  <rect x="${w * 0.50}" y="0" width="1.5" height="${h}" fill="white" fill-opacity="0.05"/>
+  <rect x="${w * 0.75}" y="0" width="1.5" height="${h}" fill="white" fill-opacity="0.05"/>
 
   <!-- HUD corner brackets -->
   <path d="M ${pad} ${pad + bracket} V ${pad} H ${pad + bracket}" fill="none" stroke="${ORANGE}" stroke-width="${bStroke}"/>
@@ -69,12 +55,6 @@ function makeSVG(w, h, L) {
   <text x="${pad + 92}" y="${pad + 26}"
     font-family="${DISPLAY}" font-size="${brandSize}" font-weight="900" letter-spacing="${Math.round(brandSize * 0.30)}"
     fill="${WHITE}">FRAME</text>
-
-  <!-- live dot, top right -->
-  <circle cx="${w - pad - 150}" cy="${pad + 22}" r="7" fill="${GREEN}"/>
-  <text x="${w - pad - 130}" y="${pad + 30}"
-    font-family="${MONO}" font-size="20" font-weight="bold" letter-spacing="4"
-    fill="rgba(244,244,240,0.6)">LIVE</text>
 
   <!-- ── eyebrow ── -->
   <rect x="${pad}" y="${eyebrowY - 9}" width="44" height="6" fill="${ORANGE}"/>
@@ -128,11 +108,9 @@ const LAYOUT_1080 = {
 async function render(outFile, w, h, layout) {
   const overlay = makeSVG(w, h, layout);
 
-  await sharp(PHOTO)
-    .resize({ width: w, height: h, fit: 'cover', position: 'center' })
-    .modulate({ brightness: 0.72, saturation: 0.82 })
-    .composite([{ input: overlay, blend: 'over' }])
-    .jpeg({ quality: 92, mozjpeg: true })
+  await sharp(overlay, { density: 72 })
+    .flatten({ background: VOID })
+    .jpeg({ quality: 94, mozjpeg: true })
     .toFile(outFile);
 
   console.log(`✓  ${outFile}  (${w}×${h})`);
