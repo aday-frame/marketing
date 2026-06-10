@@ -222,6 +222,7 @@ h1 .ln { display: block; }
 /* ── cta finale ── */
 .sec-cta { text-align: center; padding: 170px 24px 150px; }
 .sec-cta .eyebrow { justify-content: center; }
+.cta-stack { display: flex; flex-direction: column; align-items: center; }
 .cta-h { font-weight: 800; font-size: clamp(40px, 7vw, 92px); letter-spacing: -0.025em; text-transform: uppercase; line-height: .96; }
 .cta-h .ghost { display: block; }
 .cta-note { font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; color: var(--dim); margin-top: 26px; line-height: 2.1; }

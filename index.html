@@ -65,8 +65,6 @@ a.sys-row:hover .sys-go { opacity: 1; transform: translateX(4px); }
 .sys-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) brightness(.8); transition: transform .9s cubic-bezier(.2,.6,.2,1), filter .4s; }
 .sys-row:hover .sys-photo img { transform: scale(1.06); filter: saturate(1) brightness(.95); }
 .sys-photo .ph-tag { position: absolute; left: 10px; bottom: 8px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .2em; color: var(--white); text-shadow: 0 1px 6px rgba(0,0,0,.6); }
-.sys-photo.awaiting { display: flex; align-items: center; justify-content: center; background: var(--panel-2); }
-.sys-photo.awaiting .ph-wait { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; color: var(--faint); text-align: center; line-height: 2.2; }
 @media (max-width: 879px) { .sys-desc { display: none; } }
 
 /* ── modules grid ── */
@@ -195,7 +193,7 @@ a.sys-row:hover .sys-go { opacity: 1; transform: translateX(4px); }
       <div class="sys-num">SYS-03</div>
       <div class="sys-name">Aircraft<span class="st a">◐ IN DEVELOPMENT — Q3 2026</span></div>
       <div class="sys-desc">AIRWORTHINESS DIRECTIVES, FLIGHT CREW CURRENCY, AND MAINTENANCE TRACKING — THE THIRD SYSTEM COMES ONLINE Q3.</div>
-      <div class="sys-photo awaiting"><div class="ph-wait">ACFT-01<br />AWAITING FEED · Q3 2026</div></div>
+      <div class="sys-photo"><img src="/assets/aircraft-inflight.webp" alt="Private jet in flight above the clouds" loading="lazy" /><span class="ph-tag">ACFT-01 · FL450</span></div>
     </div>
   </div>
 </section>
@@ -238,10 +236,11 @@ a.sys-row:hover .sys-go { opacity: 1; transform: translateX(4px); }
 </section>
 
 <section class="sec-cta" id="access">
-  <div class="eyebrow rv">CLEARANCE REQUIRED</div>
-  <div class="cta-h rv rd1">Request<span class="ghost">access.</span></div>
-  <p class="cta-note rv rd2">INVITATION ONLY · WHITE-GLOVE ONBOARDING · PRIVATE CLOUD · SOC 2 TYPE II</p>
-  <div class="rv rd3"><a class="btn-launch" href="mailto:access@frameops.io">BEGIN CLEARANCE →</a></div>
+  <div class="rv cta-stack">
+    <div class="cta-h">Request<span class="ghost">access.</span></div>
+    <p class="cta-note">INVITATION ONLY · WHITE-GLOVE ONBOARDING · PRIVATE CLOUD · SOC 2 TYPE II</p>
+    <a class="btn-launch" href="mailto:access@frameops.io">REQUEST ACCESS →</a>
+  </div>
 </section>
 
 <footer>
