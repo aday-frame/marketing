@@ -62,13 +62,13 @@ function makeSVG(w, h, L) {
   <path d="M ${pad} ${pad + bracket} V ${pad} H ${pad + bracket}" fill="none" stroke="${ORANGE}" stroke-width="${bStroke}"/>
   <path d="M ${w - pad - bracket} ${h - pad} H ${w - pad} V ${h - pad - bracket}" fill="none" stroke="${ORANGE}" stroke-width="${bStroke}"/>
 
-  <!-- ── FRAME_ wordmark (top, inside bracket) ── -->
-  <text x="${pad + 28}" y="${pad + 30}"
+  <!-- ── F-mark + FRAME wordmark (top, inside bracket) ── -->
+  <rect x="${pad + 28}" y="${pad + 4}"  width="44"   height="5" rx="2.5" fill="white" fill-opacity="0.22"/>
+  <rect x="${pad + 28}" y="${pad + 13}" width="30"   height="5" rx="2.5" fill="white" fill-opacity="0.55"/>
+  <rect x="${pad + 28}" y="${pad + 22}" width="18.5" height="5" rx="2.5" fill="${ORANGE}"/>
+  <text x="${pad + 92}" y="${pad + 26}"
     font-family="${DISPLAY}" font-size="${brandSize}" font-weight="900" letter-spacing="${Math.round(brandSize * 0.30)}"
     fill="${WHITE}">FRAME</text>
-  <text x="${pad + 28 + brandSize * 5.7}" y="${pad + 30}"
-    font-family="${DISPLAY}" font-size="${brandSize}" font-weight="900"
-    fill="${ORANGE}">_</text>
 
   <!-- live dot, top right -->
   <circle cx="${w - pad - 150}" cy="${pad + 22}" r="7" fill="${GREEN}"/>
