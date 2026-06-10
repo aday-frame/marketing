@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FRAME — Every asset. One frame.</title>
+<meta name="robots" content="noindex" />
+<meta name="description" content="FRAME is the operating system for private ownership. Estates, vessels, aircraft — one frame.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   MONOLITH — the type IS the site
+   ============================================================ */
+:root{
+  --bg:#05070D;
+  --bg-deep:#04060B;
+  --cream:#F2EEE6;
+  --ink:#0B0E16;
+  --white:#F4F3F0;
+  --orange:#FF6A00;
+  --orange-light:#C8500A;
+  --hair:rgba(244,243,240,.13);
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --disp:'Archivo',sans-serif;
+  --nav-fg:#F4F3F0;
+  --nav-orange:#FF6A00;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+body.light-nav{
+  --nav-fg:#0B0E16;
+  --nav-orange:#C8500A;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--disp);
+  font-stretch:125%;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection{background:var(--orange);color:var(--ink);}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+
+/* ---------- custom cursor ---------- */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;z-index:9999;
+  pointer-events:none;border-radius:50%;
+  transform:translate(-100px,-100px);
+}
+.cursor-dot{width:8px;height:8px;background:var(--orange);margin:-4px 0 0 -4px;}
+.cursor-ring{
+  width:38px;height:38px;margin:-19px 0 0 -19px;
+  border:1px solid rgba(255,106,0,.55);
+  transition:width .35s var(--ease-out),height .35s var(--ease-out),
+             margin .35s var(--ease-out),border-color .35s var(--ease-out),
+             background-color .35s var(--ease-out);
+}
+.cursor-ring.big{
+  width:66px;height:66px;margin:-33px 0 0 -33px;
+  border-color:rgba(255,106,0,.9);
+  background:rgba(255,106,0,.08);
+}
+@media (hover:none),(pointer:coarse){
+  .cursor-dot,.cursor-ring{display:none;}
+}
+@media (prefers-reduced-motion: reduce){
+  .cursor-dot,.cursor-ring{display:none;}
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px clamp(20px,4vw,56px);
+  color:var(--nav-fg);
+  transition:color .45s ease;
+}
+.nav-brand{display:flex;align-items:center;gap:14px;}
+.fmark{display:flex;flex-direction:column;gap:4px;width:30px;}
+.fmark span{display:block;height:2.5px;background:currentColor;}
+.fmark .b1{width:100%;opacity:.22;}
+.fmark .b2{width:68%;opacity:.55;}
+.fmark .b3{width:42%;background:var(--nav-orange);opacity:1;transition:background-color .45s ease;}
+body.light-nav .fmark .b1{opacity:.2;}
+body.light-nav .fmark .b2{opacity:.5;}
+.wordmark{
+  font-weight:900;font-size:17px;letter-spacing:.34em;line-height:1;
+  text-transform:uppercase;
+}
+.nav-cta{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid currentColor;border-radius:999px;
+  padding:11px 22px;line-height:1;
+  transition:background-color .35s ease,color .35s ease,border-color .35s ease;
+}
+.nav-cta:hover{
+  background:var(--nav-orange);border-color:var(--nav-orange);color:var(--ink);
+}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100vh;min-height:100svh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:var(--bg-deep);
+}
+.hero-photo{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+}
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;object-position:center 38%;
+  opacity:.32;filter:saturate(.85) brightness(.85);
+}
+.hero-photo::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(4,6,11,0) 0%, rgba(4,6,11,.55) 62%, rgba(4,6,11,.92) 100%),
+    linear-gradient(to bottom, rgba(4,6,11,.55) 0%, rgba(4,6,11,.1) 35%, rgba(4,6,11,.92) 100%);
+}
+.hero-stack{
+  position:relative;z-index:2;
+  text-align:center;
+  line-height:.85;
+  letter-spacing:-.03em;
+  font-weight:900;text-transform:uppercase;
+  user-select:none;
+  will-change:transform;
+}
+.hline{display:block;overflow:hidden;padding:.04em 0;}
+.hline > span{display:block;}
+.hline .solid{color:var(--white);}
+.hline .ghost{
+  color:transparent;
+  -webkit-text-stroke:1.5px rgba(244,243,240,.8);
+}
+.hline .flame{color:var(--orange);}
+.h-xl{font-size:clamp(64px,min(16vw,19vh),15.2rem);}
+.h-lg{font-size:clamp(54px,min(13.2vw,15.5vh),12.6rem);}
+
+/* meta orbit */
+.hero-meta{
+  position:absolute;z-index:3;
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(244,243,240,.66);
+}
+.hero-meta strong{color:var(--orange);font-weight:500;}
+.meta-tr{top:110px;right:clamp(20px,4vw,56px);text-align:right;}
+.meta-bl{bottom:46px;left:clamp(20px,4vw,56px);}
+.meta-br{bottom:46px;right:clamp(20px,4vw,56px);text-align:right;max-width:280px;line-height:1.9;}
+.hero-scroll{
+  position:absolute;bottom:44px;left:50%;transform:translateX(-50%);z-index:3;
+  width:1px;height:56px;background:linear-gradient(to bottom,rgba(244,243,240,0),rgba(255,106,0,.9));
+}
+@media (max-width:700px){
+  .meta-br{display:none;}
+  .meta-tr{top:92px;}
+}
+@media (max-height:700px){
+  .meta-br{display:none;}
+  .meta-tr{top:96px;}
+}
+
+/* ---------- marquee seams ---------- */
+.seam{
+  overflow:hidden;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:18px 0;background:var(--bg);
+}
+.seam-track{
+  display:flex;width:max-content;white-space:nowrap;
+  font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(244,243,240,.38);
+  animation:seam-left 30s linear infinite;
+  transition:color .5s ease;
+}
+.seam:hover .seam-track{color:var(--orange);}
+.seam-track span{padding:0 .5em;}
+.seam.rev .seam-track{animation-direction:reverse;}
+@keyframes seam-left{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+@media (max-width:820px){
+  .seam-track{animation-duration:48s;}
+}
+@media (prefers-reduced-motion: reduce){
+  .seam-track{animation:none;}
+}
+
+/* ---------- section chrome ---------- */
+.sec-label{
+  font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(244,243,240,.5);
+  display:flex;align-items:center;gap:14px;
+}
+.sec-label::after{content:"";height:1px;flex:1;background:var(--hair);}
+.sec-label b{color:var(--orange);font-weight:500;}
+
+/* ---------- asset classes : image-in-type ---------- */
+.assets{
+  position:relative;
+  padding:clamp(90px,12vw,170px) clamp(20px,4vw,56px) clamp(90px,12vw,160px);
+  background:var(--bg);
+}
+.assets .sec-label{margin-bottom:clamp(40px,6vw,90px);}
+.asset-row{
+  display:block;position:relative;
+  border-top:1px solid var(--hair);
+  padding:clamp(18px,2.6vw,36px) 0;
+}
+.asset-row:last-of-type{border-bottom:1px solid var(--hair);}
+.asset-word{
+  display:inline-block;position:relative;
+  font-weight:900;text-transform:uppercase;
+  font-size:clamp(46px,10vw,9.8rem);
+  line-height:.9;letter-spacing:-.03em;
+  color:transparent;
+  -webkit-text-stroke:1.5px rgba(244,243,240,.75);
+  transition:color .4s var(--ease-out),-webkit-text-stroke-color .4s var(--ease-out);
+}
+.asset-row:hover .asset-word{
+  color:var(--white);
+  -webkit-text-stroke-color:transparent;
+}
+.asset-row:hover .asset-word.soon{color:rgba(244,243,240,.55);}
+.asset-sup{
+  position:absolute;top:.08em;right:-.5em;transform:translateX(100%);
+  font-family:var(--mono);font-weight:500;font-size:clamp(10px,1vw,13px);
+  letter-spacing:.18em;color:var(--orange);
+  -webkit-text-stroke:0;white-space:nowrap;
+}
+.asset-idx{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+  color:rgba(244,243,240,.4);
+  display:inline-block;vertical-align:top;margin-right:clamp(14px,3vw,44px);
+  padding-top:.7em;
+}
+.asset-desc{
+  position:absolute;right:0;bottom:clamp(22px,3vw,42px);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(244,243,240,.45);
+  opacity:0;transform:translateY(8px);
+  transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);
+}
+.asset-row:hover .asset-desc{opacity:1;transform:translateY(0);}
+.asset-inline{display:none;}
+
+/* floating hover window */
+.hover-win{
+  position:fixed;top:0;left:0;z-index:600;
+  width:min(30vw,440px);aspect-ratio:4/3;
+  overflow:hidden;pointer-events:none;
+  opacity:0;
+  transform:translate(-200px,-200px) scale(.92);
+  will-change:transform,opacity;
+}
+.hover-win img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(1.12);
+  transition:opacity .45s var(--ease-out),transform .9s var(--ease-out);
+}
+.hover-win img.dark{filter:brightness(.7) saturate(.85);}
+.hover-win img.on{opacity:1;transform:scale(1);}
+
+/* touch / narrow: words solid, inline images */
+@media (hover:none),(max-width:820px){
+  .hover-win{display:none;}
+  .asset-word{color:var(--white);-webkit-text-stroke:0;}
+  .asset-word.soon{color:rgba(244,243,240,.55);}
+  .asset-sup{display:none;}
+  .asset-desc{position:static;opacity:1;transform:none;display:block;margin-top:14px;}
+  .asset-inline{
+    display:block;margin-top:18px;overflow:hidden;aspect-ratio:16/9;
+  }
+  .asset-inline img{width:100%;height:100%;object-fit:cover;}
+  .asset-inline img.dark{filter:brightness(.7) saturate(.85);}
+}
+
+/* ---------- the flip : statement ---------- */
+.statement{
+  background:var(--cream);color:var(--ink);
+  padding:clamp(110px,15vw,220px) clamp(20px,4vw,56px);
+}
+.statement .sec-label{color:rgba(11,14,22,.55);margin-bottom:clamp(44px,6vw,90px);}
+.statement .sec-label::after{background:rgba(11,14,22,.18);}
+.statement .sec-label b{color:var(--orange-light);}
+.statement-text{
+  font-weight:600;
+  font-size:clamp(27px,3.7vw,64px);
+  line-height:1.12;letter-spacing:-.02em;
+  max-width:20em;
+  text-wrap:balance;
+}
+.statement-text .w{display:inline-block;}
+.statement-text .o{color:var(--orange-light);}
+.statement-foot{
+  margin-top:clamp(44px,6vw,80px);
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(11,14,22,.6);
+  display:flex;gap:clamp(20px,5vw,72px);flex-wrap:wrap;
+}
+
+/* ---------- ledger ---------- */
+.ledger{
+  padding:clamp(90px,12vw,170px) clamp(20px,4vw,56px);
+  background:var(--bg);
+}
+.ledger .sec-label{margin-bottom:clamp(40px,6vw,80px);}
+.ledger-row{
+  display:flex;align-items:baseline;justify-content:space-between;gap:24px;
+  border-top:1px solid var(--hair);
+  padding:clamp(20px,2.6vw,34px) 0;
+}
+.ledger-row:last-of-type{border-bottom:1px solid var(--hair);}
+.ledger-label{
+  font-family:var(--mono);font-size:clamp(11px,1.1vw,13px);
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(244,243,240,.6);
+  max-width:14em;line-height:1.8;
+}
+.ledger-num{
+  font-weight:900;text-transform:uppercase;
+  font-size:clamp(52px,9vw,9rem);
+  line-height:.9;letter-spacing:-.03em;
+  color:var(--white);text-align:right;white-space:nowrap;
+}
+.ledger-num sup{
+  font-size:.32em;vertical-align:super;color:var(--orange);
+  letter-spacing:0;font-weight:900;
+}
+.ledger-num.flame{color:var(--orange);}
+@media (max-width:480px){
+  .ledger-row{flex-direction:column;align-items:flex-start;gap:10px;}
+  .ledger-num{text-align:left;}
+}
+
+/* ---------- image band ---------- */
+.band{
+  position:relative;height:clamp(380px,72vh,760px);overflow:hidden;
+  background:var(--bg-deep);
+}
+.band img{
+  position:absolute;left:0;top:-12%;width:100%;height:124%;
+  object-fit:cover;
+  filter:saturate(.9) brightness(.8);
+  will-change:transform;
+}
+.band::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(4,6,11,.72),rgba(4,6,11,.06) 38%,rgba(4,6,11,.06) 62%,rgba(4,6,11,.8));
+}
+.band-word{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;
+  font-weight:900;text-transform:uppercase;
+  font-size:clamp(64px,15vw,14rem);
+  line-height:.85;letter-spacing:-.02em;
+  color:transparent;-webkit-text-stroke:1.5px rgba(244,243,240,.9);
+  user-select:none;white-space:nowrap;
+}
+.band-word span{display:inline-block;}
+
+/* ---------- finale ---------- */
+.finale{
+  background:var(--bg-deep);
+  padding:clamp(100px,13vw,190px) 0 0;
+}
+.finale-kicker{
+  text-align:center;
+  font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(244,243,240,.6);
+  padding:0 clamp(20px,4vw,56px);
+  margin-bottom:clamp(36px,5vw,64px);line-height:2.1;
+}
+.finale-kicker b{color:var(--orange);font-weight:500;}
+.cta-strip{
+  position:relative;display:block;overflow:hidden;
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:clamp(40px,6vw,84px) clamp(20px,4vw,56px);
+  text-align:center;cursor:pointer;
+}
+.cta-fill{
+  position:absolute;inset:0;background:var(--orange);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform .55s var(--ease-out);
+}
+.cta-strip:hover .cta-fill,.cta-strip:focus-visible .cta-fill{transform:scaleY(1);}
+.cta-text{
+  position:relative;display:block;overflow:hidden;
+  font-weight:900;text-transform:uppercase;
+  /* width-derived: "REQUEST ACCESS" measures ~11.7x font-size in Archivo Expanded Black,
+     so (100vw - padding)/12 guarantees it never clips at any viewport width */
+  font-size:clamp(24px,min(9.6vw,calc((100vw - 56px) / 12)),8.4rem);
+  line-height:1;letter-spacing:-.03em;
+}
+.cta-roll{
+  display:block;position:relative;
+  transition:transform .55s var(--ease-out);
+}
+.cta-roll > span{display:block;}
+.cta-roll .t1{color:var(--white);}
+/* t2 sits one line below, outside the clip, so the strip is one line tall at rest */
+.cta-roll .t2{position:absolute;top:100%;left:0;width:100%;color:var(--ink);}
+.cta-strip:hover .cta-roll,.cta-strip:focus-visible .cta-roll{transform:translateY(-100%);}
+@media (prefers-reduced-motion: reduce){
+  .cta-fill,.cta-roll{transition:none;}
+}
+
+/* ---------- footer ---------- */
+.footer{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  padding:clamp(34px,5vw,56px) clamp(20px,4vw,56px);
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(244,243,240,.5);
+  background:var(--bg-deep);
+}
+.footer .nav-brand{color:var(--white);}
+.footer .fmark .b3{background:var(--orange);}
+.footer .wordmark{font-size:14px;}
+
+/* ---------- reveal states (motion only, JS only) ---------- */
+@media (prefers-reduced-motion: no-preference){
+  .js .hline > span{transform:translateY(112%);}
+  .js .hero-meta,.js .hero-scroll{opacity:0;}
+  .js .fade-up{opacity:0;transform:translateY(46px);}
+  .js .statement-text .w{opacity:.13;}
+}
+</style>
+</head>
+<body>
+
+<!-- cursor -->
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<!-- nav -->
+<header class="nav">
+  <a class="nav-brand" href="#" aria-label="FRAME home">
+    <span class="fmark" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></span>
+    <span class="wordmark">Frame</span>
+  </a>
+  <a class="nav-cta" href="#request">Request access</a>
+</header>
+
+<!-- 1 · MONOLITH HERO -->
+<section class="hero" id="hero">
+  <div class="hero-photo" aria-hidden="true">
+    <img id="heroImg" src="/assets/sd90-underway.jpeg" alt="">
+  </div>
+
+  <h1 class="hero-stack" id="heroStack">
+    <span class="hline h-xl"><span class="solid">Every</span></span>
+    <span class="hline h-xl"><span class="ghost">Asset</span></span>
+    <span class="hline h-lg"><span class="solid">One</span></span>
+    <span class="hline h-lg"><span class="flame">Frame</span></span>
+  </h1>
+
+  <p class="hero-meta meta-tr"><strong>$50B+</strong><br>assets under operation</p>
+  <p class="hero-meta meta-bl">Invitation only</p>
+  <p class="hero-meta meta-br">The operating system<br>for private ownership</p>
+  <div class="hero-scroll" aria-hidden="true"></div>
+</section>
+
+<!-- seam 1 -->
+<div class="seam" aria-hidden="true">
+  <div class="seam-track" id="seam1"></div>
+</div>
+
+<!-- 2 · IMAGE-IN-TYPE : asset classes -->
+<section class="assets" id="assets">
+  <h2 class="sec-label"><b>01</b> Asset classes</h2>
+
+  <a class="asset-row" href="#request" data-img="estates" aria-label="Estates — residences, grounds, staff, works">
+    <span class="asset-idx">E—01</span><span class="asset-word">Estates</span>
+    <span class="asset-desc">Residences · grounds · staff · works</span>
+    <figure class="asset-inline"><img src="/assets/aspen-house.webp" alt="Modern glass estate at dusk in Aspen" loading="lazy" decoding="async"></figure>
+  </a>
+
+  <a class="asset-row" href="#request" data-img="vessels" aria-label="Vessels — crew, class, charter, yard periods">
+    <span class="asset-idx">V—02</span><span class="asset-word">Vessels</span>
+    <span class="asset-desc">Crew · class · charter · yard periods</span>
+    <figure class="asset-inline"><img src="/assets/lady-m-underway.avif" alt="Superyacht underway at golden hour" loading="lazy" decoding="async"></figure>
+  </a>
+
+  <a class="asset-row" href="#request" data-img="aircraft" aria-label="Aircraft — arriving Q3 2026">
+    <span class="asset-idx">A—03</span><span class="asset-word soon">Aircraft<span class="asset-sup">Q3 2026</span></span>
+    <span class="asset-desc">Arriving Q3 2026</span>
+    <figure class="asset-inline"><img class="dark" src="/assets/aircraft-inflight.webp" alt="Private jet in flight above the clouds" loading="lazy" decoding="async"></figure>
+  </a>
+</section>
+
+<!-- floating hover window (sources hydrated by JS only when hover is live) -->
+<div class="hover-win" id="hoverWin" aria-hidden="true">
+  <img data-key="estates" data-src="/assets/aspen-house.webp" alt="">
+  <img data-key="vessels" data-src="/assets/lady-m-underway.avif" alt="">
+  <img data-key="aircraft" class="dark" data-src="/assets/aircraft-inflight.webp" alt="">
+</div>
+
+<!-- seam 2 (reverse) -->
+<div class="seam rev" aria-hidden="true">
+  <div class="seam-track" id="seam2"></div>
+</div>
+
+<!-- 3 · THE FLIP : statement -->
+<section class="statement" id="statement">
+  <h2 class="sec-label"><b>02</b> What Frame does</h2>
+  <p class="statement-text" id="statementText">Frame runs the operations behind serious ownership. Estates, vessels and aircraft — crews, calendars, maintenance, documents, spend — fourteen modules in one private system, working as quietly as the people who rely on it.</p>
+  <div class="statement-foot">
+    <span>White-glove onboarding</span>
+    <span>Private cloud</span>
+    <span>Invitation only</span>
+  </div>
+</section>
+
+<!-- seam 3 -->
+<div class="seam" aria-hidden="true">
+  <div class="seam-track" id="seam3"></div>
+</div>
+
+<!-- 4 · LEDGER -->
+<section class="ledger" id="ledger">
+  <h2 class="sec-label"><b>03</b> The ledger</h2>
+
+  <div class="ledger-row fade-up">
+    <p class="ledger-label">Assets under operation</p>
+    <p class="ledger-num"><span class="num" data-prefix="$" data-target="50" data-suffix="B">$50B</span><sup>+</sup></p>
+  </div>
+  <div class="ledger-row fade-up">
+    <p class="ledger-label">Integrated modules</p>
+    <p class="ledger-num"><span class="num" data-target="14">14</span></p>
+  </div>
+  <div class="ledger-row fade-up">
+    <p class="ledger-label">Asset classes — estates · vessels · aircraft</p>
+    <p class="ledger-num"><span class="num" data-target="3" data-pad="2">03</span></p>
+  </div>
+  <div class="ledger-row fade-up">
+    <p class="ledger-label">Aircraft arrives</p>
+    <p class="ledger-num flame"><span class="num" data-prefix="Q3 " data-target="26" data-pad="2">Q3 26</span></p>
+  </div>
+</section>
+
+<!-- image band -->
+<section class="band" aria-label="Superyacht seen from above">
+  <img id="bandImg" src="/assets/viva-underway.jpg" alt="Superyacht underway, seen from above" loading="lazy" decoding="async">
+  <span class="band-word" aria-hidden="true">Frame</span>
+</section>
+
+<!-- 5 · FINALE -->
+<section class="finale" id="request">
+  <p class="finale-kicker">Access is by <b>invitation</b>.<br>Onboarding is white-glove. The cloud is private.</p>
+  <a class="cta-strip" href="#request" id="ctaStrip">
+    <span class="cta-fill" aria-hidden="true"></span>
+    <span class="cta-text">
+      <span class="cta-roll">
+        <span class="t1">Request access</span>
+        <span class="t2" aria-hidden="true">Welcome.</span>
+      </span>
+    </span>
+  </a>
+</section>
+
+<!-- footer -->
+<footer class="footer">
+  <span class="nav-brand">
+    <span class="fmark" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></span>
+    <span class="wordmark">Frame</span>
+  </span>
+  <span>frameops.io — private cloud — invitation only</span>
+  <span>&copy; 2026 Frame</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+  var motion = hasGsap && !reduced;
+
+  // Hidden-by-CSS reveal states only apply when html.js is present AND motion is possible.
+  if (motion) {
+    document.documentElement.classList.add("js");
+  }
+
+  /* ---------- statement: split paragraph into word spans (one word orange) ---------- */
+  var statementText = document.getElementById("statementText");
+  if (statementText) {
+    var words = statementText.textContent.trim().split(/\s+/);
+    statementText.textContent = "";
+    words.forEach(function(word, i){
+      var span = document.createElement("span");
+      span.className = "w";
+      // the word "one" carries the brand orange
+      if (word === "one") span.className += " o";
+      span.textContent = word;
+      statementText.appendChild(span);
+      if (i < words.length - 1) statementText.appendChild(document.createTextNode(" "));
+    });
+  }
+
+  /* ---------- marquee seams: build content ---------- */
+  var seamPhrase = "$50B+ under operation — estates — vessels — aircraft — 14 modules — invitation only — private cloud — ";
+  ["seam1","seam2","seam3"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (!el) return;
+    var chunk = "";
+    for (var i = 0; i < 4; i++) chunk += "<span>" + seamPhrase + "</span>";
+    // duplicate once for seamless -50% loop
+    el.innerHTML = chunk + chunk;
+  });
+
+  /* ---------- custom cursor ---------- */
+  var dot = document.querySelector(".cursor-dot");
+  var ring = document.querySelector(".cursor-ring");
+  var cx = -100, cy = -100, dx = -100, dy = -100, rx = -100, ry = -100;
+  var cursorOn = finePointer && !reduced && dot && ring;
+
+  if (cursorOn) {
+    window.addEventListener("mousemove", function(e){
+      cx = e.clientX; cy = e.clientY;
+    }, { passive: true });
+    document.addEventListener("mouseover", function(e){
+      if (!ring) return;
+      var t = e.target;
+      var hit = t && t.closest ? t.closest("a, button, .asset-row") : null;
+      ring.classList.toggle("big", !!hit);
+    });
+  }
+
+  /* ---------- hero: load choreography ---------- */
+  var heroStack = document.getElementById("heroStack");
+  var heroImg = document.getElementById("heroImg");
+
+  if (motion) {
+    var tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+    var lines = document.querySelectorAll(".hline > span");
+    if (heroImg) {
+      tl.fromTo(heroImg, { scale: 1.1, opacity: 0 }, { scale: 1, opacity: 0.32, duration: 2.2, ease: "power2.out" }, 0);
+    }
+    if (lines.length) {
+      // CSS (.js + no-preference) parks lines at translateY(112%); drive them home.
+      tl.fromTo(lines, { y: "112%" }, { y: "0%", duration: 1.5, stagger: 0.11 }, 0.25);
+    }
+    var metas = document.querySelectorAll(".hero-meta, .hero-scroll");
+    if (metas.length) {
+      tl.to(metas, { opacity: 1, duration: 1.1, stagger: 0.12, ease: "power2.out" }, 1.1);
+    }
+  }
+
+  /* ---------- hero: scroll-velocity skew (clamped, spring back) ---------- */
+  var lastY = window.scrollY || 0;
+  var skew = 0;
+  var heroVisible = true;          // toggled by a hero ScrollTrigger; gates the skew math
+  var heroExitState = { s: 1 };    // exit scale, scrubbed by GSAP, written in the rAF loop
+
+  /* ---------- asset hover window: lerp follow (live across resizes) ---------- */
+  var hoverWin = document.getElementById("hoverWin");
+  var assetsSec = document.getElementById("assets");
+  var winImgs = hoverWin ? hoverWin.querySelectorAll("img") : [];
+  var winOn = false, tx = 0, ty = 0, wx = 0, wy = 0, winScale = 0.92, winOpacity = 0;
+  var narrowMql = window.matchMedia("(max-width: 820px)");
+  var hoverCapable = finePointer && !reduced && !!hoverWin && !!assetsSec && winImgs.length > 0;
+  var hoverLive = hoverCapable && !narrowMql.matches;
+
+  // hydrate hover-window sources only when hover is actually usable (saves 3 image loads on touch/narrow)
+  var winHydrated = false;
+  function hydrateWin(){
+    if (winHydrated) return;
+    winHydrated = true;
+    for (var i = 0; i < winImgs.length; i++) {
+      var ds = winImgs[i].getAttribute("data-src");
+      if (ds) winImgs[i].setAttribute("src", ds);
+    }
+  }
+  if (hoverLive) hydrateWin();
+
+  function onNarrowChange(){
+    hoverLive = hoverCapable && !narrowMql.matches;
+    if (hoverLive) hydrateWin();
+    else winOn = false;
+    if (hasGsap && typeof ScrollTrigger !== "undefined" && ScrollTrigger.refresh) ScrollTrigger.refresh();
+  }
+  if (narrowMql.addEventListener) narrowMql.addEventListener("change", onNarrowChange);
+  else if (narrowMql.addListener) narrowMql.addListener(onNarrowChange);
+
+  function setWinImg(key){
+    for (var i = 0; i < winImgs.length; i++) {
+      winImgs[i].classList.toggle("on", winImgs[i].getAttribute("data-key") === key);
+    }
+  }
+
+  if (hoverCapable) {
+    var rows = assetsSec.querySelectorAll(".asset-row");
+    rows.forEach(function(row){
+      row.addEventListener("mouseenter", function(e){
+        if (!hoverLive) return;
+        winOn = true;
+        setWinImg(row.getAttribute("data-img"));
+        // if the window is currently invisible, snap to the cursor (no cross-screen lerp)
+        if (winOpacity < 0.05) {
+          tx = e.clientX + 36;
+          ty = e.clientY;
+          wx = tx;
+          wy = ty;
+        }
+      });
+    });
+    assetsSec.addEventListener("mouseleave", function(){ winOn = false; });
+    assetsSec.addEventListener("mousemove", function(e){
+      if (!hoverLive) return;
+      tx = e.clientX + 36;
+      ty = e.clientY;
+      // keep window on screen
+      var ww = Math.min(window.innerWidth * 0.30, 440);
+      var wh = ww * 0.75;
+      if (tx + ww > window.innerWidth - 16) tx = e.clientX - ww - 36;
+      ty = Math.min(Math.max(ty, wh / 2 + 16), window.innerHeight - wh / 2 - 16);
+    }, { passive: true });
+  }
+
+  /* ---------- single rAF loop: cursor + skew + hover window + nav flip ---------- */
+  var statementSec = document.getElementById("statement");
+
+  function navFlipCheck(){
+    if (!statementSec) return;
+    var r = statementSec.getBoundingClientRect();
+    var probe = 60; // nav midline
+    document.body.classList.toggle("light-nav", r.top < probe && r.bottom > probe);
+  }
+
+  var rafActive = cursorOn || hoverCapable || (motion && heroStack);
+  var rafId = null;
+
+  function loop(){
+    // cursor
+    if (cursorOn) {
+      dx += (cx - dx) * 0.55;
+      dy += (cy - dy) * 0.55;
+      rx += (cx - rx) * 0.16;
+      ry += (cy - ry) * 0.16;
+      dot.style.transform = "translate(" + dx + "px," + dy + "px)";
+      ring.style.transform = "translate(" + rx + "px," + ry + "px)";
+    }
+    // skew + exit scale — only while the hero is actually on screen
+    if (motion && heroStack && heroVisible) {
+      var y = window.scrollY || 0;
+      var v = y - lastY;
+      lastY = y;
+      var target = Math.max(-3.5, Math.min(3.5, v * 0.14));
+      skew += (target - skew) * 0.1;
+      if (Math.abs(skew) < 0.005) skew = 0;
+      heroStack.style.transform = "skewY(" + skew.toFixed(3) + "deg) scale(" + heroExitState.s.toFixed(4) + ")";
+    }
+    // hover window — skip the math entirely while fully hidden
+    if (hoverLive && (winOn || winOpacity > 0.01)) {
+      wx += (tx - wx) * 0.13;
+      wy += (ty - wy) * 0.13;
+      var tScale = winOn ? 1 : 0.92;
+      var tOp = winOn ? 1 : 0;
+      winScale += (tScale - winScale) * 0.14;
+      winOpacity += (tOp - winOpacity) * 0.14;
+      if (winOpacity < 0.01 && !winOn) winOpacity = 0;
+      hoverWin.style.opacity = winOpacity.toFixed(3);
+      hoverWin.style.transform = "translate(" + (wx) + "px," + (wy - (Math.min(window.innerWidth * 0.30, 440) * 0.75) / 2) + "px) scale(" + winScale.toFixed(3) + ")";
+    }
+    rafId = requestAnimationFrame(loop);
+  }
+  function startLoop(){
+    if (rafActive && rafId === null) rafId = requestAnimationFrame(loop);
+  }
+  // idle the loop when the tab is hidden
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) {
+      if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+    } else {
+      lastY = window.scrollY || 0;
+      startLoop();
+    }
+  });
+  startLoop();
+
+  // nav flip works with or without motion
+  window.addEventListener("scroll", navFlipCheck, { passive: true });
+  navFlipCheck();
+
+  /* ---------- ScrollTrigger scenes ---------- */
+  if (motion && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // hero exit choreography: as the monolith leaves, it loosens —
+    // scale eases off, tracking opens, lines shear apart at different rates
+    var heroSec = document.getElementById("hero");
+    if (heroSec && heroStack) {
+      var heroST = ScrollTrigger.create({
+        trigger: heroSec, start: "top top", end: "bottom top",
+        onToggle: function(self){
+          heroVisible = self.isActive;
+          lastY = window.scrollY || 0; // avoid a velocity spike on re-entry
+        }
+      });
+      heroVisible = heroST.isActive; // correct initial state if the page loads mid-scroll
+      var exitTl = gsap.timeline({
+        scrollTrigger: { trigger: heroSec, start: "top top", end: "bottom top", scrub: true }
+      });
+      exitTl.to(heroExitState, { s: 0.94, ease: "none" }, 0);
+      exitTl.to(heroStack, { letterSpacing: "0.03em", ease: "none" }, 0);
+      var heroLines = gsap.utils.toArray(".hero .hline");
+      var lineRates = [-26, 14, -40, 26];
+      heroLines.forEach(function(line, i){
+        exitTl.to(line, { yPercent: lineRates[i % lineRates.length], ease: "none" }, 0);
+      });
+      exitTl.fromTo(".hero-meta, .hero-scroll",
+        { opacity: 1 }, { opacity: 0, ease: "none", immediateRender: false }, 0);
+    }
+
+    // asset rows reveal
+    var assetRows = gsap.utils.toArray(".asset-row");
+    assetRows.forEach(function(row, i){
+      var word = row.querySelector(".asset-word");
+      if (!word) return;
+      gsap.fromTo(word, { y: 80, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 1.2, ease: "expo.out",
+        scrollTrigger: { trigger: row, start: "top 88%" }
+      });
+    });
+
+    // statement: word-by-word scrub — resolves while the paragraph is still in view
+    var stWords = document.querySelectorAll(".statement-text .w");
+    if (stWords.length && statementSec) {
+      gsap.to(stWords, {
+        opacity: 1, stagger: 0.6, ease: "none",
+        scrollTrigger: {
+          trigger: statementSec,
+          start: "top 72%",
+          end: "top 30%",
+          scrub: 0.6
+        }
+      });
+    }
+
+    // ledger rows
+    gsap.utils.toArray(".fade-up").forEach(function(el){
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 1.1, ease: "expo.out",
+        scrollTrigger: { trigger: el, start: "top 90%" }
+      });
+    });
+
+    // ledger numerals: odometer roll-up (static markup stays for no-motion / no-JS)
+    gsap.utils.toArray(".ledger-num .num").forEach(function(el){
+      var target = parseFloat(el.getAttribute("data-target"));
+      if (isNaN(target)) return;
+      var prefix = el.getAttribute("data-prefix") || "";
+      var suffix = el.getAttribute("data-suffix") || "";
+      var pad = parseInt(el.getAttribute("data-pad") || "0", 10);
+      var proxy = { v: 0 };
+      gsap.to(proxy, {
+        v: target, duration: 1.6, ease: "power3.out",
+        snap: { v: 1 },
+        scrollTrigger: { trigger: el, start: "top 92%", once: true },
+        onUpdate: function(){
+          var s = String(Math.round(proxy.v));
+          while (s.length < pad) s = "0" + s;
+          el.textContent = prefix + s + suffix;
+        }
+      });
+    });
+
+    // band word: letters converge from a scattered tracking as the band scrolls in
+    var bandWord = document.querySelector(".band-word");
+    var bandSec = bandWord ? bandWord.parentElement : null;
+    if (bandWord && bandSec) {
+      var bandChars = bandWord.textContent.split("");
+      bandWord.textContent = "";
+      bandChars.forEach(function(ch){
+        var s = document.createElement("span");
+        s.textContent = ch;
+        bandWord.appendChild(s);
+      });
+      var letters = bandWord.querySelectorAll("span");
+      var mid = (letters.length - 1) / 2;
+      letters.forEach(function(l, i){
+        gsap.fromTo(l, { xPercent: (i - mid) * 46, opacity: 0.35 }, {
+          xPercent: 0, opacity: 1, ease: "none",
+          scrollTrigger: { trigger: bandSec, start: "top bottom", end: "center center", scrub: true }
+        });
+      });
+    }
+
+    // band parallax: desktop only, managed by gsap.matchMedia so resizes stay correct
+    var mm = gsap.matchMedia();
+    mm.add("(min-width: 821px)", function(){
+      var bandImg = document.getElementById("bandImg");
+      if (bandImg && bandImg.parentElement) {
+        gsap.fromTo(bandImg, { yPercent: -8 }, {
+          yPercent: 8, ease: "none",
+          scrollTrigger: { trigger: bandImg.parentElement, start: "top bottom", end: "bottom top", scrub: true }
+        });
+      }
+    });
+  } else {
+    // ensure nothing is stuck hidden if CSS reveal states somehow applied
+    document.documentElement.classList.remove("js");
+  }
+})();
+</script>
+</body>
+</html>
